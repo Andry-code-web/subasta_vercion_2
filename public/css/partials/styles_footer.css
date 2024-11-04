@@ -1,0 +1,341 @@
+@import url("https://fonts.googleapis.com/css2?family=BioRhyme:wght@200..800&family=Sedan:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Scope+One&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --font--banner--semi: "Barlow";
+    --font--banner--bool: "Roboto";
+    --font--parrafo: "Space Mono";
+    --font--header: "Sedan";
+    --font--testimoni: "Modern Antiqua";
+    --font--about: "BioRhyme";
+    --font--cont: "Scope One";
+    --font--header--v2: "Poppins";
+    --bg--botones: #d30000;
+    --color--sub: #d30000;
+}
+
+/* FOOTER */
+footer {
+    width: 100%;
+}
+
+.contenedor_superior {
+    display: flex;
+    justify-content: center;
+
+}
+
+.img_descripcion {
+    width: 18%;
+}
+
+.imagen {
+    width: 100%;
+}
+
+.imagen .img_logo {
+    width: 100%;
+}
+
+.descripcion {
+    width: 90%;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-top: 3.5%;
+}
+
+.categoria2 {
+    width: 18%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.categoria2 a {
+    text-decoration: none;
+    color: var(--color--sub);
+}
+
+.ayuda {
+    width: 18%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ayuda a {
+    text-decoration: none;
+    color: var(--color--sub);
+}
+
+.terminos_condiciones {
+    width: 18%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.terminos_condiciones a {
+    text-decoration: none;
+    color: var(--color--sub);
+}
+
+.terminos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.redes_sociales {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0.5rem;
+}
+
+.img_footer {
+    width: 16%;
+}
+
+.copy_paises {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.copy_paises .paises img{
+    width: 15%;
+}
+
+.descricion_footer{
+    margin: 0;
+    text-align: justify;
+}
+
+.img_redes{
+    width: 80%;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+    /* FOOTER */
+    footer {
+        height: 60vh;
+    }
+
+    .contet_footer {
+        flex-direction: column;
+        margin-top: 0;
+        gap: 1rem;
+    }
+
+    .contenedor_superior {
+        justify-content: space-around;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .img_logo {
+        width: 60%;
+    }
+
+    .img_descripcion {
+        width: 50%;
+        text-align: justify;
+
+    }
+
+    .descripcion {
+        width: 100%;
+    }
+
+    .categoria2 {
+        width: 100%;
+    }
+
+    .terminos_condiciones {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .terminos_condiciones a {
+        font-size: .9rem;
+    }
+
+    .ayuda {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+    .copy_paises {
+        flex-direction: column;
+    }
+
+    .paises img {
+        width: 26px;
+    }
+
+    .copy_paises p {
+        margin: 0;
+        font-size: .9rem;
+    }
+
+    .redes_sociales img {
+        width: 70%;
+    }
+
+    .redes_footer {
+        gap: 0;
+        margin-top: 0rem;
+        margin-bottom: 0rem;
+    }
+
+    .redes_footer div {
+        display: flex;
+    }
+
+    .redes_footer a img {
+        width: 65%;
+    }
+
+    .contet_footer p {
+        font-size: .9rem;
+    }
+
+    .copy_paises {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .img_logo {
+        width: 120%;
+    }
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+
+    /* FOOTER */
+    footer {
+        height: 50vh;
+    }
+
+    .contenedor_superior {
+        justify-content: space-evenly;
+    }
+
+    .contet_footer {
+        margin-top: 0rem;
+        flex-direction: column;
+    }
+
+    .categoria2 {
+        text-align: center;
+    }
+
+    .terminos_condiciones {
+        text-align: center;
+    }
+
+    .img_logo {
+        width: 100%;
+    }
+
+    .redes_footer {
+        margin: 0;
+    }
+
+    footer .img_footer {
+        width: 37%;
+        height: 100%;
+    }
+
+    .copy_paises {
+        align-items: center;
+    }
+
+    .copy_paises p {
+        margin: 0;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+
+    /* FOOTER */
+    footer {
+        height: 30vh;
+    }
+
+    .contenedor_superior {
+        justify-content: space-around;
+    }
+
+    .img_logo {
+        width: 20%;
+    }
+
+    .contet_footer {
+        gap: 1rem;
+        margin-top: 0rem;
+    }
+
+    .contet_footer p {
+        width: 30%;
+        font-size: .8rem;
+    }
+
+    .redes_footer {
+        gap: .5rem;
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .redes_footer a img {
+        width: 35%;
+    }
+
+    .terminos {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .terminos_condiciones a {
+        font-size: .9rem;
+    }
+
+    .copy_paises {
+        align-items: center;
+    }
+
+    .copy_paises p {
+        margin: 0;
+        font-size: .9rem;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) and (max-width: 1440px) {}

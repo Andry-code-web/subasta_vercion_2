@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subastas - admin vendedor</title>
+  <link rel="shortcut icon" href="/img/footer_logo.svg" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="/css/style_adminV.css">
+  <!-- ICONS -->
+  <script src="https://kit.fontawesome.com/78137c0870.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <!-- Estructura principal -->
+  <div class="d-flex">
+    <!-- Sidebar del administrador -->
+    <div class="d-flex flex-column justify-content-between sidebar p-3">
+      <div>
+        <!-- Logo y nombre del dashboard -->
+        <div class="mb-4">
+          <h2 class="text-white">Subastas</h2>
+          <p class="text-white">Admin Vendedor</p>
+        </div>
+        <!-- Menú de navegación -->
+        <ul class="nav flex-column">
+          <!-- Opciones del menú -->
+          <li class="nav-item">
+            <a class="nav-link active" href="#"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
+          </li>
+          <!-- Otras opciones del menú -->
+        </ul>
+      </div>
+      <!-- Perfil del usuario -->
+      <div class="user-profile mt-auto d-flex align-items-center">
+        <img src="https://placehold.co/40x40" alt="Profile Picture" class="rounded-circle me-2">
+        <div class="d-flex flex-column ms-2">
+          <div>
+            <strong>Admin Vendedor</strong><br>
+            <small>
+              <%= nombreUsuario %>
+            </small>
+          </div>
+          <a href="/admin/logoutAdminV" class="btn btn-danger btn-sm">Cerrar Sesión</a>
+        </div>
+
+      </div>
+    </div>
+    <!-- Contenido principal -->
+    <div class="main-content">
+      <!-- Encabezado y barra de navegación -->
+      <div class="d-flex justify-content-between mb-4">
+        <h1>Dashboard - Admin Vendedor</h1>
+        <!-- Opciones de perfil y configuración -->
+        <div class="d-flex align-items-center">
+          <span class="me-3">
+            <%= nombreUsuario %>
+          </span>
+          <img src="https://placehold.co/40x40" alt="Profile" class="rounded-circle">
+        </div>
+      </div>
+      <!-- Sección de estadísticas -->
+      <div class="row mb-4">
+        <!-- Tarjetas de estadísticas -->
+        <div class="col-md-3">
+          <div class="stats-card">
+            <h6>Total Subastas</h6>
+            <h3>
+              <%= numSubastas %>
+            </h3>
+            <!-- Datos estadísticos -->
+          </div>
+        </div>
+        <!-- Más tarjetas de estadísticas -->
+      </div>
+      <!-- Gráficos y tablas -->
+      <div class="row mb-4">
+        <!-- Gráfico de visitantes y tarjeta de nuevas subastas -->
+        <div class="">
+          <div class="graph-card">
+            <h5>Subastas</h5>
+            <!-- Gráfico de subastas y ofertas -->
+            <div class="chart-container ">
+              <div style="overflow-y: auto; height: 100%; ">
+                <!-- Establece la altura máxima y habilita el desplazamiento vertical -->
+                <table class="table-bordered" style="width: 100%; text-align: center;">
+                  <thead style="font-weight: 600; font-size: .9rem;">
+                    <tr>
+                      <td class="marca">Marca</td>
+                      <td class="modelo">Modelo</td>
+                      <td class="descripción">Descripción</td>
+                      <td class="categoría">Categoría</td>
+                      <td class="año">Año</td>
+                      <td class="precio">Precio Base</td>
+                      <td class="placa">Placa</td>
+                      <td class="tarjeta">Tarjeta de Propiedad</td>
+
+                      <td class="hora_subasta">Hora subastas</td>
+                      <td class="fecha_subasta">Fecha subastas</td>
+                      <td class="importante">Ganadores</td>
+                      <td class="llave">Llave</td>
+                      <td class="activo">activo / finalizado</td>
+                    </tr>
+                  </thead>
+                  <tbody style="font-size: .9rem;">
+                    <% subastas.forEach(subasta=> { %>
+                    <tr>
+                      <td class="marca">
+                        <%= subasta.marca %>
+                      </td>
+                      <td class="modelo">
+                        <%= subasta.modelo %>
+                      </td>
+                      <td class="descripcion-corta descripción">
+                        <%= subasta.descripcion %>
+                      </td>
+                      <td class="categoría">
+                        <%= subasta.categoria %>
+                      </td>
+                      <td class="año">
+                        <%= subasta.anio %>
+                      </td>
+                      <td class="precio">
+                        $<%= subasta.precio_base %>
+                      </td>
+                      <td class="placa">
+                        <%= subasta.placa %>
+                      </td>
+                      <td class="tarjeta">
+                        <%= subasta.tarjeta_propiedad %>
+                      </td>
+
+                      <td class="hora_subasta">
+                        <%= subasta.hora_subasta %>
+                      </td>
+                      <td class="fecha_subasta">
+                        <%= subasta.fecha_formateada %>
+                      </td>
+
+                      <td class="truncate importante">
+                        <%= subasta.currentWinner %>
+                      </td>
+
+                      <% if (subasta.act_fina == "activa") { %>
+                      <td class="llave_activa">
+                        activa
+                      </td>
+                      <% } else { %>
+                      <td class="llave_finalizada">
+                        finalizada
+                      </td>
+                      <% } %>
+                      <td class="btn_activas_finalidas">
+                        <button class="btn-activar acti" id="btn_activar" data-id="<%= subasta.id %>">Activar</button>
+                        <button class="btn-finalizar fina" id="btn_finalizar" data-id="<%= subasta.id %>">Finalizar</button>
+                      </td>
+
+                    </tr>
+                    <% }); %>
+                  </tbody>
+                </table>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 mt-5 tarjeta_suvir_vehiculo">
+          <!-- Formulario para crear nueva subasta -->
+          <div class="card">
+            <form action="/admin/subir-vehiculo" method="POST" enctype="multipart/form-data">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="card-title">Subir Vehículo</h5>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="Marca">Marca</label>
+                        <input type="text" class="form-control" id="marca" name="marca" required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="Modelo">Modelo</label>
+                        <input type="text" class="form-control" id="modelo" name="modelo" required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="descripcion">Descripción</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion" rows="2" required></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="Categoria">Categoría</label>
+                        <select class="form-select" id="categoria" name="categoria" required>
+                          <option value="auto">Auto</option>
+                          <option value="camioneta">Camioneta</option>
+                          <option value="moto">Moto</option>
+                          <option value="piezas">Piezas</option>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="Año">Año</label>
+                        <input type="text" class="form-control" id="anio" name="anio" required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="precio">Precio Base</label>
+                        <input type="number" class="form-control" id="precio_base" name="precio_base" required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="Placa">Placa</label>
+                        <input type="text" class="form-control" id="placa" name="placa" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="Tarjeta_propiedad">Tarjeta de Propiedad</label>
+                        <select class="form-select" id="tarjeta_propiedad" name="tarjeta_propiedad" required>
+                          <option value="si">Sí</option>
+                          <option value="no">No</option>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="Llave">Llave</label>
+                        <select class="form-select" id="llave" name="llave" required>
+                          <option value="si">Sí</option>
+                          <option value="no">No</option>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="Ubicación">Ubicación</label>
+                        <input type="text" class="form-control" id="ubicacion" name="ubicacion" required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="Estado">Estado</label>
+                        <select class="form-select" id="estado" name="estado" required>
+                          <option value="SINIESTRADO">Siniestrado</option>
+                          <option value="USADO">Usado</option>
+                        </select>
+                      </div>
+                      <!-- <div class="mb-3">
+                          <label for="prorroga">Prórroga (minutos)</label>
+                          <input type="number" class="form-control" id="prorroga" name="prorroga" required>
+                        </div> -->
+                      <div class="mb-3">
+                        <label for="Importante">Importante</label>
+                        <input type="text" class="form-control" id="importante" name="importante" required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="fecha_subasta">Fecha Subasta</label>
+                        <input type="date" class="form-control" name="fecha_subasta" id="fecha_subasta">
+                      </div>
+                      <div class="mb-3">
+                        <label for="hora_subasta">Hora Subasta</label>
+                        <input type="time" class="form-control" name="hora_subasta" id="hora_subasta">
+                      </div>
+
+                    </div>
+                    <div class="mb-3">
+                      <div class="row">
+                        <label for="imagenes" class="form-label">Imágenes</label>
+                        <input type="file" name="images" multiple>
+                      </div>
+                      <div class="mt-3">
+                        <label for="anexos">Anexos (URLs separados por comas)</label>
+                        <input type="text" class="form-control" name="anexos" id="anexos">
+
+                      </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Subir Vehículo</button>
+                  </div>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+    var inputHora = document.getElementById("hora_subasta");
+
+    function MedirTiempo() {
+      var TimeSplit = inputHora.value.split(":"),
+        hours,
+        minutes,
+        meridean;
+      hours = TimeSplit[0];
+      minutes = TimeSplit[1];
+      if (hours > 12) {
+        meridean = 'PM';
+        hours -= 12;
+      } else if (hours < 12) {
+        meridean = 'AM';
+        if (hours == 0) {
+          hours = 12;
+        }
+      } else {
+        meridean = 'PM'
+      }
+      alert(hours + ':' + minutes + ':' + meridean);
+    }
+  </script>
+
+  <script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Evita que el formulario se envíe de forma tradicional
+
+      const formData = new FormData(this);
+
+      fetch('/admin/subir-vehiculo', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Éxito',
+              text: data.message
+            });
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: data.message
+            });
+          }
+        })
+        .catch(error => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Ocurrió un error al enviar la solicitud.'
+          });
+          console.error('Error:', error);
+        });
+    });
+  </script>
+
+  <script>
+    document.querySelectorAll('.btn-activar').forEach(button => {
+      button.addEventListener('click', function() {
+        const subastaId = this.getAttribute('data-id');
+        fetch(`/admin/subasta/activar/${subastaId}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              // Notificar al usuario usando SweetAlert2
+              Swal.fire({
+                title: "Subasta activa con éxito",
+                text: "La subasta se activó",
+                icon: 'success'
+              }).then(() => {
+                location.reload(); // Recargar la página después de que el usuario haga clic en "OK"
+              });
+            } else {
+              Swal.fire({
+                title: "Error",
+                text: "Error al activar la subasta",
+                icon: 'error'
+              });
+            }
+
+          })
+          .catch(error => console.error('Error:', error));
+      });
+    });
+
+    document.querySelectorAll('.btn-finalizar').forEach(button => {
+      button.addEventListener('click', function() {
+        const subastaId = this.getAttribute('data-id');
+        fetch(`/admin/subasta/finalizar/${subastaId}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              // Notificar al usuario usando SweetAlert2
+              Swal.fire({
+                title: "Subasta finalizada con éxito",
+                text: "La subasta se finalizo",
+                icon: 'success'
+              }).then(() => {
+                location.reload(); // Recargar la página después de que el usuario haga clic en "OK"
+              });
+            } else {
+              Swal.fire({
+                title: "Error",
+                text: "Error al finalizar la subasta",
+                icon: 'error'
+              });
+            }
+          })
+          .catch(error => console.error('Error:', error));
+      });
+    });
+  </script>
+</body>
+
+</html>

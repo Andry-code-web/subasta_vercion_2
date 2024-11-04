@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subastas - admin general</title>
+    <link rel="shortcut icon" href="/img/footer_logo.svg" type="image/x-icon">
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <!-- ICONS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="/css/style_adminV.css">
+
+    <style>
+        .truncate {
+            max-width: 200px;
+            font-size: .75rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="d-flex">
+        <!-- Sidebar del administrador -->
+        <div class="sidebar p-3">
+            <div>
+                <!-- Logo y nombre del dashboard -->
+                <div class="mb-4 logo">
+                    <div class="d-flex align-items-center justify-content-center logo_title">
+                        <img src="/img/footer_logo.svg" alt="">
+                        <h2 class="text-white">Subastas</h2>
+                    </div>
+                    <p class="text-white">Admin General</p>
+                </div>
+                <!-- Menú de navegación -->
+                <ul class="nav flex-column">
+                    <!-- Opciones del menú -->
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
+                    </li>
+                    <!-- Otras opciones del menú -->
+                </ul>
+            </div>
+            <!-- Perfil del usuario -->
+            <div class="user-profile mt-auto d-flex align-items-center flex-column">
+                <div class="d-flex">
+                    <img src="https://placehold.co/40x40" alt="Profile Picture" class="rounded-circle me-2">
+                    <div>
+                        <strong>Admin General</strong><br>
+                        <small>
+                            <%= nombreUsuario %>
+                        </small>
+                    </div>
+                </div>
+                <a href="/admin/logout" class="btn btn-danger btn-sm ms-2">Cerrar Sesión</a>
+                <!-- Botón de cierre de sesión -->
+            </div>
+        </div>
+        <!-- Contenido principal -->
+        <div class="main-content">
+            <!-- Encabezado y barra de navegación -->
+            <div class="d-flex justify-content-between mb-4">
+                <h1>Dashboard - Admin General</h1>
+                <!-- Opciones de perfil y configuración -->
+                <div class="d-flex align-items-center">
+                    <span class="me-3">
+                        <%= nombreUsuario %>
+                    </span>
+                    <img src="https://placehold.co/40x40" alt="Profile" class="rounded-circle">
+                </div>
+            </div>
+            <!-- Sección de estadísticas -->
+            <div class="row mb-4">
+                <!-- Tarjetas de estadísticas -->
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <h6>Total Subastas</h6>
+                        <h3>
+                            <%= numSubastas %>
+                        </h3>
+                        <!-- Datos estadísticos -->
+                    </div>
+                </div>
+                <!-- Más tarjetas de estadísticas -->
+            </div>
+            <!-- Gráficos y tablas -->
+            <div class="row mb-4">
+                <!-- Gráfico de visitantes y tarjeta de nuevas subastas -->
+                <div class="col-md-9">
+                    <div class="d-flex" style="gap:2rem; overflow: hidden;">
+                        <div class="graph-card new-subastas-card mb-4"
+                            style="width: 50%; height: 450px; padding-bottom: 2rem; overflow-y: auto;">
+                            <h6>
+                                Usuarios
+                                <span style="font-size: 1.1rem; font-weight: 600; margin-left: .5rem;">
+                                    <%= numUsuarios %>
+                                </span>
+                            </h6>
+                            <div style="overflow-y: auto; max-height: 350px;">
+                                <!-- Establece la altura máxima y habilita el desplazamiento vertical -->
+                                <table class="table-bordered" style="width: 100%; text-align: center;">
+                                    <thead style="font-weight: 600;">
+                                        <tr>
+                                            <td>Foto</td>
+                                            <td>Nombre</td>
+                                            <td>DNI</td>
+                                            <td>Correo</td>
+                                            <td>Oportunidades</td> <!-- Nueva columna -->
+                                            <td>Acciones</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="font-size: .9rem;">
+                                        <% usuarios.forEach(usuario => { %>
+                                            <tr>
+                                                <td>
+                                                    <i class="bi bi-person-circle text-warning" style="font-size: 1.5rem;"></i>
+                                                </td>
+                                                <td>
+                                                    <%= usuario.nombre_apellidos %>
+                                                </td>
+                                                <td>
+                                                    <%= usuario.dni_ce %>
+                                                </td>
+                                                <td>
+                                                    <%= usuario.email %>
+                                                </td>
+                                                <td>
+                                                    <%= usuario.oportunidades %> <!-- Muestra las oportunidades -->
+                                                </td>
+                                                <td class="acciones">
+                                                    <a href="/admin/editarUsuario/<%= usuario.id %>" class="text-primary">
+                                                        <i class="bi bi-pencil-square"></i>
+                                                    </a>
+                                                    <a href="#" class="text-danger eliminar-usuario" data-id="<%= usuario.id %>">
+                                                        <i class="bi bi-trash3"></i>
+                                                    </a>
+                                                    <!-- Enlace para activar oportunidades -->
+                                                    <a href="#" class="text-success activar-oportunidades" data-id="<%= usuario.id %>">
+                                                        <i class="bi bi-check-square"></i>
+                                                        <span class="tooltip-text">Activar oportunidades</span>
+                                                    </a>
+                                                    
+                                                    
+                                                </td>
+                                            </tr>
+                                        <% }); %>
+                                    </tbody>
+                                </table>
+                                
+                                
+                                
+                            </div>
+                        </div>
+
+                        <div class="graph-card new-subastas-card mb-4"
+                            style="width: 50%; height: 450px; padding-bottom: 2rem; overflow-y: auto;">
+                            <h6>
+                                Admin vendedor
+                                <span style="font-size: 1.1rem; font-weight: 600; margin-left: .5rem;">
+                                    <%= numAdminVendedores %>
+                                </span>
+                            </h6>
+                            <div style="overflow-y: auto; max-height: 350px;">
+                                <!-- Establece la altura máxima y habilita el desplazamiento vertical -->
+                                <table class="table-bordered" style="width: 100%; text-align: center;">
+                                    <thead style="font-weight: 600;">
+                                        <tr>
+                                            <td>Foto</td>
+                                            <td>Usuario</td>
+                                            <td>Estado</td>
+                                            <td>Acciones</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="font-size: .9rem;">
+                                        <% adminVendedores.forEach(adminVendedor=> { %>
+                                            <tr>
+                                                <td>
+                                                    <i class="bi bi-person-badge-fill text-success"
+                                                        style="font-size: 1.5rem;"></i>
+                                                </td>
+                                                <td>
+                                                    <%= adminVendedor.nombre_usuario %>
+                                                </td>
+                                                <td>
+                                                    <%= adminVendedor.activo ? "Activo" : "Inactivo" %>
+                                                </td>
+                                                <td class="acciones">
+                                                    <a href="#" class="eliminar-adminVendedor"
+                                                        data-id="<%= adminVendedor.id %>">
+                                                        <i class="bi bi-trash3 text-danger"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="graph-card">
+                        <h5>Subastas</h5>
+                        <!-- Gráfico de subastas y ofertas -->
+                        <div class="chart-container ">
+                            <div style="overflow-y: auto; max-height: 350px;">
+                                <!-- Establece la altura máxima y habilita el desplazamiento vertical -->
+                                <table class="table-bordered" style="width: 100%; text-align: center;">
+                                    <thead style="font-weight: 600; font-size: .9rem;">
+                                        <tr>
+                                            <td>ID</td>
+                                            <td>Nombre prop.</td>
+                                            <td>Descipción</td>
+                                            <td>Categoria</td>
+                                            <td>Direccion</td>
+                                            <td>Precio</td>
+                                            <td>N° Cuartos</td>
+                                            <td>N° Baños</td>
+                                            <td>N° Cosina</td>
+                                            <td>N° Cochera</td>
+                                            <td>Patio</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="font-size: .9rem;">
+                                        <% subastas.forEach(subasta=> { %>
+                                            <tr>
+                                                <td>
+                                                    <%= subasta.id %>
+                                                </td>
+                                                <td>
+                                                    <%= subasta.nombre_propiedad %>
+                                                </td>
+                                                <td class="truncate">
+                                                    <%= subasta.descripcion %>
+                                                </td>
+                                                <td>
+                                                    <%= subasta.categoria %>
+                                                </td>
+                                                <td>
+                                                    <%= subasta.direccion %>
+                                                </td>
+                                                <td>
+                                                    <%= subasta.precio_base %>
+                                                </td>
+                                                <td>
+                                                    <%= subasta.N_cuartos %>
+                                                </td>
+                                                <td>
+                                                    <%= subasta.N_baños %>
+                                                </td>
+                                                <td>
+                                                    <%= subasta.N_cocina %>
+                                                </td>
+                                                <td>
+                                                    <%= subasta.N_cocheras %>
+                                                </td>
+                                                <td>
+                                                    <%= subasta.patio %>
+                                                </td>
+                                                <!-- <td class="acciones">
+                                                    <a href="">
+                                                        <i class="bi bi-pencil-square text-primary"></i>
+                                                    </a>
+                                                    <a href="">
+                                                        <i class="bi bi-trash3 text-danger"></i>
+                                                    </a>
+                                                </td> -->
+                                            </tr>
+                                            <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <!-- Formulario para crear nueva subasta -->
+                    <form action="/admin/crear-admin-vendedor" class="card" method="POST">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Nuevo Admin Vendedor</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="nombre_usuario">Nombre de Usuario</label>
+                                    <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario"
+                                        required>
+                                </div>
+                                <div>
+                                    <label for="contraseña">Contraseña</label>
+                                    <div class="inputs">
+                                        <input type="password" class="form-control" id="contraseña" name="contraseña"
+                                            required>
+                                        <button type="button" class="mostarC" id="toggleButton" onclick="mostrar();">
+                                            <i id="toggleIcon" class="bi bi-eye-slash-fill"></i>
+                                        </button>
+                                    </div>
+
+                                </div>
+                                <!-- Aquí puedes agregar más campos según la estructura de la tabla -->
+                                <button type="submit" class="btn btn-primary mt-3">Crear Admin Vendedor</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        function mostrar() {
+            const contra = document.getElementById('contraseña');
+            const icon = document.getElementById('toggleIcon');
+            if (contra.type === 'password') {
+                contra.type = 'text';
+                icon.classList.remove('bi-eye-slash-fill');
+                icon.classList.add('bi-eye-fill')
+            } else {
+                contra.type = 'password';
+                icon.classList.remove('bi-eye-fill');
+                icon.classList.add('bi-eye-slash-fill');
+            }
+        }
+    </script>
+
+    <!-- logiaca eliminar -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const eliminarLinks = document.querySelectorAll('.eliminar-adminVendedor');
+
+            eliminarLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault(); // Evita el comportamiento predeterminado de navegación
+
+                    const adminVendedorId = link.getAttribute('data-id');
+                    const confirmarEliminar = confirm('¿Estás seguro de que deseas eliminar este adminVendedor?');
+
+                    if (confirmarEliminar) {
+                        fetch(`/admin/eliminarAdminVendedor/${adminVendedorId}`, {
+                            method: 'DELETE'
+                        })
+                            .then(response => {
+                                if (response.ok) {
+                                    // Operación de eliminación exitosa, actualizar la interfaz o mostrar mensaje
+                                    console.log('AdminVendedor eliminado correctamente');
+                                    location.reload(); // Actualiza la página para reflejar los cambios
+                                } else {
+                                    throw new Error('Error al eliminar adminVendedor');
+                                }
+                            })
+                            .catch(error => console.error('Error al eliminar adminVendedor:', error));
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Logica activar oportunidades -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.activar-oportunidades').forEach(link => {
+                link.addEventListener('click', async (event) => {
+                    event.preventDefault(); // Evita la acción por defecto del enlace
+                    const usuarioId = link.getAttribute('data-id');
+                    
+                    // Confirmar la acción con el usuario
+                    const confirm = await Swal.fire({
+                        title: 'Confirmar',
+                        text: '¿Estás seguro de que deseas activar 3 oportunidades para este usuario?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Sí, activar',
+                        cancelButtonText: 'Cancelar'
+                    });
+    
+                    if (confirm.isConfirmed) {
+                        try {
+                            // Enviar solicitud para activar oportunidades
+                            const response = await fetch(`/admin/activarOportunidades/${usuarioId}`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' }
+                            });
+                            const result = await response.json();
+                            
+                            if (result.success) {
+                                Swal.fire('Éxito', 'Se han activado 3 oportunidades para el usuario.', 'success');
+                                // Actualizar la tabla si es necesario
+                                location.reload(); // Recargar la página para reflejar los cambios
+                            } else {
+                                Swal.fire('Error', result.message, 'error');
+                            }
+                        } catch (error) {
+                            console.error('Error al activar oportunidades:', error);
+                            Swal.fire('Error', 'Hubo un problema al activar oportunidades', 'error');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+    
+    
+</body>
+
+</html>

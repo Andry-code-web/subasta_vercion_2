@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- FAVICON -->
+  <link rel="shortcut icon" href="/img/footer_logo.svg" type="image/x-icon">
+  <!-- BOOTSTRAP -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <!-- BOOSTRAP SCRIPT -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <!-- BOOTSSTRAP ICON -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- ICONS -->
+  <script src="https://kit.fontawesome.com/78137c0870.js" crossorigin="anonymous"></script>
+  <!-- ESTILOS -->
+  <link rel="stylesheet" href="/css/style_home.css">
+  <!-- estilos componentes -->
+  <link rel="stylesheet" href="/css/partials/styles_header.css">
+  <link rel="stylesheet" href="/css/partials/styles_footer.css">
+  <link rel="stylesheet" href="/css/partials/styles_whatsapp_flot.css">
+  <link rel="stylesheet" href="/css/partials/styles_search.css">
+
+  <title>Subasta Sur</title>
+</head>
+
+<body>
+  <!-- CABEZERA -->
+  <%- include('partials/header') %>
+
+    <!-- BANNER -->
+    <section class="banner" id="banner">
+      <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="2000">
+            <img src="/img/banner_slider2_v2.jpeg" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="/img/banner_slider3_v2.jpeg" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="/img/banner_slider4_v2.jpeg" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="/img/banner_catalogo_2.png" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
+          data-bs-slide="prev">
+          <span class="carousel-icon" aria-hidden="true">
+            <i class="bi bi-chevron-left"></i>
+          </span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
+          data-bs-slide="next">
+          <span class="carousel-next-icon" aria-hidden="true">
+            <i class="bi bi-chevron-right"></i>
+          </span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- CATEGORÍAS -->
+    <section class="categoria" id="cartegoria">
+      <h2>Navega por las categorías</h2>
+      <div class="categorias">
+        <a href="/catalogo?categoria=camioneta" class="content_img">
+          <div class="iconos_cuentas">
+            <span class="icono">
+              <img src="/img/icon_camioneta.png" alt="">
+            </span>
+            <span class="contador">
+              <%= cantidades.camioneta %>
+            </span>
+          </div>
+          <span class="descripcion_categoria">
+            Camionetas
+          </span>
+        </a>
+        <a href="/catalogo?categoria=auto" class="content_img">
+          <div class="iconos_cuentas">
+            <span class="icono">
+              <img src="/img/icon_auto.png" alt="">
+            </span>
+            <span class="contador">
+              <%= cantidades.auto %>
+            </span>
+          </div>
+          <span class="descripcion_categoria">
+            Autos
+          </span>
+        </a>
+        <a href="/catalogo?categoria=moto" class="content_img">
+          <div class="iconos_cuentas">
+            <span class="icono">
+              <img src="/img/icon_moto.png" alt="">
+            </span>
+            <span class="contador">
+              <%= cantidades.moto %>
+            </span>
+          </div>
+          <span class="descripcion_categoria">
+            Motos
+          </span>
+        </a>
+
+        <a href="/catalogo?categoria=camioneta" class="content_img">
+          <div class="iconos_cuentas">
+            <span class="icono">
+              <img src="/img/icon-caminhoes-onibus.svg" alt="">
+            </span>
+            <span class="contador">
+              0
+            </span>
+          </div>
+          <span class="descripcion_categoria">
+            Camiones y autobuses
+          </span>
+        </a>
+        <a href="/catalogo?categoria=auto" class="content_img">
+          <div class="iconos_cuentas">
+            <span class="icono">
+              <img src="/img/icon-maquinas.svg" alt="">
+            </span>
+            <span class="contador">
+              0
+            </span>
+          </div>
+          <span class="descripcion_categoria">
+            Maquinas de construcción
+          </span>
+        </a>
+        <a href="/catalogo?categoria=moto" class="content_img">
+          <div class="iconos_cuentas">
+            <span class="icono">
+              <img src="/img/icon-industria.svg" alt="">
+            </span>
+            <span class="contador">
+              0
+            </span>
+          </div>
+          <span class="descripcion_categoria">
+            Industrial y Equipos
+          </span>
+        </a>
+        <a href="/catalogo" class="content_img d-flex justify-content-between">
+          <div class="iconos_cuentas piesa" style="margin-top: 7px; ">
+            <span class="icono piezas">
+              <img src="/img/icon-movimentacoes.svg" alt="">
+            </span>
+            <% if(cantidades.piezas>= 1) { %>
+              <span class="contador piesas">
+                0
+              </span>
+              <% } else { %>
+                <span class="contador piesas">0</span>
+                <% } %>
+          </div>
+          <span class="descripcion_categoria">
+            Movimiento y transporte
+          </span>
+        </a>
+        <a href="/catalogo" class="content_img grid_colum_2 d-flex justify-content-between">
+          <div class="iconos_cuentas piesa" style="margin-top: 7px; ">
+            <span class="icono piezas">
+              <img src="/img/icon_accesorios.png" alt="">
+            </span>
+            <% if(cantidades.piezas>= 1) { %>
+              <span class="contador piesas">
+                <%= cantidades.piezas %>
+              </span>
+              <% } else { %>
+                <span class="contador piesas">0</span>
+                <% } %>
+          </div>
+          <span class="descripcion_categoria">
+            Piezas
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <!-- SUBASTAS MAS LIKEADAS -->
+    <section class="subastas">
+
+      <div class="btn_fechas_F_A">
+        <a href="/catalogo?estado=finalizadas">Subastas Finalizadas</a>
+        <a href="/catalogo?estado=activas">Subastas Activas</a>
+      </div>
+
+      <!-- Camionetas -->
+      <div class="contenedor_subastass">
+        <h2>Camionetas</h2>
+        <div class="content_card row row-cols-1 row-cols-md-5">
+          <% camionetas.forEach(subasta=> { %>
+            <div class="card_home col mb-4">
+              <div class="card-img">
+                <% if (subasta.imagenes && subasta.imagenes.length> 0) { %>
+                  <a href="/subasta/<%= subasta.id %>">
+                    <img src="data:image/jpeg;base64,<%= subasta.imagenes[0] %>" alt="Subasta Image">
+                  </a>
+
+                  <% }else { %>
+                    <img src="/img/casa.png" alt="Default Image">
+                    <% } %>
+              </div>
+
+              <div class="card-info d-flex justify-content-between">
+                <div class="informacion">
+                  <a href="/subasta/<%= subasta.id %>" class="info text-title">
+                    <%= subasta.marca %>
+                  </a>
+                  <p class="info text-body">
+                    <%= subasta.categoria %>
+                  </p>
+                  <a href="/subasta/<%= subasta.id %>" class="text-model">
+                    Modelo: <%= subasta.modelo %>
+                  </a>
+
+                  <a href="/subasta/<%= subasta.id %>" class="text_descripcion">
+                    <%= subasta.descripcion %>
+                  </a>
+                </div>
+                <div class="comment-react">
+                  <div class="like">
+                    <svg fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                      <path fill="#f5356e" stroke-linecap="round" stroke-width="2" stroke="none"
+                        d="M19.4626 3.99415C16.7809 2.34923 14.4404 3.01211 13.0344 4.06801C12.4578 4.50096 12.1696 4.71743 12 4.71743C11.8304 4.71743 11.5422 4.50096 10.9656 4.06801C9.55962 3.01211 7.21909 2.34923 4.53744 3.99415C1.01807 6.15294 0.221721 13.2749 8.33953 19.2834C9.88572 20.4278 10.6588 21 12 21C13.3412 21 14.1143 20.4278 15.6605 19.2834C23.7783 13.2749 22.9819 6.15294 19.4626 3.99415Z">
+                      </path>
+                    </svg>
+                  </div>
+                  <hr>
+                  <span>
+                    <%= subasta.like_count %>
+                  </span>
+                </div>
+              </div>
+              <div class="card-footer">
+                <span class="text-title precio" id="precio">
+                  <a href="/subasta/<%= subasta.id %>">
+                    $<%= subasta.precio_base %>
+                  </a>
+                </span>
+                <div class="card-button">
+                  <a href="/subasta/<%= subasta.id %>" class="button">
+                    <span class="button-text">Detalles</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <% }) %>
+        </div>
+
+      </div>
+
+      <div class="contenedor_banners_info mb-4">
+        <div class="banner_informativos">
+          <div class="div1 img_div"><img src="/img/banner_info_4.jpeg" alt=""></div>
+          <div class="div2 img_div"><img src="/img/banner_info_2.jpeg" alt=""></div>
+        </div>
+      </div>
+
+      <!-- Autos -->
+      <div class="contenedor_subastass">
+        <h2>Autos</h2>
+        <div class="content_card">
+          <% autos.forEach(subasta=> { %>
+            <div class="card_home">
+              <div class="card-img">
+                <% if (subasta.imagenes && subasta.imagenes.length> 0) { %>
+                  <a href="/subasta/<%= subasta.id %>">
+                    <img src="data:image/jpeg;base64,<%= subasta.imagenes[0] %>" alt="Subastas Image">
+                  </a>
+                  <% }else { %>
+                    <img src="/img/casa.png" alt="Default Image">
+                    <% } %>
+              </div>
+              <div class="card-info d-flex justify-content-between">
+                <div class="informacion">
+                  <a href="/subasta/<%= subasta.id %>" class="info text-title">
+                    <%= subasta.marca %>
+                  </a>
+                  <p class="info text-body">
+                    <%= subasta.categoria %>
+                  </p>
+                  <a href="/subasta/<%= subasta.id %>" class="text-model">
+                    Modelo: <%= subasta.modelo %>
+                  </a>
+
+                  <a href="/subasta/<%= subasta.id %>" class="text_descripcion">
+                    <%= subasta.descripcion %>
+                  </a>
+                </div>
+                <div class="comment-react">
+                  <div class="like">
+                    <svg fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                      <path fill="#f5356e" stroke-linecap="round" stroke-width="2" stroke="none"
+                        d="M19.4626 3.99415C16.7809 2.34923 14.4404 3.01211 13.0344 4.06801C12.4578 4.50096 12.1696 4.71743 12 4.71743C11.8304 4.71743 11.5422 4.50096 10.9656 4.06801C9.55962 3.01211 7.21909 2.34923 4.53744 3.99415C1.01807 6.15294 0.221721 13.2749 8.33953 19.2834C9.88572 20.4278 10.6588 21 12 21C13.3412 21 14.1143 20.4278 15.6605 19.2834C23.7783 13.2749 22.9819 6.15294 19.4626 3.99415Z">
+                      </path>
+                    </svg>
+                  </div>
+                  <hr>
+                  <span>
+                    <%= subasta.like_count %>
+                  </span>
+                </div>
+              </div>
+              <div class="card-footer">
+                <span class="text-title precio">
+                  <a href="/subasta/<%= subasta.id %>">
+                    $<%= subasta.precio_base %>
+                  </a>
+                </span>
+                <div class="card-button">
+                  <a href="/subasta/<%= subasta.id %>" class="button">
+                    <span class="button-text">Detalles</span>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+            <% }) %>
+        </div>
+
+      </div>
+
+      <div class="contenedor_banners_info mt-4 mb-4">
+        <div class="banner_informativos">
+          <div class="div3 img_div"><img src="/img/banner_info_3.jpeg" alt=""></div>
+          <div class="div4 img_div"><img src="/img/baner_info_1.jpeg" alt=""></div>
+        </div>
+      </div>
+
+      <!-- Motos -->
+      <div class="contenedor_subastass">
+        <h2>Motos</h2>
+        <div class="content_card">
+          <% motos.forEach(subasta=> { %>
+            <div class="card_home">
+              <div class="card-img">
+                <% if (subasta.imagenes && subasta.imagenes.length> 0) { %>
+                  <a href="/subasta/<%= subasta.id %>">
+                    <img src="data:image/jpeg;base64,<%= subasta.imagenes[0] %>" alt="Subasta Image">
+                  </a>
+                  <% }else { %>
+                    <img src="/img/casa.png" alt="Default Image">
+                    <% } %>
+              </div>
+              <div class="card-info d-flex justify-content-between">
+                <div class="informacion">
+                  <a href="/subasta/<%= subasta.id %>" class="info text-title">
+                    <%= subasta.marca %>
+                  </a>
+                  <p class="info text-body">
+                    <%= subasta.categoria %>
+                  </p>
+                  <a href="/subasta/<%= subasta.id %>" class="text-model">
+                    Modelo: <%= subasta.modelo %>
+                  </a>
+
+                  <a href="/subasta/<%= subasta.id %>" class="text_descripcion">
+                    <%= subasta.descripcion %>
+                  </a>
+                </div>
+                <div class="comment-react">
+                  <div class="like">
+                    <svg fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                      <path fill="#f5356e" stroke-linecap="round" stroke-width="2" stroke="none"
+                        d="M19.4626 3.99415C16.7809 2.34923 14.4404 3.01211 13.0344 4.06801C12.4578 4.50096 12.1696 4.71743 12 4.71743C11.8304 4.71743 11.5422 4.50096 10.9656 4.06801C9.55962 3.01211 7.21909 2.34923 4.53744 3.99415C1.01807 6.15294 0.221721 13.2749 8.33953 19.2834C9.88572 20.4278 10.6588 21 12 21C13.3412 21 14.1143 20.4278 15.6605 19.2834C23.7783 13.2749 22.9819 6.15294 19.4626 3.99415Z">
+                      </path>
+                    </svg>
+                  </div>
+                  <hr>
+                  <span>
+                    <%= subasta.like_count %>
+                  </span>
+                </div>
+              </div>
+              <div class="card-footer">
+                <span class="text-title precio">
+                  <a href="/subasta/<%= subasta.id %>">
+                    $<%= subasta.precio_base %>
+                  </a>
+                </span>
+                <div class="card-button">
+                  <a href="/subasta/<%= subasta.id %>" class="button">
+                    <span class="button-text">Detalles</span>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+            <% }) %>
+        </div>
+
+        <div class="verMas d-flex justify-content-center">
+          <a href="/catalogo" class="cssbuttons-io-button">
+            Ver más subastas
+            <div class="icon">
+              <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                  fill="currentColor"></path>
+              </svg>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="contenedor_banners_info mt-4 mb-4">
+        <div class="banner_informativos">
+          <div class="div5 img_div"><img src="/img/banner_img_mas.jpeg" alt=""></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHATSAPP FLOTANTE -->
+    <%- include('partials/whatsapp_flot') %>
+
+      <!-- FOOTER -->
+      <%- include('partials/footer') %>
+
+        <!-- SCRIPTS -->
+        <script>
+          document.querySelectorAll('.img-subasta').forEach(img => {
+            img.addEventListener('load', function () {
+              // Ocultar el loader cuando la imagen se haya cargado
+              const loader = this.parentNode.querySelector('.loader');
+              if (loader) {
+                loader.style.display = 'none';
+              }
+            });
+
+            img.addEventListener('error', function () {
+              // En caso de error al cargar la imagen, también podemos ocultar el loader
+              const loader = this.parentNode.querySelector('.loader');
+              if (loader) {
+                loader.style.display = 'none';
+              }
+            });
+          });
+        </script>
+        <!-- menu menu_desplegable -->
+        <script>
+          document.addEventListener('DOMContentLoaded', () => {
+            const botonActivar = document.getElementById("btn_menu");
+            const botonCerrar = document.getElementById("btn_close");
+            const contenederMenu = document.getElementsByClassName("menu_desplegable")[0];
+
+            botonActivar.addEventListener('click', () => {
+              contenederMenu.classList.add("active");
+            });
+
+            botonCerrar.addEventListener('click', () => {
+              contenederMenu.classList.remove("active");
+            });
+          });
+        </script>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script>
+          $(document).ready(function () {
+            $(".like-button").on("click", function () {
+              const $button = $(this);
+              const subastaId = $button.data("subasta-id");
+
+              // Enviar una solicitud al servidor para guardar el estado del like
+              $.post("/like", {
+                subasta_id: subastaId
+              }, function (response) {
+                if (response.success) {
+                  // Alternar la visibilidad de los íconos
+                  $button.find(".bi-heart-fill").toggleClass("d-none");
+                  $button.find(".bi-heart").toggleClass("d-none");
+                } else if (response.redirect) {
+                  // Redirigir al usuario a la página de inicio de sesión
+                  window.location.href = response.redirect;
+                } else {
+                  alert("Error al realizar la acción.");
+                }
+              }).fail(function (jqXHR) {
+                if (jqXHR.status === 401) {
+                  // Redirigir al usuario a la página de inicio de sesión
+                  window.location.href = jqXHR.responseJSON.redirect;
+                } else {
+                  alert("Error al realizar la acción.");
+                }
+              });
+            });
+          });
+        </script>
+
+        <script src="/js/partials/script_header.js"></script>
+        <script src="/js/partials/script_whatsapp_flot.js"></script>
+        <!-- <script src="/js/partials/script_sugerencias.js"></script> -->
+</body>
+
+</html>

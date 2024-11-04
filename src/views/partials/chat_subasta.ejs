@@ -1,0 +1,310 @@
+<div class="card">
+  <div class="card-header">
+    <p class="title_p">
+      CIERRA EN:
+    </p>
+    <p class="fecha-subasta" id="countdown">
+      <span id="countdown-timer">0d 00h 00m 00s</span>
+    </p>
+
+  </div>
+
+  <!-- Card para unirse (antes de que empiece) -->
+  <div class="card-body" id="body_card" style="display: <%= !estaEnCurso && !estaTerminada ? 'block' : 'none' %>">
+    <div class="analisis d-flex justify-content-center">
+      <div class="vistas">
+        <p>
+          <span>VISTAS</span>
+          <span><%= totalVisitas %></span>
+        </p>
+      </div>
+      <div class="megusta">
+        <p>
+          <span>LIKES</span>
+          <span><%= subasta.like_count %></span>
+        </p>
+      </div>
+    </div>
+
+    <div class="apertura_cierre d-flex justify-content-evenly" style="gap: 1rem;">
+      <div class="fecha_hoara_cierre">
+        <p class="titulo_cierre">Fecha Cierre:</p>
+        <p class="horasss">
+          <% 
+          const fechaHora = new Date(fechaHoraFinSubasta);
+          const dia = fechaHora.getDate().toString().padStart(2, '0');
+          const mes = (fechaHora.getMonth() + 1).toString().padStart(2, '0');
+          const anio = fechaHora.getFullYear();
+
+          const horas = fechaHora.getHours().toString().padStart(2, '0');
+          const minutos = fechaHora.getMinutes().toString().padStart(2, '0');
+          const segundos = fechaHora.getSeconds().toString().padStart(2, '0');
+
+          const fechaFormateada = `${dia}/${mes}/${anio} para <br>  las ${horas}:${minutos}:${segundos}`; 
+        %>
+
+          <%- fechaFormateada %>
+        </p>
+      </div>
+
+      <div class="fecha_hoara_apertura">
+        <p class="titulo_apertura">Fecha Apertura:</p>
+        <p class="horasss">
+          <% 
+          const fechaHoraActiva = new Date(fechaHoraAperturaSubasta);
+          const dias = fechaHoraActiva.getDate().toString().padStart(2, '0');
+          const mess = (fechaHoraActiva.getMonth() + 1).toString().padStart(2, '0');
+          const anios = fechaHoraActiva.getFullYear();
+          
+          const hora = fechaHoraActiva.getHours().toString().padStart(2, '0');
+          const minutoss = fechaHoraActiva.getMinutes().toString().padStart(2, '0');
+          const segundoss = fechaHoraActiva.getSeconds().toString().padStart(2, '0');
+
+          const fechaHoaraApertura = `${dias}/${mess}/${anios} a <br> las ${hora}:${minutoss}:${segundoss}`;
+        %>
+
+          <%- fechaHoaraApertura %>
+        </p>
+      </div>
+    </div>
+
+
+
+    <h2 id="estado_subasta">¡Próximamente!</h2>
+    <!-- <p class="fecha-subasta">
+      Fecha de inicio: <%= fechaFormateadaEsp %> <%= subasta.hora_formateada %>
+    </p> -->
+
+    <p class="precio_con_incremento">
+      <span>Precio Inicial: </span>
+      <span>US$ <%= ofertaActual %></span>
+    </p>
+
+    <hr>
+
+    <p class="precio d-flex align-items-center justify-content-center">
+      <i class="bi bi-cash-coin d-flex"></i>
+      <span class="precio_base">Precio base:</span>
+      <span class="price">US$<%= formatNumber(initialPrice) %></span>
+    </p>
+
+    <div class="form_oferta">
+      <div class="inputGroup">
+        <div class="d-flex justify-content-evenly align-items-center">
+          <button class="restar" id="restar">-</button>
+          <input type="text" value="<%= ofertaActual %>" id="valorOferta">
+          <button class="sumar" id="sumatoria">+</button>
+        </div>
+        <p class="Incremento">Incremento US$100.00</p>
+      </div>
+
+
+      <button type="submit" id="participar_puja">ENVIAR PUJA</button>
+    </div>
+
+
+    <div class="grid_info_card">
+      <div class="div1">
+        <p>mínimo de participantes 2</p>
+      </div>
+      <div class="div2">
+        <p>Con Precio Reserva</p>
+      </div>
+      <div class="div3">
+        <p>Opción a Visitas previa cita</p>
+      </div>
+      <div class="div4">
+        <p>Sin Comisión</p>
+      </div>
+      <div class="div5">
+        <a href="" id="oportunidades">
+          <i class="fa-solid fa-circle-info" style="color: #db0000;"></i>
+          <span>Participa en 3 subastas por $500.</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card para enviar pujas (durante la subasta) -->
+  <div class="card-body-puja" id="body_card_puja" style="display: <%= estaEnCurso && !estaTerminada ? 'block' : 'none' %>">
+    <div class="analisis d-flex justify-content-center">
+      <div class="vistas">
+        <p>
+          <span>VISTAS</span>
+          <span><%= totalVisitas %></span>
+        </p>
+      </div>
+      <div class="megusta">
+        <p>
+          <span>LIKES</span>
+          <span><%= subasta.like_count %></span>
+        </p>
+      </div>
+    </div>
+
+    <div class="apertura_cierre d-flex justify-content-evenly" style="gap: 1rem;">
+      <div class="fecha_hora_cierre">
+        <p class="titulo_cierre">Fecha Cierre:</p>
+        <p class="horasss">
+          <% 
+            const fechaHoraCierre = new Date(fechaHoraFinSubasta);
+            const diaCierre = fechaHoraCierre.getDate().toString().padStart(2, '0');
+            const mesCierre = (fechaHoraCierre.getMonth() + 1).toString().padStart(2, '0');
+            const anioCierre = fechaHoraCierre.getFullYear();
+    
+            const horaCierre = fechaHoraCierre.getHours().toString().padStart(2, '0');
+            const minutosCierre = fechaHoraCierre.getMinutes().toString().padStart(2, '0');
+            const segundosCierre = fechaHoraCierre.getSeconds().toString().padStart(2, '0');
+    
+            const fechaFormateadaCierre = `${diaCierre}/${mesCierre}/${anioCierre} para <br> las ${horaCierre}:${minutosCierre}:${segundosCierre}`; 
+          %>
+          <%- fechaFormateadaCierre %>
+        </p>
+      </div>
+    
+      <div class="fecha_hora_apertura">
+        <p class="titulo_apertura">Fecha Apertura:</p>
+        <p class="horasss">
+          <% 
+            const fechaHoraApertura = new Date(fechaHoraAperturaSubasta);
+            const diaApertura = fechaHoraApertura.getDate().toString().padStart(2, '0');
+            const mesApertura = (fechaHoraApertura.getMonth() + 1).toString().padStart(2, '0');
+            const anioApertura = fechaHoraApertura.getFullYear();
+    
+            const horaApertura = fechaHoraApertura.getHours().toString().padStart(2, '0');
+            const minutosApertura = fechaHoraApertura.getMinutes().toString().padStart(2, '0');
+            const segundosApertura = fechaHoraApertura.getSeconds().toString().padStart(2, '0');
+    
+            const fechaFormateadaApertura = `${diaApertura}/${mesApertura}/${anioApertura} a <br> las ${horaApertura}:${minutosApertura}:${segundosApertura}`;
+          %>
+          <%- fechaFormateadaApertura %>
+        </p>
+      </div>
+    </div>
+    
+
+    <h2>¡Subasta en Curso!</h2>
+
+    <p class="precio_con_incremento">
+      <span>Oferta Actual: </span>
+      <span>US$ <%= ofertaActual %></span>
+    </p>
+
+    <hr>
+
+    <p class="precio d-flex align-items-center justify-content-center">
+      <i class="bi bi-cash-coin d-flex"></i>
+      <span class="precio_base">Precio base:</span>
+      <span class="price">US$<%= formatNumber(subasta.precio_base) %></span>
+    </p>
+
+    <button id="participar">UNIRME</button>
+
+    <div class="grid_info_card">
+      <div class="div1">
+        <p>mínimo de participantes 2</p>
+      </div>
+      <div class="div2">
+        <p>Con Precio Reserva</p>
+      </div>
+      <div class="div3">
+        <p>Opción a Visitas previa cita</p>
+      </div>
+      <div class="div4">
+        <p>Sin Comisión</p>
+      </div>
+      <div class="div5">
+        <a href="" id="oportunidades">
+          <i class="fa-solid fa-circle-info" style="color: #db0000;"></i>
+          <span>Participa en 3 subastas por $500.</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card para subasta terminada -->
+  <div class="card-body-termino" id="body_card_termino" style="display: <%= estaTerminada ? 'block' : 'none' %>">
+    <div class="analisis d-flex justify-content-center">
+      <div class="vistas">
+        <p>
+          <span>VISTAS</span>
+          <span><%= totalVisitas %></span>
+        </p>
+      </div>
+      <div class="megusta">
+        <p>
+          <span>LIKES</span>
+          <span><%= subasta.like_count %></span>
+        </p>
+      </div>
+    </div>
+
+    <h2>¡Subasta Finalizada!</h2>
+
+    <p class="precio_con_incremento">
+      <span>Oferta Final: </span>
+      <span>US$ <%= ofertaActual %></span>
+    </p>
+
+    <hr>
+
+    <p class="precio d-flex align-items-center justify-content-center">
+      <i class="bi bi-cash-coin d-flex"></i>
+      <span class="precio_base">Precio base:</span>
+      <span class="price">US$<%= formatNumber(subasta.precio_base) %></span>
+    </p>
+
+    <button disabled aria-disabled="true">SUBASTA FINALIZADA</button>
+
+    <div class="grid_info_card">
+      <div class="div1">
+        <p>mínimo de participantes 2</p>
+      </div>
+      <div class="div2">
+        <p>Con Precio Reserva</p>
+      </div>
+      <div class="div3">
+        <p>Opción a Visitas previa cita</p>
+      </div>
+      <div class="div4">
+        <p>Sin Comisión</p>
+      </div>
+      <div class="div5">
+        <a href="" id="oportunidades">
+          <i class="fa-solid fa-circle-info" style="color: #db0000;"></i>
+          <span>Participa en 3 subastas por $500.</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <!-- Chat de pujas -->
+  <!-- Componente de chat para la subasta -->
+  <div id="chat" class="chat">
+    <!-- <div id="countdown" class="countdown">03:00</div> -->
+    <div class="prorroga_esperando"></div>
+    <div id="messages" class="messages"></div>
+
+    <div class="contenedor_subastas_input">
+      <!-- Input para la última puja +100 (no editable) -->
+      <div class="content_acciones_ d-flex justify-content-center mb-3">
+        <div class="mensaje">
+          <input type="text" id="lastBidInput" placeholder="Última Puja" class="input_mensaje" disabled />
+        </div>
+        <button id="sendButton" class="btn_enviar">Enviar</button>
+      </div>
+
+      <!-- Input para puja personalizada (editable) -->
+      <div class="content_acciones d-flex justify-content-center">
+        <div class="mensaje">
+          <input type="text" id="customBidInput" placeholder="Ingresa tu oferta" class="input_mensaje" />
+        </div>
+        <button id="sendCustomBidButton" class="btn_enviar">Enviar Puja</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,763 @@
+@import url("https://fonts.googleapis.com/css2?family=BioRhyme:wght@200..800&family=Sedan:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Scope+One&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --font--banner--semi: "Barlow";
+    --font--banner--bool: "Roboto";
+    --font--parrafo: "Space Mono";
+    --font--header: "Sedan";
+    --font--testimoni: "Modern Antiqua";
+    --font--about: "BioRhyme";
+    --font--cont: "Scope One";
+    --font--header--v2: "Poppins";
+    --bg--botones: #d30000;
+    --color--sub: #d30000;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.banner{
+    width: 100%;
+    height: 40vh;
+    background: rgb(238, 0, 0);
+    background: linear-gradient(100deg, rgba(238, 0, 0, 1) 0%, rgb(161, 1, 1) 100%);
+    margin-top: 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.banner h2{
+    font-family: var(--font--header--v2);
+    font-weight: 600;
+    font-size: 2rem;
+    color: #fff;
+}
+
+.contenedor_info_banner{
+    width: 40%;
+    display: flex;
+    align-items: center;
+}
+
+.contenedor_info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.contenedor_info h3{
+    font-family: var(--font--header--v2);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.contenedor_info p{
+    width: 80%;
+    color: #ffff;
+    font-family: var(--font--banner--semi);
+    font-weight: 500;
+}
+
+.contenedor_info a{
+    width: 150px;
+    height: 40px;
+    background: #fff;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-family: var(--font--banner--bool);
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+    border-radius: .5rem;
+}
+
+.contenedor_info_banner img{
+    width: 32%;
+    height: 95%;
+}
+
+
+/* COMO COMPRAR */
+.como{
+    width: 100%;
+    height: 35vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor_info_como{
+    width: 45%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 6rem;
+}
+
+.contenedor_info_como img{
+    width: 50%;
+    height: 80%;
+}
+
+.como_info h3{
+    font-family: var(--font--banner--bool);
+    font-size: 2rem;
+    font-weight: 600;
+    color: #d30000;
+}
+
+.como_info p{
+    width: 90%;
+    font-family: var(--font--banner--semi);
+    font-weight: 600;
+    font-size: 1rem;
+    color: #3d3d3dcc;
+    text-align: justify;
+}
+
+/* IDENTIFICAR */
+.identifica{
+    width: 100%;
+    height: 65vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #eeeeee;
+    padding-top: 1rem;
+}
+
+.identifica h2{
+    font-family: var(--font--banner--bool);
+    font-weight: 600;
+    color: #d30000;
+    font-size: 1.9rem;
+    margin-bottom: 2rem;
+}
+
+.tabs_info{
+    width: 45%;
+}
+
+.navegador_tabs{
+    margin-bottom: 2rem;
+}
+
+.navegador_tabs li a{
+    font-family: var(--font--banner--semi);
+    font-size: 1.3rem;
+    color: #000;
+}
+
+.nav-underline .nav-link.active{
+    border-bottom-color: #d30000;
+}
+
+.nav-underline .nav-link:hover{
+    color: #d30000;
+}
+
+.contenedor_indo_lista{
+    width: 120%;
+    margin-left: 2rem;
+}
+
+.contenedor_info_subasta,
+.contenedor_info_compraya,
+.contenedor_info_propuesta{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contenedor_subasta_tab{
+    width: 100%;
+    height: 350px;
+}
+
+.contenedor_info_subasta,
+.contenedor_info_compraya,
+.contenedor_info_propuesta{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.contenedor_info_subasta .contenedor_info,
+.contenedor_info_compraya .contenedor_info,
+.contenedor_info_propuesta .contenedor_info{
+    width: 60%;
+    height: 100%;
+    background: #d30000;
+    padding-left: 2rem;
+    padding-right: 5rem;
+    border-radius: 1rem;
+    color: #fff;
+}
+
+.contenedor_info_subasta .contenedor_info ol,
+.contenedor_info_compraya .contenedor_info ol{
+    font-family: var(--font--banner--bool);
+    line-height: 2.1rem;
+}
+
+.contenedor_info_subasta .contenedor_info a,
+.contenedor_info_compraya .contenedor_info a,
+.contenedor_info_propuesta .contenedor_info a{
+    width: 150px;
+    height: 35px;
+    font-size: .9rem;
+    box-shadow: 2px 3px 5px  #ffd0d0;
+}
+
+.contenedor_info_subasta img,
+.contenedor_info_compraya img,
+.contenedor_info_propuesta img{
+    position: absolute;
+    top: 50%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+}
+
+.contenedor_info_propuesta .contenedor_info ol{
+    font-family: var(--font--banner--bool);
+}
+
+.porque{
+    width: 100%;
+    height: 65vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2rem;
+}
+
+.porque h2{
+    font-family: var(--font--banner--bool);
+    font-size: 1.7rem;
+    font-weight: 900;
+    color: #5f5f5f;
+}
+
+.porque p{
+    font-size: 1.1rem;
+    font-family: var(--font--banner--semi);
+
+}
+
+.contenedor_infor_porque{
+    display: flex;
+    width: 60%;
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.tarjeta{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imagenes_tarjetas{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+}
+
+
+.tarjeta .contenedor_info h4{
+    font-family: var(--font--banner--semi);
+    font-weight: 600;
+    color: #d30000;
+    text-align: center;
+}
+
+.tarjeta .contenedor_info p{
+    color: #575757;
+    font-family: var(--font--banner--semi);
+    text-align: justify;
+    width: 100%;
+}
+
+/* OPORTUNIDADES */
+
+.oportunidad{
+    width: 100%;
+    height: 20vh;
+    background-color: #d30000;
+    color: #fff;
+    text-align: center;
+    padding-top: 2rem;
+}
+
+.oportunidad h2{
+    font-family: var(--font--banner--bool);
+    font-weight: 700;
+    font-size: 2.5rem;
+}
+
+.oportunidad p{
+    font-family: var(--font--banner--semi);
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+.oportunidad a{
+    display: inline-block;
+    width: 200px;
+    height: 40px;
+    background-color: #fff;
+    padding-top: .5rem;
+    text-decoration: none;
+    font-family: var(--font--header--v2);
+    color: #000;
+    font-weight: 600;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px){
+    .banner{
+        height: 80vh;
+        margin-top: 3.5rem;
+    }
+
+    .banner h2{
+        font-size: 1.8rem;
+        width: 70%;
+        text-align: center;
+    }
+
+    .contenedor_info_banner{
+        width: 90%;
+        height: 80%;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .contenedor_info{
+        text-align: center;
+        align-items: center;
+    }
+
+    .contenedor_info p{
+        width: 100%;
+    }
+
+    .contenedor_info_banner img{
+        width: 65%;
+        height: 40%;
+    }
+
+    /*  */
+
+    .como{
+        margin-top: 2rem;
+        height: auto;
+    }
+
+    .contenedor_info_como{
+        width: 90%;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .contenedor_info_como img {
+        width: 50%;
+        height: 30%;
+    }
+
+    .como_info{
+        text-align: center;
+    }
+
+    .como_info p{
+        width: 100%;
+    }
+
+    /*  */
+
+    .identifica h2{
+        font-size: 1rem;
+        width: 80%;
+        text-align: center;
+    }
+
+    .tabs_info{
+        width: 90%;
+    }
+
+    .navegador_tabs li a{
+        font-size: 1rem;
+    }
+
+    .contenedor_indo_lista{
+        width: 85%;
+    }
+
+    .contenedor_info_subasta .contenedor_info, .contenedor_info_compraya .contenedor_info, .contenedor_info_propuesta .contenedor_info{
+        width: 100%;
+        padding-left: 1rem;
+    padding-right: 2rem;
+        text-align: justify;
+    }
+
+    .contenedor_info_subasta img, .contenedor_info_compraya img, .contenedor_info_propuesta img{
+        display: none;
+    }
+
+    .contenedor_info_subasta .contenedor_info ol, .contenedor_info_compraya .contenedor_info ol{
+        font-size: .8rem;
+        line-height: 1.5rem;
+    }
+
+    /*  */
+
+    .porque{
+        height: auto;
+    }
+
+    .porque h2{
+        font-size: 1.2em;
+    }
+
+    .porque p{
+        width: 80%;
+        text-align: center;
+        font-size: .8rem;
+    }
+
+    .contenedor_infor_porque{
+        width: 95%;
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        grid-template-rows: repeat(2, auto);
+        justify-items: center;
+    }
+
+    .tarjeta{
+        width: 90%;
+    }
+
+
+    /*  */
+
+    .oportunidad{
+        height: 25vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 2rem;
+    }
+
+    .oportunidad h2{
+        font-size: 1.5rem;
+    }
+
+    .oportunidad p{
+        font-size: 1rem;
+        width: 80%;
+        text-align: center;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 992px){
+    .banner{
+        margin-top: 4.9rem;
+    }
+
+    .banner h2{
+        font-size: 1.8rem;
+    }
+
+    .contenedor_info_banner{
+        width: 90%;
+    }
+
+    .contenedor_info h3{
+        font-size: 1.5rem;
+    }
+
+    .contenedor_info p{
+        font-size: .9rem;
+    }
+
+    /*  */
+
+    .contenedor_info_como{
+        width: 85%;
+        gap: 3rem;
+    }
+
+    .contenedor_info_como img{
+        width: 40%;
+        height: 40%;
+    }
+
+    .como_info h3{
+        font-size: 1.6rem;
+    }
+
+    .como_info p{
+        font-size: .9rem;
+    }
+
+    .identifica h2 {
+        font-size: 1.5rem;
+    }
+
+    /*  */
+
+    .tabs_info{
+        width: 80%;
+    }
+
+    .contenedor_info_subasta img, .contenedor_info_compraya img, .contenedor_info_propuesta img{
+        display: none;
+    }
+
+    .contenedor_info_subasta .contenedor_info, .contenedor_info_compraya .contenedor_info, .contenedor_info_propuesta .contenedor_info{
+        width: 80%;
+    }
+
+    .contenedor_indo_lista{
+        width: 105%;
+    }
+
+    /*  */
+
+    .porque{
+        height: auto;
+    }
+
+    .contenedor_infor_porque{
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        grid-template-rows: repeat(2, auto);
+        justify-items: center;
+        width: 85%;
+    }
+
+    .tarjeta{
+        width: 85%;
+    }
+
+    /* */
+    .oportunidad{
+        margin-top: 2rem;
+    }
+}
+
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) and (max-width: 1200px){
+    .banner{
+        height: 55vh;
+        margin-top: 4rem;
+    }
+
+    .contenedor_info_banner{
+        width: 80%;
+    }
+
+    .banner h2{
+        font-size: 1.8rem;
+    }
+
+    .contenedor_info h3{
+        font-size: 1.3rem;
+    }
+
+    .contenedor_info p{
+        width: 70%;
+        font-size: .8rem;
+    }
+
+    .contenedor_info a{
+        height: 35px;
+        font-size: .9rem;
+    }
+    
+    /*  */
+
+    .como{
+        height: 50vh;
+    }
+
+    .contenedor_info_como{
+        width: 80%;
+    }
+
+    .como_info h3{
+        font-size: 1.5rem;
+    }
+
+    .como_info p{
+        font-size: .9rem;
+    }
+
+    /*  */
+
+    .identifica{
+        height: 95vh;
+    }
+
+    .identifica h2{
+        font-size: 1.5rem;
+    }
+
+    .navegador_tabs li a{
+        font-size: 1rem;
+    }
+
+    .tabs_info{
+        width: 95%;
+    }
+
+    .contenedor_indo_lista{
+        width: 95%;
+    }
+
+    /*  */
+
+    .porque{
+        height: 90vh;
+    }
+
+    .porque h2{
+        font-size: 1.4rem;
+    }
+
+    .porque p{
+        font-size: .9rem;
+    }
+
+    .contenedor_infor_porque {
+        width: 95%;
+    }
+
+    /*  */
+
+    .oportunidad{
+        height: 35vh;
+    }
+
+    .oportunidad h2{
+        font-size: 1.8rem;
+    }
+
+    .oportunidad p{
+        font-size: 1rem;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) and (max-width: 1440px){
+    .banner{
+        height: 50vh;
+        margin-top: 4.5rem;
+    }
+
+    .banner h2{
+        font-size: 1.9rem;
+    }
+
+    .contenedor_info_banner{
+        width: 70%;
+    }
+
+    /*  */
+
+    .como{
+        height: 40vh;
+    }
+
+    .contenedor_info_como{
+        width: 65%;
+    }
+
+    .como_info h3{
+        font-weight: 500;
+        font-size: 1.8rem;
+    }
+
+    .como_info p{
+        font-weight: 500;
+    }
+
+    /*  */
+
+    .identifica{
+        height: 75vh;
+    }
+
+    .identifica h2{
+        font-size: 1.9rem;
+        font-family: 500;
+    }
+
+    .tabs_info{
+        width: 65%;
+    }
+
+    .contenedor_indo_lista{
+        width: 110%;
+    }
+
+    /*  */
+
+    .porque{
+        height: 65vh;
+    }
+
+    .porque h2{
+        font-weight: 500;
+        font-size: 1.7rem;
+    }
+
+    .porque p{
+        font-size: 1rem;
+    }
+
+    .contenedor_infor_porque{
+        width: 90%;
+    }
+
+    /*  */
+
+    .oportunidad{
+        height: 25vh;
+    }
+
+    .oportunidad h2{
+        font-size: 2rem;
+    }
+
+    .oportunidad p{
+        font-size: 1rem;
+    }
+}

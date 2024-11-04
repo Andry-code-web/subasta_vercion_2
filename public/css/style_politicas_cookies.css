@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=BioRhyme:wght@200..800&family=Sedan:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Scope+One&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+  --font--banner--semi: "Barlow";
+  --font--banner--bool: "Roboto";
+  --font--parrafo: "Space Mono";
+  --font--header: "Sedan";
+  --font--testimoni: "Modern Antiqua";
+  --font--about: "BioRhyme";
+  --font--cont: "Scope One";
+  --font--header--v2: "Poppins";
+  --bg--botones: #d30000;
+  --color--sub: #d30000;
+}
+
+.cookies{
+    width: 100%;
+    height: 65vh;
+    display: flex;
+    justify-content: center;
+    margin-top: 7rem;
+}
+
+.contenedor_cookies{
+    width: 50%;
+    background: #f8f8f8;
+    border-radius: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    box-shadow: 2px 3px 10px #ccc;
+}
+
+.contenedor_cookies h1{
+    color: var(--color--sub);
+    font-family: var(--font--banner--bool);
+    font-size: 1.7rem;
+    font-weight: 400;
+    padding-top: 2rem;
+}
+
+.contenedor_cookies h1 span img{
+    width: 75px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.contenedor_cookies p{
+    width: 80%;
+    margin-left: 4rem;
+    margin-top: 1rem;
+    font-family: var(--font--parrafo);
+    font-size: .9rem;
+    letter-spacing: -.05rem;
+    text-align: justify;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px){
+    .cookies{
+        height: auto;
+        margin-top: 5rem;
+    }
+    .contenedor_cookies{
+        width: 90%;
+        height: 100%;
+    }
+    .contenedor_cookies h1{
+        font-size: 1.5rem;
+        padding-top: 0rem;
+    }
+
+    .contenedor_cookies h1 span img {
+        width: 65px;
+        height: 50px;
+    }
+
+    .contenedor_cookies p{
+        width: 95%;
+        margin-left: .5rem;
+        font-size: .8rem;
+        margin-top: .5rem;
+    }
+
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 992px){
+    .contenedor_cookies{
+        width: 80%;
+    }
+
+    .contenedor_cookies h1{
+        padding-top: .5rem;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) and (max-width: 1200px){
+    .cookies{
+        height: 100vh;
+    }
+
+    .contenedor_cookies{
+        width: 70%;
+        height: auto;
+    }
+
+    .contenedor_cookies h1{
+        padding-top: 1rem;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) and (max-width: 1440px){
+    .contenedor_cookies{
+        width: 70%;
+    }
+}

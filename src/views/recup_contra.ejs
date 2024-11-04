@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="/img/footer_logo.svg" type="image/x-icon">
+  <!-- BOOTSTRAP -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <!-- ESTILOS -->
+  <link rel="stylesheet" href="/css/style_recuContra.css">
+  <title>Recuperar contraseña || Subastas</title>
+</head>
+
+<body>
+  <div class="d-flex justify-content-center">
+    <div class="content d-flex flex-column align-items-center">
+      <h2 class="mb-4">Cambiar contraseña</h2>
+      <form action="/admin/recuperar" method="post" class="d-flex flex-column align-items-center" style="width: 350px;">
+
+        <div class="inputs mb-3">
+          <input type="email" class="form-control" id="exampleInputEmail1" placeholder=" " required>
+          <label for="exampleInputEmail1" class="form-control-placeholder">Correo electrónico</label>
+        </div>
+        <button type="button" id="sendEmailBtn" class="btn btn-primary mb-3">Enviar correo</button>
+
+        <div id="codeSection" style="display: none;">
+          <h3>Ingresa el código</h3>
+          <div class="code-inputs d-flex justify-content-between mb-3">
+            <input type="text" class="form-control keys" maxlength="2" size="2">
+            <input type="text" class="form-control keys" maxlength="2" size="2">
+            <input type="text" class="form-control keys" maxlength="2" size="2">
+            <input type="text" class="form-control keys" maxlength="2" size="2">
+            <input type="text" class="form-control keys" maxlength="2" size="2">
+          </div>
+          <button type="button" id="validateCodeBtn" class="btn btn-primary mb-3" style="display: none;">Validar
+            código</button>
+        </div>
+
+        <div id="passwordSection" class="d-flex flex-column align-items-center" style="display: none !important;">
+          <div class="inputs mb-3 mt-3">
+            <input type="password" class="form-control" id="exampleInputEmail1" placeholder=" " required>
+            <label for="exampleInputEmail1" class="form-control-placeholder">Nueva contraseña</label>
+          </div>
+          <div class="inputs mb-3">
+            <input type="password" class="form-control" id="exampleInputEmail1" placeholder=" " required>
+            <label for="exampleInputEmail1" class="form-control-placeholder">Nueva contraseña</label>
+          </div>
+          <button type="button" id="changePasswordBtn" class="btn btn-primary">Cambiar contraseña</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/script_nueva_contra.js"></script>
+</body>
+
+</html>

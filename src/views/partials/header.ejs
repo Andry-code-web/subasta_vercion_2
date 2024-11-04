@@ -1,0 +1,175 @@
+<!-- CABEZERA -->
+<header>
+  <div class="menu_icon">
+    <button class="menu_activar" id="menu_activar">
+      <i class="bi bi-list"></i>
+    </button>
+    <div class="menu_navegador" id="menu_navegador">
+      <div class="cerrar_contet">
+        <button class="menu_cerrar" id="menu_cerrar">
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+      <ul class="navegador">
+        <li>
+          <a href="/">Inicio</a>
+        </li>
+        <hr class="ceparador">
+        <li>
+          <a href="/catalogo">Catalogo</a>
+        </li>
+        <hr class="ceparador">
+        <li>
+          <a href="/info-vender">Vender</a>
+        </li>
+        <hr class="ceparador">
+        <li>
+          <a href="/info-comprar">Comprar</a>
+        </li>
+        <li class="item_buscador">
+          <div class="group ms-3">
+            <form id="search-form" action="/catalogo" method="GET">
+              <input id="search-input" placeholder="Buscar marca o modelo" type="search" class="input" name="search">
+              <button type="submit" class="btn_buscar">Buscar</button>
+              <!-- <ul id="suggestions-list" class="suggestions"></ul> -->
+            </form>
+          </div>
+
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+
+  <a href="/" class="logo"><img src="/img/SUBASTA-SUR-ROJO-HORIZONTAL.png" alt=""></a>
+
+
+  <nav class="navbar navbar-expand-lg">
+
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Categorias
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/catalogo?categoria=auto">Autos y Motos</a></li>
+              <li><a class="dropdown-item" href="/catalogo">Camiones y autobuses</a></li>
+              <li><a class="dropdown-item" href="/catalogo">Maquinaria de construccion y Agricola</a></li>
+              <li><a class="dropdown-item" href="/catalogo">Industrial, Maquinaria y Equipos</a></li>
+              <li><a class="dropdown-item" href="/catalogo">Movimiento y Transporte</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/">Inicio</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/catalogo">Catalogo</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/info-vender">Vender</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/info-comprar">Comprar</a>
+          </li>
+        </ul>
+
+        <div class="group ms-3">
+          <form id="search-form" action="/catalogo" method="GET">
+            <input id="search-input" placeholder="Buscar marca o modelo" type="search" class="input" name="search">
+            <button type="submit" class="btn_buscar">Buscar</button>
+            <!-- <ul id="suggestions-list" class="suggestions"></ul> -->
+          </form>
+        </div>
+
+
+        <!-- CSS para estilos de sugerencias -->
+        <!-- <style>
+          .suggestions {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 3rem;
+            border: 1px solid #ccc;
+            max-height: 200px;
+            overflow-y: auto;
+            position: absolute;
+            z-index: 100;
+          }
+
+          .suggestions li {
+            padding: 10px;
+            background-color: white;
+            cursor: pointer;
+          }
+
+          .suggestions li:hover {
+            background-color: #f0f0f0;
+          }
+        </style> -->
+
+
+
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="session">
+    <% if (usuario) { %>
+      <p class="d-flex align-items-center ">
+        <span>
+          <%= usuario.nombre %>
+        </span>
+        <button class="btn_menu ms-1" id="btn_menu">
+          <i class="bi bi-list"></i>
+        </button>
+      <div class="menu_desplegable d-flex flex-column justify-content-between">
+        <div>
+          <div class="cabezera_menu d-flex justify-content-between">
+            <h3>Subastas</h3>
+            <button id="btn_close">
+              <i class="bi bi-x-lg"></i>
+            </button>
+          </div>
+          <ul>
+            <li><a href="#">Me gusta</a></li>
+            <li><a href="/editar_user/<%= usuario.id %>">Editar usuario</a></li>
+          </ul>
+        </div>
+        <div class="perfil_user">
+          <div class="d-flex flex-row">
+            <i class="bi bi-person-bounding-box" style="font-size: 2.5rem; color: #fff; margin-right: 1rem;"></i>
+            <div class="d-flex flex-column">
+              <strong>Cliente</strong>
+              <small>
+                <%= usuario.nombre %>
+              </small>
+              <a href="/logout" class="btn btn-danger btn-sm ms-2">Cerrar Sesión</a>
+            </div>
+          </div>
+        </div>
+        <% } else { %>
+          <p class="ingresar">
+            <span class="">
+              <i class="bi bi-person"></i>
+            </span>
+            <span>
+              <a href="/login" class="ingresar_ligin">Ingresar</a>
+
+            </span>
+          </p>
+          <% } %>
+      </div>
+  </div>
+</header>

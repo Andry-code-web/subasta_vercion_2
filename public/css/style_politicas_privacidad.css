@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=BioRhyme:wght@200..800&family=Sedan:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Scope+One&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+  --font--banner--semi: "Barlow";
+  --font--banner--bool: "Roboto";
+  --font--parrafo: "Space Mono";
+  --font--header: "Sedan";
+  --font--testimoni: "Modern Antiqua";
+  --font--about: "BioRhyme";
+  --font--cont: "Scope One";
+  --font--header--v2: "Poppins";
+  --bg--botones: #d30000;
+  --color--sub: #d30000;
+}
+
+.privacidad{
+    width: 100%;
+    margin-top: 7rem;
+    display: flex;
+    justify-content: center;
+}
+
+.contenido_privacidad{
+    width: 50%;
+    background: #f8f8f8;
+    border-radius: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    box-shadow: 2px 3px 10px #ccc;
+}
+
+.contenido_privacidad h1{
+    color: var(--color--sub);
+    font-family: var(--font--banner--bool);
+    font-size: 1.7rem;
+    font-weight: 400;
+}
+
+.contenido_privacidad h1 span img{
+    width: 75px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.contenido_privacidad h2{
+    margin-left: 1.5rem;
+    font-family: var(--font--banner--semi);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--bg--botones);
+}
+
+.contenido_privacidad p{
+    width: 85%;
+    margin-left: 2rem;
+    font-family: var(--font--parrafo);
+    font-size: .9rem;
+    letter-spacing: -.05rem;
+    text-align: justify;
+}
+
+.privacidad ul,
+.privacidad ol{
+    width: 70%;
+    margin-left: 3.5rem;
+    font-family: var(--font--parrafo);
+    font-size: .9rem;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px){
+
+    .privacidad{
+        margin-top: 5rem;
+    }
+
+    .contenido_privacidad{
+        width: 90%;
+        padding: 1rem 1rem 1rem 0rem;
+    }
+
+    .contenido_privacidad h1{
+        font-size: 1.2rem;
+    }
+
+    .contenido_privacidad h1 span img{
+        width: 65px;
+        height: 50px;
+    }
+
+    .contenido_privacidad p{
+        font-size: .8rem;
+    }
+
+    .contenido_privacidad ul{
+        font-size: .75rem;
+    }
+
+    .contenido_privacidad h2{
+        font-size: 1.1rem;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 992px){
+    .contenido_privacidad{
+        width: 80%;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) and (max-width: 1200px){
+    .contenido_privacidad{
+        width: 80%;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) and (max-width: 1440px){
+    .contenido_privacidad{
+        width: 70%;
+    }
+}

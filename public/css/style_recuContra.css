@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=BioRhyme:wght@200..800&family=Sedan:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Scope+One&display=swap');
+
+:root{
+    --font--banner--semi: url("/fonts/segoeuithibd.ttf");
+    --font--banner--bool: url("/fonts/segoeuithibd.ttf");
+    --font--parrafo: "Space Mono";
+    --font--header: "Sedan";
+    --font--testimoni: "Modern Antiqua";
+    --font--about: "BioRhyme";
+    --font--cont: "Scope One";
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #F8F8F8;
+}
+
+.content {
+    margin-top: 2rem;
+    width: 50%;
+    height: auto;
+    background-color: #ffff;
+    padding: 2rem;
+}
+
+.content h2{
+    font-family: var(--font--parrafo);
+    font-weight: 500;
+}
+
+.content form {
+    width: 80%;
+}
+
+.content form .inputs {
+    min-width: 300px;
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.content form .inputs input {
+    height: 35px;
+    border-radius: 50px;
+    font-size: .8rem;
+    padding-left: 15px;
+}
+
+.content form .inputs input:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.form-control-placeholder {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    transition: all 0.2s ease-in-out;
+    color: #aaa;
+    pointer-events: none;
+    font-size: 11px;
+}
+
+.form-control:focus+.form-control-placeholder,
+.form-control:not(:placeholder-shown)+.form-control-placeholder {
+    top: 0;
+    left: 10px;
+    font-size: 12px;
+    color: #777;
+    background: white;
+    padding: 0 5px;
+}
+
+.content form button{
+    height: 30px;
+    margin: 0;
+    padding: 0px 1rem 0px 1rem;
+    background-color: #c20000;
+    border: none;
+    font-size: .9rem;
+    font-weight: 600;
+}
+
+.content form button:hover{
+    background-color: #db0202;
+}
+
+.key {
+    gap: .5rem;
+    min-width: 300px;
+}
+
+.key p{
+    font-size: .9rem;
+    font-weight: 500;
+    font-family: var(--font--parrafo);
+    margin: 0;
+    padding: 0;
+}
+
+.key .keys {
+    text-align: center;
+    max-width: 40px;
+    height: 35px;
+    padding: 0;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.key input:focus{
+    outline: none;
+}
+
+.new_contra{
+    gap: 1rem;
+}

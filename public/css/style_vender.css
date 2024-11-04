@@ -1,0 +1,572 @@
+@import url("https://fonts.googleapis.com/css2?family=BioRhyme:wght@200..800&family=Sedan:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Scope+One&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --font--banner--semi: "Barlow";
+    --font--banner--bool: "Roboto";
+    --font--parrafo: "Space Mono";
+    --font--header: "Sedan";
+    --font--testimoni: "Modern Antiqua";
+    --font--about: "BioRhyme";
+    --font--cont: "Scope One";
+    --font--header--v2: "Poppins";
+    --bg--botones: #d30000;
+    --color--sub: #d30000;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.banner {
+    width: 100%;
+    height: 45vh;
+    margin-top: 6rem;
+}
+
+.contenedor_banner {
+    width: 100%;
+    height: 100%;
+    background: rgb(238, 0, 0);
+    background: linear-gradient(100deg, rgba(238, 0, 0, 1) 0%, rgb(161, 1, 1) 100%);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font--header--v2);
+}
+
+.contenedor_banner img {
+    width: 9%;
+    margin: 1rem 1rem;
+}
+
+.contenedor_banner p {
+    width: 40%;
+    text-align: center;
+    margin-top: 1rem;
+    font-weight: 500;
+}
+
+.informacion {
+    width: 100%;
+    height: auto;
+}
+
+.contenedor_informacion {
+    width: 100%;
+    height: 100%;
+}
+
+.contenedor_informacion h2 {
+    font-family: var(--font--header--v2);
+    color: #5e5e5ecc;
+    font-weight: 600;
+    text-align: center;
+    padding-top: 2rem;
+}
+
+.info {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.tarjeta {
+    width: 20%;
+    height: auto;
+    text-align: center;
+    padding: 2rem 1rem 2rem 1rem;
+}
+
+.tarjeta img {
+    width: 30%;
+}
+
+.tarjeta h3 {
+    color: var(--color--sub);
+    font-family: var(--font--header--v2);
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+}
+
+.tarjeta p {
+    padding: 1rem 2rem;
+    font-family: var(--font--header--v2);
+}
+
+.enviar_datos {
+    display: inline-block;
+    width: 100%;
+    height: 30vh;
+
+}
+
+.contenedor_datos {
+    width: 100%;
+    height: 100%;
+    background: rgb(238, 0, 0);
+    background: linear-gradient(100deg, rgba(238, 0, 0, 1) 0%, rgb(161, 1, 1) 100%);
+    color: #fff;
+    padding: 1rem 20rem 1rem 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.contenedor_datos h2 {
+    font-size: 2rem;
+    font-family: var(--font--header--v2);
+    font-weight: 600;
+}
+
+.contenedor_datos p {
+    width: 60%;
+}
+
+.contenedor_datos button {
+    width: 15%;
+    height: 40px;
+    border: none;
+    background-color: #ffffff;
+    border-radius: .5rem;
+    font-weight: 600;
+    transition: ease-in .3s;
+}
+
+.contenedor_datos button:hover {
+    transform: scale(1.1);
+}
+
+/* formulario de ventas */
+
+.container {
+    width: 30%;
+    height: auto;
+    margin: 0 auto;
+    padding: 20px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgb(211, 0, 0);
+    /* filter: blur(0.5px); */
+    background: linear-gradient(180deg, rgba(211, 0, 0, 1) 0%, rgba(255, 94, 0, 1) 100%);
+    border-radius: .5rem;
+    box-shadow: 5px 6px 20px 0px #0000009b;
+    align-items: center;
+    display: none;
+    z-index: 100;
+}
+
+.content_btn{
+    width: 100%;
+    text-align: end;
+}
+
+.cerrar_vender{
+    background: none;
+    border: none;
+}
+
+.cerrar_vender i{
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+.imagen_icon {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 50%;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    font-size: 17px;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.submit-btn {
+    background-color: #ff0000;
+    color: white;
+    padding: 10px;
+    border: none;
+    width: 100%;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #bd0303bb;
+}
+
+/* esto sera cuando el  usuario haga clic en el boton y recien salga el formulario */
+
+/* .container.active {
+
+}
+ */
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .banner {
+        height: 60vh;
+        margin-top: 3rem;
+    }
+
+    .contenedor_banner h1 {
+        width: 60%;
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
+    .contenedor_banner img {
+        width: 30%;
+    }
+
+    .contenedor_banner h2 {
+        width: 70%;
+        text-align: center;
+    }
+
+    .contenedor_banner p {
+        width: 90%;
+        font-size: .8rem;
+    }
+
+    /*  */
+
+    .contenedor_informacion {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .contenedor_informacion h2 {
+        width: 80%;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .info {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0rem;
+    }
+
+    .tarjeta {
+        width: 90%;
+        padding: 1rem .5rem;
+    }
+
+    .tarjeta img {
+        width: 20%;
+    }
+
+    .tarjeta p {
+        text-align: justify;
+        margin: 0;
+    }
+
+    /*  */
+    .enviar_datos {
+        margin-top: 2rem;
+    }
+
+    .contenedor_datos {
+        padding: 1rem 1rem;
+    }
+
+    .contenedor_datos h2 {
+        font-size: 1.8rem;
+    }
+
+    .contenedor_datos p {
+        width: 90%;
+        font-size: .9rem;
+    }
+
+    .contenedor_datos button {
+        width: 40%;
+    }
+
+    .container {
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
+        padding: 20px;
+        position: absolute;
+        top: 97%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgb(211, 0, 0);
+        /* filter: blur(0.5px); */
+        background: linear-gradient(180deg, rgba(211, 0, 0, 1) 0%, rgba(255, 94, 0, 1) 100%);
+        border-radius: .5rem;
+        box-shadow: 5px 6px 20px 0px #0000009b;
+        align-items: center;
+        display: none;
+    }
+}
+
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .banner {
+        height: 40vh;
+        margin-top: 4.5rem;
+    }
+
+    .contenedor_banner h1 {
+        font-size: 1.9rem;
+    }
+
+    .contenedor_banner img {
+        width: 15%;
+    }
+
+    .contenedor_banner h2 {
+        font-size: 1.5rem;
+    }
+
+    .contenedor_banner p {
+        width: 75%;
+        font-size: .9rem;
+    }
+
+    /*  */
+
+    .contenedor_informacion h2 {
+        font-size: 1.8rem;
+    }
+
+    .info {
+        gap: 1rem;
+    }
+
+    .tarjeta {
+        width: 30%;
+    }
+
+    .tarjeta h3 {
+        font-size: 1.2rem;
+    }
+
+    .tarjeta p {
+        text-align: justify;
+        padding: .5rem 1rem;
+    }
+
+    /*  */
+    .enviar_datos {
+        height: 25vh;
+    }
+
+    .contenedor_datos {
+        padding: 1rem 5rem;
+    }
+
+    .contenedor_datos h2 {
+        font-size: 1.8rem;
+    }
+
+    .contenedor_datos p {
+        width: 80%;
+        font-size: .8rem;
+    }
+
+    .contenedor_datos button {
+        width: 30%;
+    }
+
+    .container {
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
+        padding: 20px;
+        position: absolute;
+        top: 97%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgb(211, 0, 0);
+        /* filter: blur(0.5px); */
+        background: linear-gradient(180deg, rgba(211, 0, 0, 1) 0%, rgba(255, 94, 0, 1) 100%);
+        border-radius: .5rem;
+        box-shadow: 5px 6px 20px 0px #0000009b;
+        align-items: center;
+        display: none;
+    }
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+    .banner {
+        height: 50vh;
+        margin-top: 3.5rem;
+    }
+
+    .contenedor_banner h1 {
+        font-size: 1.5rem;
+    }
+
+    .contenedor_banner img {
+        width: 5%;
+    }
+
+    .contenedor_banner h2 {
+        font-size: 1.1rem;
+    }
+
+    .contenedor_banner p {
+        font-size: .7rem;
+    }
+
+    /*  */
+
+    .contenedor_informacion h2 {
+        font-size: 1.4rem;
+    }
+
+    .tarjeta {
+        width: 25%;
+    }
+
+    .tarjeta img {
+        width: 25%;
+    }
+
+    .tarjeta h3 {
+        font-size: 1.1rem;
+    }
+
+    .tarjeta p {
+        text-align: justify;
+        font-size: .8rem;
+    }
+
+    /*  */
+
+    .enviar_datos {
+        height: 35vh;
+    }
+
+    .contenedor_datos {
+        gap: .9rem;
+    }
+
+    .contenedor_datos h2 {
+        font-size: 1.4rem;
+    }
+
+    .contenedor_datos p {
+        width: 80%;
+        font-size: .8rem;
+    }
+
+    .contenedor_datos button {
+        width: 40%;
+    }
+    .container {
+        width: 60%;
+        height: auto;
+        margin: 0 auto;
+        padding: 20px;
+        position: absolute;
+        top: 97%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgb(211, 0, 0);
+        /* filter: blur(0.5px); */
+        background: linear-gradient(180deg, rgba(211, 0, 0, 1) 0%, rgba(255, 94, 0, 1) 100%);
+        border-radius: .5rem;
+        box-shadow: 5px 6px 20px 0px #0000009b;
+        align-items: center;
+        display: none;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) and (max-width: 1440px) {
+    .banner {
+        margin-top: 4.5rem;
+    }
+
+    .contenedor_banner h1 {
+        font-size: 1.8rem;
+    }
+
+    .contenedor_banner h2 {
+        font-size: 1.5rem;
+    }
+
+    .contenedor_banner p {
+        font-size: .8rem;
+    }
+
+    .contenedor_informacion h2 {
+        font-size: 1.8rem;
+    }
+
+    .tarjeta {
+        width: 25%;
+    }
+
+    .tarjeta img {
+        width: 25%;
+    }
+
+    .tarjeta h3 {
+        font-size: 1.3rem;
+    }
+
+    .tarjeta p {
+        text-align: justify;
+    }
+
+    .enviar_datos {
+        height: 35vh;
+    }
+
+    .enviar_datos h2 {
+        font-size: 1.9rem;
+    }
+
+    .enviar_datos p {
+        width: 70%;
+    }
+
+    .contenedor_datos button {
+        width: 30%;
+    }
+}

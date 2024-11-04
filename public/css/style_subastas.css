@@ -1,0 +1,507 @@
+@import url("https://fonts.googleapis.com/css2?family=BioRhyme:wght@200..800&family=Sedan:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Scope+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Arsenal+SC:ital,wght@0,400;0,700;1,400;1,700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+  --font--banner--semi: "Barlow";
+  --font--banner--bool: "Roboto";
+  --font--parrafo: "Space Mono";
+  --font--header: "Sedan";
+  --font--testimoni: "Modern Antiqua";
+  --font--about: "BioRhyme";
+  --font--cont: "Scope One";
+  --font--sub--title: "Arsenal SC";
+  --font--sub--title--2: "Roboto Condensed";
+  --font--sub--title--3: "Kanit";
+  --bg--botones: #d30000;
+  --color--sub: #d30000;
+}
+
+.contenedor_superior_subastas {
+  width: 100%;
+}
+
+.title_veiculo {
+  width: 100%;
+  text-align: center;
+  font-size: 1.6rem;
+  margin-top: 9rem;
+  font-family: var(--font--banner--bool);
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #494949;
+}
+
+.sub_title_apertura {
+  margin-bottom: .4rem;
+  padding: 0;
+  font-size: .9rem;
+  font-family: var(--font--banner--semi);
+}
+
+/* SUBASTAS */
+.detalles_subasta {
+  width: 100%;
+  margin-top: 2rem;
+  gap: 3rem;
+  padding-bottom: 3rem;
+  display: flex;
+  justify-content: center;
+}
+
+.property-detail {
+  width: 35%;
+  background-color: #f0f0f0;
+  padding: 1rem;
+  flex-direction: 2rem;
+  overflow-y: auto;
+}
+
+.scroll-1::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scroll-1::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background: rgb(204, 120, 120);
+  background: linear-gradient(90deg, rgb(204, 120, 120) 0%, rgb(214, 165, 165) 100%);
+}
+
+.content_galeria {
+  width: 100%;
+}
+
+.imgen_principal {
+  width: 100%;
+  height: 45vh;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.imgen_principal,
+.img_principal {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Ajusta la imagen para cubrir el contenedor */
+}
+
+.galeria {
+  width: 100%;
+  overflow-x: auto;
+  /* Permite el desplazamiento horizontal */
+  white-space: nowrap;
+  /* Evita el salto de línea */
+  display: flex;
+  /* Cambia a flex para manejar las imágenes horizontalmente */
+  flex-wrap: nowrap;
+  /* Evita el salto de línea en el flexbox */
+  padding: 10px 0;
+  /* Añade relleno superior e inferior para espacio */
+}
+
+.img_wrapper {
+  width: auto;
+  /* Ancho automático para cada imagen */
+  flex: 0 0 auto;
+  /* Ancho automático pero no se estira */
+  margin-right: 10px;
+  /* Espacio entre las imágenes */
+}
+
+.imgs {
+  width: 100%;
+  /* Ajusta al ancho completo del contenedor */
+  height: auto;
+  /* Altura automática según la relación de aspecto */
+  max-height: 150px;
+  /* Altura máxima para controlar el tamaño */
+  cursor: pointer;
+  /* Cambia el cursor al pasar sobre las imágenes */
+  transition: transform 0.2s ease;
+  /* Transición suave al hacer hover */
+}
+
+.imgs:hover {
+  transform: scale(1.1);
+  /* Aumenta ligeramente al hacer hover */
+}
+
+.imgs:focus {
+  outline: none;
+  /* Elimina el contorno al enfocar */
+}
+
+.galeria .imgs.active {
+  border-color: #3182ce;
+  /* Color del borde cuando está activa */
+}
+
+.property-details-content {
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.property-details-content .content_title {
+  width: 100%;
+  text-align: center;
+  padding-top: 1.5rem;
+}
+
+.property-details-content h4 {
+  display: inline-block;
+  color: var(--color--sub);
+  font-size: 1.2rem;
+  font-family: var(--font--sub--title--3);
+  font-weight: 600;
+  position: relative;
+  padding: 10px 15px 10px 15px;
+}
+
+.content_info_subastas p {
+  border-bottom: 1px solid #dddddd;
+}
+
+.content_info_subastas p span:first-child {
+  font-family: var(--font--sub--title--3);
+  color: #990000;
+}
+
+.nombre_tipo {
+  width: 80%;
+  height: auto;
+}
+
+.nombre_tipo h3 {
+  font-size: 1.1rem;
+  font-weight: 400;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #dddddd;
+}
+
+.nombre_tipo h3 span:first-child {
+  font-family: var(--font--sub--title--3);
+  color: #BD0000;
+}
+
+.features,
+.imagenes {
+  width: 80%;
+}
+
+.content_descripcion {
+  width: 80%;
+}
+
+.content_descripcion h5 {
+  color: var(--color--sub);
+  font-weight: 400;
+  font-family: var(--font--sub--title--2);
+  font-size: 1.5rem;
+}
+
+.content_descripcion p {
+  border: none !important;
+}
+
+.content_descripcion p span {
+  height: auto;
+  color: #000 !important;
+  font-weight: 200 !important;
+}
+
+.importante span:last-child {
+  font-size: .8rem;
+  text-align: end;
+}
+
+.descripcion span:last-child {
+  width: 65%;
+  font-size: .9rem;
+  text-align: justify;
+}
+
+.descripcion-text {
+  white-space: pre-line;
+  /* Esto preserva los saltos de línea */
+  width: 65%;
+  /* Mantiene el mismo ancho que antes */
+  font-size: .9rem;
+  /* Ajusta el tamaño de fuente */
+  text-align: justify;
+  /* Alinea el texto a la izquierda */
+}
+
+.info_apertura_redes {
+  width: 100%;
+  height: auto;
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+
+.redes_apertura {
+  width: 50%;
+  height: auto;
+  gap: .5rem;
+}
+
+.redes_apertura div {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.redes_apertura .face {
+  background-color: #3C5A99;
+}
+
+.redes_apertura .tik {
+  background-color: #000000;
+}
+
+.redes_apertura .youtu {
+  background-color: #993c3c;
+}
+
+.redes_apertura .whats {
+  background-color: #25D366;
+}
+
+
+.redes_apertura .face i,
+.redes_apertura .tik i,
+.redes_apertura .youtu i,
+.redes_apertura .whats i {
+  font-size: 1.2rem;
+  color: #ffff;
+}
+
+
+.info_apertura {
+  width: 100%;
+  height: auto;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  margin-left: .5rem;
+}
+
+.info_apertura h4 {
+  font-size: 1.2rem;
+  font-family: var(--font--banner--bool);
+  font-weight: 600;
+}
+
+.info_apertura p:first-child {
+  margin: 0;
+  padding: 0;
+}
+
+.info_apertura p span:first-child {
+  font-size: 1.05srem;
+  font-family: var(--font--banner--bool);
+  font-weight: 700;
+}
+
+.precio_apertura {
+  margin-bottom: 1rem;
+}
+
+.precio_con_incremento span:first-child {
+  font-size: 1.2rem;
+  font-family: var(--font--banner--bool);
+}
+
+.precio_con_incremento span:last-child {
+  font-size: 1.4rem;
+  font-family: var(--font--banner--bool);
+  color: #00722a;
+}
+
+.info_apertura p span:last-child {
+  font-size: 1.1rem;
+}
+
+
+.grid_info_card {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.grid_info_card .div3 {
+  grid-row-start: 2;
+}
+
+.grid_info_card .div4 {
+  grid-row-start: 2;
+}
+
+.grid_info_card .div1,
+.grid_info_card .div2,
+.grid_info_card .div3,
+.grid_info_card .div4 {
+  width: auto;
+  height: auto;
+  padding: .3rem .8rem;
+  background-color: #000;
+  border-radius: .5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+}
+
+.grid_info_card .div5 {
+  grid-column: span 2 / span 2;
+  /* margin-top: 1rem; */
+}
+
+.grid_info_card .div1 p,
+.grid_info_card .div2 p,
+.grid_info_card .div3 p,
+.grid_info_card .div4 p {
+  font-size: .7rem;
+  color: #fff;
+  font-family: var(--font--banner--bool);
+  margin: 0;
+  padding: 0;
+}
+
+.grid_info_card .div5 a {
+  text-decoration: none;
+  color: #000;
+}
+
+.grid_info_card .div5 a:hover {
+  color: var(--color--sub);
+}
+
+#particles-js {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  /* Asegurar que las partículas estén detrás de la alerta */
+}
+
+.bg-btn-alert2 {
+  background-color: #BD0000;
+}
+
+.bg-btn-alert2:focus-visible {
+  box-shadow: none;
+}
+
+.contet_pdf {
+  transition: ease-in .2s;
+  cursor: pointer;
+}
+
+.contet_pdf:hover {
+  background-color: #ccc;
+}
+
+.archivo_pdf {
+  width: 100%;
+  height: auto;
+  font-size: .9rem;
+  text-decoration: none;
+  color: #000;
+  margin-left: .8rem;
+  transition: ease-in .1s;
+}
+
+.archivo_pdf i {
+  font-size: 1.5rem !important;
+  color: #990000 !important;
+}
+
+.contet_pdf:hover a.archivo_pdf {
+  text-decoration: underline;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .detalles_subasta {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .property-detail {
+    width: 95%;
+  }
+
+  .imgen_principal {
+    height: 25vh;
+  }
+
+  .img_wrapper {
+    width: 170px;
+  }
+}
+
+/*Actualizacion tamaño de letras*/
+/* Small devices (small cell phones, 360px and up) */
+@media only screen and (min-width: 360px) and (max-width: 740px) {
+  .title_veiculo {
+    margin-top: 5rem;
+    font-size: 28px;
+  }
+}
+
+/* Small devices (small cell phones, 412px and up) */
+@media only screen and (min-width: 412px) and (max-width: 915px) {
+  .title_veiculo {
+    margin-top: 5rem;
+    font-size: 25px;
+  }
+
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @media only screen and (min-width: 600px) {}
+
+  /* Medium devices (landscape tablets, 768px and up) */
+  @media only screen and (min-width: 768px) and (max-width: 992px) {
+    .detalles_subasta {
+      flex-direction: column-reverse;
+      align-items: center;
+    }
+
+    .property-detail {
+      width: 80%;
+    }
+
+    .title_veiculo {
+      margin-top: 8rem;
+    }
+  }
+
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px) and (max-width: 1200px) {
+    .detalles_subasta {
+      margin-top: 4rem;
+    }
+
+    .property-detail {
+      width: 50%;
+    }
+  }
+
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @media only screen and (min-width: 1200px) and (max-width: 1440px) {
+    .detalles_subasta {
+      margin-top: 5rem;
+    }
+    .property-detail {
+      width: 50%;
+    }
+  }
+}

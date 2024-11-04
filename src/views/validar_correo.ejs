@@ -1,0 +1,186 @@
+<!DOCTYPE html> <!-- Define el tipo de documento como HTML5 -->
+<html lang="en"> <!-- Establece el idioma de la página como inglés -->
+
+<head>
+  <meta charset="UTF-8"> <!-- Establece la codificación de caracteres a UTF-8 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Configura la vista para dispositivos móviles -->
+  <title>Document</title> <!-- Título de la pestaña del navegador -->
+  <link rel="stylesheet" href="/css/partials/styles_validar_correo.css">
+  <!-- Enlaza la hoja de estilos para validar correo -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Enlaza Bootstrap para estilos -->
+  <link rel="stylesheet" href="/css/partials/styles_header.css"> <!-- Enlaza la hoja de estilos del encabezado -->
+  <link rel="stylesheet" href="/css/partials/styles_footer.css"> <!-- Enlaza la hoja de estilos del pie de página -->
+  <link rel="stylesheet" href="/css/partials/styles_whatsapp_flot.css"> <!-- Enlaza estilos para WhatsApp flotante -->
+  <link rel="stylesheet" href="/css/partials/styles_search.css"> <!-- Enlaza estilos para la búsqueda -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Enlaza iconos de Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <!-- Enlaza la librería SweetAlert2 para alertas -->
+  <!-- ICONS -->
+  <script src="https://kit.fontawesome.com/78137c0870.js" crossorigin="anonymous"></script>
+  <!-- Enlaza Font Awesome para iconos -->
+</head>
+
+<body>
+
+  <!-- CABEZERA -->
+  <header>
+    <div class="menu_icon"> <!-- Contenedor para el icono del menú -->
+      <button class="menu_activar" id="menu_activar"> <!-- Botón para activar el menú -->
+        <i class="bi bi-list"></i> <!-- Icono de lista de Bootstrap -->
+      </button>
+      <div class="menu_navegador" id="menu_navegador"> <!-- Contenedor del menú de navegación -->
+        <div class="cerrar_contet"> <!-- Contenedor para el botón de cerrar -->
+          <button class="menu_cerrar" id="menu_cerrar"> <!-- Botón para cerrar el menú -->
+            <i class="bi bi-x"></i> <!-- Icono de cierre de Bootstrap -->
+          </button>
+        </div>
+        <ul class="navegador"> <!-- Lista de navegación -->
+          <li>
+            <a href="/">Inicio</a> <!-- Enlace a la página de inicio -->
+          </li>
+          <hr class="ceparador"> <!-- Línea separadora -->
+          <li>
+            <a href="/catalogo">Catalogo</a> <!-- Enlace al catálogo -->
+          </li>
+          <hr class="ceparador"> <!-- Línea separadora -->
+          <li>
+            <a href="/info-vender">Vender</a> <!-- Enlace a información para vender -->
+          </li>
+          <hr class="ceparador"> <!-- Línea separadora -->
+          <li>
+            <a href="/info-comprar">Comprar</a> <!-- Enlace a información para comprar -->
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <a href="/" class="logo"><img src="/img/SUBASTA-SUR-ROJO-HORIZONTAL.png" alt=""></a>
+    <!-- Enlace con logo de la página -->
+
+    <nav class="navbar navbar-expand-lg"> <!-- Navegación con Bootstrap -->
+      <div class="container-fluid"> <!-- Contenedor fluido para la barra de navegación -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <!-- Botón para alternar la barra de navegación -->
+          <span class="navbar-toggler-icon"></span> <!-- Icono para el botón de alternar -->
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown"> <!-- Contenedor colapsable para enlaces -->
+          <ul class="navbar-nav"> <!-- Lista de enlaces de navegación -->
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/">Inicio</a> <!-- Enlace a la página de inicio -->
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/info-vender">Vender</a> <!-- Enlace a información para vender -->
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/info-comprar">Comprar</a> <!-- Enlace a información para comprar -->
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container form-container"> <!-- Contenedor principal para el formulario -->
+    <div class="row"> <!-- Fila para columnas -->
+      <div class="col-md-4 contenedor_listas_user"> <!-- Columna para la lista del usuario -->
+        <div class="sidebar"> <!-- Contenedor lateral -->
+          <h5 class="Titulo_general">Perfil del Usuario</h5> <!-- Título de la sección -->
+          <ul class="list-unstyled"> <!-- Lista sin estilo -->
+            <li class="item_lista">
+              <i class="fas fa-user"></i> <!-- Icono de usuario -->
+              Información de usuario <!-- Texto de la lista -->
+            </li>
+          </ul>
+          <img src="/img/SUBASTA-SUR-POSITIVO-VERTICAL.png" alt="Imagen de Perfil" class="img-fluid mt-3">
+          <!-- Imagen de perfil -->
+        </div>
+      </div>
+      <div class="col-md-8"> <!-- Columna para la información del usuario -->
+        <!-- Sección de información del usuario -->
+        <div id="userInfo" class=""> <!-- Contenedor para la información del usuario -->
+          <div class="form-title active text-white"> <!-- Título del formulario -->
+            <h4 class="form-title">Información del Usuario</h4> <!-- Encabezado de la sección -->
+          </div>
+          <form id="emailForm" action="javascript:void(0);" method="post" class="formulario_usuario">
+            <!-- Formulario para verificar el email -->
+            <div class="form-group"> <!-- Contenedor para el grupo de formulario -->
+              <label for="email">Correo electrónico</label> <!-- Etiqueta para el campo de correo -->
+              <input type="email" class="form-control inputss" id="email" name="email" required>
+              <!-- Campo de entrada para el correo -->
+            </div>
+            <button type="button" class="enviarform" onclick="verificarEmail()">Verificar Email</button>
+            <!-- Botón para verificar el email -->
+          </form>
+          <form id="passwordForm" action="/actualizar/contrasena" method="post" class="formulario_usuario"
+            style="display: none;"> <!-- Formulario para cambiar la contraseña, oculto por defecto -->
+            <div class="clave"> <!-- Contenedor para la sección de contraseña -->
+              <div class="form-group"> <!-- Contenedor para el grupo de formulario -->
+                <label for="newPassword">Nueva contraseña</label> <!-- Etiqueta para la nueva contraseña -->
+                <input type="password" class="form-control inputss" id="newPassword" name="new_password">
+                <!-- Campo de entrada para nueva contraseña -->
+              </div>
+              <div class="form-group"> <!-- Contenedor para el grupo de formulario -->
+                <label for="confirmPassword">Confirmación de contraseña</label>
+                <!-- Etiqueta para confirmar la contraseña -->
+                <input type="password" class="form-control inputss" id="confirmPassword" name="confirm_password">
+                <!-- Campo de entrada para confirmar la contraseña -->
+              </div>
+              <button type="submit" class="enviarform">Cambiar Contraseña</button>
+              <!-- Botón para enviar el formulario de cambio de contraseña -->
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include('partials/footer') %> <!-- Incluye el pie de página -->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> <!-- Enlaza jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Enlaza scripts de Bootstrap -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script> <!-- Enlaza Font Awesome -->
+    <script src="/js/partials/script_header.js"></script> <!-- Enlaza el script del encabezado -->
+    <script src="/js/partials/script_whatsapp_flot.js"></script> <!-- Enlaza el script para WhatsApp flotante -->
+
+    <script>
+      function verificarEmail() { // Función para verificar el email ingresado
+        const email = document.getElementById('email').value; // Obtiene el valor del campo de correo
+        fetch('/confirmar/datos', { // Realiza una solicitud POST para confirmar el email
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json' // Establece el tipo de contenido a JSON
+          },
+          body: JSON.stringify({ // Envía el correo como JSON
+            email: email
+          })
+        })
+          .then(response => response.json()) // Convierte la respuesta a JSON
+          .then(data => { // Procesa los datos recibidos
+            if (data.success) { // Si la verificación fue exitosa
+              document.getElementById('passwordForm').style.display = 'block'; // Muestra el formulario para cambiar la contraseña
+            } else {
+              Swal.fire({ // Muestra una alerta de error si el correo no fue encontrado
+                icon: 'error',
+                title: 'Correo no encontrado',
+                text: 'Ingrese un correo válido'
+              });
+            }
+          })
+          .catch(error => { // Captura errores en la solicitud
+            console.error('Error:', error); // Muestra el error en la consola
+            Swal.fire({ // Muestra una alerta de error interno
+              icon: 'error',
+              title: 'Error interno',
+              text: 'Error interno del servidor'
+            });
+          });
+      }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html> <!-- Define el tipo de documento como HTML5 -->
+<html lang="en">
+<!-- Establece el idioma de la página como inglés -->
+
+<head>
+  <meta charset="UTF-8"> <!-- Establece la codificación de caracteres a UTF-8 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Configura la vista para dispositivos móviles -->
+  <link rel="shortcut icon" href="/img/SUBASTA-SUR-ROJO-HORIZONTAL.png" type="image/x-icon">
+  <!-- Establece un favicon para la página -->
+
+  <!-- ESTILOS CABEZERA -->
+  <link rel="stylesheet" href="/css/partials/styles_header.css"> <!-- Enlaza la hoja de estilos para el encabezado -->
+
+  <!-- ESTILOS FOOTER -->
+  <link rel="stylesheet" href="/css/partials/styles_footer.css">
+  <!-- Enlaza la hoja de estilos para el pie de página -->
+  <link rel="stylesheet" href="/css/partials/styles_whatsapp_flot.css"> <!-- Enlaza estilos para WhatsApp flotante -->
+  <link rel="stylesheet" href="/css/partials/styles_search.css"> <!-- Enlaza estilos para la búsqueda -->
+
+  <!-- ICONS -->
+  <script src="https://kit.fontawesome.com/78137c0870.js" crossorigin="anonymous"></script>
+  <!-- Enlaza Font Awesome para iconos -->
+
+  <!-- BOOSTRAP -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <!-- Enlaza Bootstrap para estilos -->
+
+  <!-- SCRIPT BOOTSTRAP -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> <!-- Enlaza scripts de Bootstrap -->
+
+
+
+  <!-- script para sweat alert -->
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+  <!-- ESTILOS ICON -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Enlaza iconos de Bootstrap -->
+
+  <!-- ESTILOS PAGINA -->
+  <link rel="stylesheet" href="/css/style_vender.css">
+  <!-- Enlaza la hoja de estilos específica para la página de vender -->
+
+  <title>Subasta Sur || info-vender</title> <!-- Título de la pestaña del navegador -->
+</head>
+
+<body>
+  <%- include('partials/header') %>
+  <!-- Incluye el encabezado de la página -->
+
+  <section class="banner">
+    <!-- Sección del banner principal -->
+    <div class="contenedor_banner">
+      <!-- Contenedor para el contenido del banner -->
+      <h1>Vende tus autos con Subasta Sur</h1> <!-- Título principal del banner -->
+
+      <img src="/img/ICONOS SUBASTA SUR_Mesa de trabajo 1 copia 5.png" alt=""> <!-- Imagen en el banner -->
+
+      <h2>Venta rápida en minutos</h2> <!-- Subtítulo del banner -->
+
+      <p>Nuestro respaldo es altamente competitivo para todos nuestros inversores o clientes que buscan una
+        oportunidad de adquirir su primer auto.</p> <!-- Descripción en el banner -->
+    </div>
+  </section>
+
+  <section class="informacion">
+    <!-- Sección que detalla la información de venta -->
+    <div class="contenedor_informacion">
+      <!-- Contenedor para la información -->
+      <h2>Beneficios de vender en Subasta Sur</h2> <!-- Título de beneficios -->
+      <div class="info">
+        <!-- Contenedor para la información -->
+        <div class="tarjeta">
+          <!-- Tarjeta para el primer beneficio -->
+          <img src="/img/ICONOS SUBASTA SUR_Mesa de trabajo 1 copia 4.png" alt=""> <!-- Imagen del beneficio -->
+          <h3>Proceso simple</h3> <!-- Título del beneficio -->
+          <p>transparencia en las negociaciones desde el contacto con los potenciales compradores hasta el retiro de
+            los activos después del pago y documentación solicitada.</p> <!-- Descripción del beneficio -->
+        </div>
+        <div class="tarjeta">
+          <!-- Tarjeta para el segundo beneficio -->
+          <img src="/img/ICONOS SUBASTA SUR_Mesa de trabajo 1 copia 3.png" alt=""> <!-- Imagen del beneficio -->
+          <h3>Negocio simple</h3> <!-- Título del beneficio -->
+          <p>Contamos con un equipo competitivo que te brinda el apoyo y respaldo en todo el proceso.</p>
+          <!-- Descripción del beneficio -->
+        </div>
+        <div class="tarjeta">
+          <!-- Tarjeta para el tercer beneficio -->
+          <img src="/img/ICONOS SUBASTA SUR_Mesa de trabajo 1 copia 7.png" alt=""> <!-- Imagen del beneficio -->
+          <h3>Resultados rápidos</h3> <!-- Título del beneficio -->
+          <p>Recuperación de capital para emprendedores o empresas con los mejores resultados del mercado.</p>
+          <!-- Descripción del beneficio -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <sectiom class="enviar_datos">
+    <!-- Sección para enviar datos (hay un error tipográfico en "sectiom") -->
+    <div class="contenedor_datos">
+      <!-- Contenedor para la sección de datos -->
+      <h2>¡ENVIA TUS DATOS!</h2> <!-- Título para enviar datos -->
+      <p>No pierdas la oportunidad de subastar tus autos con nosotros y recuperar tu capital.</p> <!-- Descripción -->
+      <button class="datos_vender" id="quiero_vender">QUIERO VENDER</button>
+      <!-- Botón para iniciar el proceso de venta -->
+    </div>
+  </sectiom>
+  <div class="container" id="formulario_vender" style="display: none;">
+
+    <div class="content_btn">
+      <button class="cerrar_vender" id="cerrar_vender">
+        <i class="bi bi-x-circle"></i>
+      </button>
+    </div>
+
+    <img class="imagen_icon" src="/img/SUBASTA-SUR-POSITIVO-HORIZONTAL.png" alt>
+
+    <form action="/enviar/formulario" method="post">
+
+
+      <div class="form-group">
+        <label for="nombre">Nombres y Apellidos</label>
+        <input type="text" id="nombre" name="nombre">
+      </div>
+
+      <div class="d-flex" style="gap: 1rem;">
+        <div class="form-group">
+          <label for="celular">Celular</label>
+          <input type="tel" id="celular" name="celular" maxlength="9">
+        </div>
+
+        <div class="form-group">
+          <label for="correo">Correo electrónico</label>
+          <input type="email" id="correo" name="correo">
+        </div>
+      </div>
+
+      <div class="d-flex" style="gap: 1rem;">
+        <div class="form-group">
+          <label for="departamento">Departamento</label>
+          <select id="departamento" name="departamento">
+            <option value="Amazonas">Amazonas</option>
+            <option value="Áncash">Áncash</option>
+            <option value="Apurímac">Apurímac</option>
+            <option value="Arequipa">Arequipa</option>
+            <option value="Ayacucho">Ayacucho</option>
+            <option value="Cajamarca">Cajamarca</option>
+            <option value="Callao">Callao</option>
+            <option value="Cusco">Cusco</option>
+            <option value="Huancavelica">Huancavelica</option>
+            <option value="Huánuco">Huánuco</option>
+            <option value="Ica">Ica</option>
+            <option value="Junín">Junín</option>
+            <option value="La Libertad">La Libertad</option>
+            <option value="Lambayeque">Lambayeque</option>
+            <option value="Lima">Lima</option>
+            <option value="Loreto">Loreto</option>
+            <option value="Madre de Dios">Madre de Dios</option>
+            <option value="Moquegua">Moquegua</option>
+            <option value="Pasco">Pasco</option>
+            <option value="Piura">Piura</option>
+            <option value="Puno">Puno</option>
+            <option value="San Martín">San Martín</option>
+            <option value="Tacna">Tacna</option>
+            <option value="Tumbes">Tumbes</option>
+            <option value="Ucayali">Ucayali</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="ciudad">Ciudad</label>
+          <input type="text" id="ciudad" name="ciudad">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="descripcion">Descripción de los vehiculos</label>
+        <textarea id="descripcion" name="descripcion" rows="4" placeholder="Describa brevemente los vehiculos ..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="informacion">Cómo te enteraste de nuestro sitio</label>
+        <select id="informacion" name="informacion">
+          <option>Indicación de Otras Empresas</option>
+          <option>Publicidad en Internet</option>
+          <option>Redes Sociales</option>
+          <option>Tik Tok</option>
+          <option>Un amigo</option>
+        </select>
+      </div>
+
+
+      <button type="submit" class="submit-btn">ENVIAR</button>
+    </form>
+
+  </div>
+
+
+
+  <!-- WHATSAPP FLOTANTE -->
+  <%- include('partials/whatsapp_flot') %>
+  <!-- Incluye el WhatsApp flotante -->
+
+  <%- include('partials/footer') %>
+
+  <!-- Incluye el pie de página -->
+  <script src="/js/partials/script_header.js"></script> <!-- Enlaza el script del encabezado -->
+  <script src="/js/partials/script_whatsapp_flot.js"></script> <!-- Enlaza el script para WhatsApp flotante -->
+
+
+
+  <!-- SCRIPTS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => { // Espera a que el contenido del DOM esté cargado
+      const botonActivar = document.getElementById("btn_menu"); // Obtiene el botón para activar el menú
+      const botonCerrar = document.getElementById("btn_close"); // Obtiene el botón para cerrar el menú
+      const contenederMenu = document.getElementsByClassName("menu_desplegable")[0]; // Obtiene el contenedor del menú desplegable
+
+      botonActivar.addEventListener('click', () => { // Agrega un evento al botón de activar
+        contenederMenu.classList.add("active"); // Agrega la clase "active" al menú para mostrarlo
+      });
+
+      botonCerrar.addEventListener('click', () => { // Agrega un evento al botón de cerrar
+        contenederMenu.classList.remove("active"); // Remueve la clase "active" al menú para ocultarlo
+      });
+    });
+  </script>
+
+  <!-- CERRAR LA PANTALLA -->
+  <script>
+    const btn_cerrar_vender = document.getElementById("cerrar_vender");
+    const formulario = document.getElementById("formulario_vender");
+
+    btn_cerrar_vender.addEventListener('click', () => {
+      formulario.style.display = formulario.style.display === "none" ? "block" : "none";
+    })
+  </script>
+
+  <script>
+    // Busca el botón llamado "quiero_vender" en la página 
+    // y espera a que alguien haga clic en él
+    document.getElementById("quiero_vender").addEventListener("click", () => {
+
+      // Encuentra el formulario en la página con el nombre "formulario_vender"
+      const formulario = document.getElementById("formulario_vender");
+
+      // Aquí miramos si el formulario está oculto o visible
+      // Si está oculto (display es "none"), lo mostramos (display se vuelve "block")
+      // Si ya está visible (display es "block"), lo escondemos otra vez (display se pone "none")
+      formulario.style.display = formulario.style.display === "none" ? "block" : "none";
+    });
+  </script>
+
+  <!-- sweetalert2 -->
+  <script>
+    // Función para obtener los valores del formulario
+    function obtenerValoresFormulario() {
+      // Devuelve un objeto con los valores de los campos del formulario, eliminando espacios en blanco al inicio y al final
+      return {
+        nombre: document.getElementById("nombre").value.trim(),
+        celular: document.getElementById("celular").value.trim(),
+        correo: document.getElementById("correo").value.trim(),
+        departamento: document.getElementById("departamento").value.trim(),
+        ciudad: document.getElementById("ciudad").value.trim(),
+        descripcion: document.getElementById("descripcion").value.trim(),
+        informacion: document.getElementById("informacion").value.trim(),
+      };
+    }
+
+    // Función para mostrar alertas utilizando SweetAlert2
+    function mostrarAlerta(titulo, texto, icono, confirmText = "OK") {
+      // Muestra una alerta con los parámetros proporcionados
+      return Swal.fire({
+        title: titulo, // Título de la alerta
+        text: texto, // Mensaje de la alerta
+        icon: icono, // Icono de la alerta (ej. 'success', 'warning')
+        confirmButtonText: confirmText, // Texto del botón de confirmación
+      });
+    }
+
+    // Escucha el evento click en el botón de envío
+    document.querySelector(".submit-btn").addEventListener("click", async (event) => {
+      event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+
+      // Obtiene los valores del formulario usando la función anterior
+      const {
+        nombre,
+        celular,
+        correo,
+        departamento,
+        ciudad,
+        descripcion,
+        informacion
+      } = obtenerValoresFormulario();
+
+      // Verifica si algún campo del formulario está vacío
+      if (!nombre || !celular || !correo || !departamento || !ciudad || !descripcion || !informacion) {
+        // Si hay campos vacíos, muestra una alerta de advertencia
+        await mostrarAlerta("Campos incompletos", "Por favor, completa todos los campos antes de enviar.", "warning");
+        return; // Sale de la función para evitar el envío del formulario
+      }
+
+      // Si todos los campos están llenos, muestra una alerta de confirmación
+      Swal.fire({
+        title: "Solicitud recibida", // Título de la alerta
+        text: "Un asesor se comunicará contigo al WhatsApp / correo en las próximas 24 horas.", // Mensaje de la alerta
+        icon: "success", // Icono de éxito
+        showCancelButton: true, // Muestra el botón de cancelar
+        confirmButtonText: "Enviar", // Texto del botón de confirmación
+        cancelButtonText: "Cancelar", // Texto del botón de cancelación
+        showLoaderOnConfirm: true, // Muestra un cargador mientras se procesa la solicitud
+        preConfirm: async () => {
+          // Función que se ejecuta antes de confirmar la alerta
+          try {
+            // Envía los datos del formulario a la ruta especificada
+            const response = await fetch("/enviar/formulario", {
+              method: "POST", // Método HTTP
+              headers: {
+                "Content-Type": "application/json", // Tipo de contenido
+              },
+              body: JSON.stringify({
+                nombre,
+                celular,
+                correo,
+                departamento,
+                ciudad,
+                descripcion,
+                informacion
+              }), // Convierte el objeto a JSON
+            });
+
+            // Verifica si la respuesta fue exitosa
+            if (!response.ok) {
+              throw new Error("Error al enviar los datos"); // Lanza un error si la respuesta no es exitosa
+            }
+          } catch (error) {
+            // Muestra un mensaje de validación en caso de error
+            Swal.showValidationMessage(`Solicitud fallida: ${error.message}`);
+          }
+        },
+        allowOutsideClick: () => !Swal.isLoading(), // Permite hacer clic fuera de la alerta solo si no se está cargando
+      }).then((result) => {
+        // Maneja el resultado de la alerta
+        if (result.isConfirmed) {
+          // Si se confirma la alerta, redirige a la página especificada
+          window.location.href = "/info-vender";
+        }
+      });
+    });
+  </script>
+
+
+
+</body>
+
+</html>

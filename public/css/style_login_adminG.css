@@ -1,0 +1,242 @@
+@import url("https://fonts.googleapis.com/css2?family=BioRhyme:wght@200..800&family=Sedan:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Scope+One&display=swap");
+
+:root {
+  --font--banner--semi: url("/fonts/segoeuithibd.ttf");
+  --font--banner--bool: url("/fonts/segoeuithibd.ttf");
+  --font--parrafo: "Space Mono";
+  --font--header: "Sedan";
+  --font--testimoni: "Modern Antiqua";
+  --font--about: "BioRhyme";
+  --font--cont: "Scope One";
+  --bg--botones: #a29060;
+  --color--sub: #c5ac75;
+  --bg-fondo: #eeeeee;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.fondo {
+  width: 100%;
+  height: 100vh;
+  background: rgb(204,180,120);
+background: linear-gradient(0deg, rgba(204,180,120,1) 0%, rgba(214,198,165,1) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.fondo::before {
+  content: "";
+  position: absolute;
+  left: 22%;
+  bottom: -10%;
+  width: 350px;
+  height: 350px;
+  background: rgb(173, 121, 54);
+  background: linear-gradient(75deg, 
+  rgba(173, 121, 54, 1) 0%,
+  rgba(243, 245, 176, 1) 100%);
+  border-radius: 50%;
+}
+
+.fondo::after {
+  content: "";
+  position: absolute;
+  right: 20%;
+  top: 33%;
+  width: 450px;
+  height: 450px;
+  background: rgb(173, 121, 54);
+  background: linear-gradient(70deg, 
+  rgba(173, 121, 54, 1) 0%,
+  rgba(243, 245, 176, 1) 100%);
+  border-radius: 50%;
+}
+
+.circulo{
+  position: absolute;
+  left: 15%;
+  top: 50%;
+  width: 150px;
+  height: 150px;
+  background: #DE8C27;
+  background: linear-gradient(50deg, 
+  #DE8C27 0%,
+  #FEEE8F 100%);
+  border-radius: 50%;
+}
+
+.circulo1{
+  position: absolute;
+  right: 38%;
+  top: 20%;
+  width: 100px;
+  height: 100px;
+  background: #F4AC36;
+  background: linear-gradient(50deg, 
+  #F4AC36 0%,
+  #FEFECB 100%);
+  border-radius: 50%;
+}
+
+.circulo2{
+  position: absolute;
+  right: 15%;
+  top: 35%;
+  width: 70px;
+  height: 70px;
+  background: #FDE150;
+  background: linear-gradient(50deg, 
+  #FDE150 0%,
+  #FFFDC9 100%);
+  border-radius: 50%;
+}
+
+.circulo3{
+  position: absolute;
+  left: 25%;
+  top: -10%;
+  width: 400px;
+  height: 400px;
+  background: #C0752E;
+  background: linear-gradient(50deg, 
+  #C0752E 0%,
+  #FFF9B4 100%);
+  border-radius: 50%;
+}
+
+.contenedor {
+  min-width: 600px;
+  min-height: 600px;
+  border-top: 1px solid  #fff;
+  border-right: 1px solid  #fff;
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  z-index: 1000;
+}
+
+.content_form {
+  width: 100%;
+}
+
+.content_form h1 {
+  font-weight: 700;
+  font-size: 2.2rem;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.content_form form {
+  width: 45%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.inputs {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.inputs label {
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+
+.inputs input {
+  width: 100%;
+  height: 35px;
+  background-color: #fff;
+  border: none;
+  border-radius: 2px;
+  padding-left: 1rem;
+}
+
+.inputs input::placeholder{
+  font-family: var(--font--cont);
+  font-weight: 600;
+  font-size: .9rem;
+  color: #FEC95A;
+}
+
+.inputs input:focus{
+  outline: none;
+}
+
+.content_form form a{
+  width: 100%;
+  font-size: .7rem;
+  text-decoration: none;
+  color: #fff;
+  text-align: end;
+  margin-top: -.7rem;
+  transition: ease-in .2s;
+}
+
+.content_form form a:hover{
+  color: #fffcd0;
+}
+
+.content_form form button {
+  padding: .4rem 1.5rem;
+  font-size: .95rem;
+  font-weight: 600;
+  font-family: var(--font--banner--bool);
+  border: none;
+  border-radius: 10px;
+  color: #F4AC36;
+}
+
+.imagen {
+  width: 30%;
+}
+
+.imagen img {
+  width: 100%;
+  height: 100%;
+  border-radius: 0px 20px 20px 0px;
+}
+
+.mostarC {
+  padding: 0 !important;
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+
+/* Agrega animación de deslizamiento desde la izquierda */
+@keyframes slideLeft {
+  from {
+      transform: translateX(-100%);
+  }
+  to {
+      transform: translateX(0);
+  }
+}
+
+/* Estilos para la transición */
+.contenedor,
+.fondo::after,
+.fondo::before,
+.cir{
+  animation: slideLeft 0.5s ease forwards;
+}

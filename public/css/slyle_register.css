@@ -1,0 +1,515 @@
+@import url("https://fonts.googleapis.com/css2?family=BioRhyme:wght@200..800&family=Sedan:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Scope+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --font--banner--semi: "Heebo";
+  --font--banner--bool: "Kanit";
+  --font--parrafo: "Space Mono";
+  --font--header: "Sedan";
+  --font--testimoni: "Modern Antiqua";
+  --font--about: "BioRhyme";
+  --font--cont: "Scope One";
+  --color--label: #989898;
+  --color--activo--nav: #df405f;
+  --color--inactivo--nav: #b62a46;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.contenedor_general {
+  width: 100%;
+  height: 100vh;
+  padding: 5rem 15rem 5rem 15rem;
+  background-image: url("../img/registro_img.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.contenedor_general_a {
+  width: 100%;
+  height: 100%;
+  border-radius: 2rem;
+  box-shadow: 0px 4px 15px rgb(94, 94, 94);
+  display: flex;
+  flex-direction: row;
+}
+
+.banner_registro {
+  width: 40%;
+  height: 100%;
+  background-color: #ffecc2;
+  border-radius: 2rem 0rem 0rem 2rem;
+}
+
+.banner_registro h1 {
+  font-family: var(--font--banner--bool);
+  font-size: 4rem;
+  font-weight: 600;
+}
+
+.banner_registro p {
+  width: 60%;
+  font-family: var(--font--banner--semi);
+  font-size: 0.9rem;
+  color: #797979;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.tipo_persona {
+  width: 70%;
+  text-align: center;
+}
+
+.btn_persona_natural {
+  margin-right: 1rem;
+}
+
+.tipo_persona button {
+  padding: 6px 18px 4px 18px;
+  background: none;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  font-family: var(--font--banner--semi);
+  font-size: 0.9rem;
+  color: #686868;
+  transition: ease-in 0.3s;
+}
+
+.tipo_persona button:hover {
+  transform: scale(1.1);
+  border: 2px solid #fff;
+  color: #000;
+}
+
+.banner_registro .login {
+  margin-top: 1rem;
+  font-size: 0.7rem;
+}
+
+.banner_registro .login a {
+  color: #df405f;
+  font-size: 0.75rem;
+}
+
+.banner_registro .login:hover a {
+  color: #b62a46;
+}
+
+.titulo h2 {
+  font-size: 2.5rem;
+  font-family: var(--font--banner--semi);
+  font-weight: 700;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.titulo h2::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0.28rem;
+  width: 15%;
+  height: 4px;
+  background: var(--color--activo--nav);
+}
+
+.navegador {
+  width: 60%;
+  height: auto;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.nav_datos {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--color--inactivo--nav);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ccc;
+}
+
+.nav_datos.active {
+  background-color: var(--color--activo--nav);
+  color: #fff;
+}
+
+.nav_datos p {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font--banner--semi);
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.contenedor_de_datos {
+  width: 60%;
+  height: 100%;
+  background-color: #f8f8f8;
+  border-radius: 0rem 2rem 2rem 0rem;
+  justify-content: center;
+}
+
+.contenedor_datos_natural {
+  width: 65%;
+  height: 50%;
+}
+
+.contenedor_datos_natural form {
+  width: 100%;
+}
+
+.espacioT {
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+
+.espacioT input {
+  width: 100%;
+  height: 37px;
+  /* margin-left: 1rem;
+  margin-right: 1rem;*/
+  padding-left: 1rem;
+  margin-top: 1rem; 
+  border-radius: 4rem;
+  border: 1px solid #ccc;
+  background: none;
+  color: #4b4b4b;
+  font-size: 0.9rem;
+}
+
+.espacioT input:focus {
+  outline: none;
+}
+
+.espacioT input::placeholder {
+  font-size: 0.8rem;
+  color: #888888;
+}
+
+.espacioT select {
+  width: 100%;
+  height: 35px;
+  margin-top: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4rem;
+  font-size: 0.8rem;
+  color: #888888;
+  background: none;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.espacioT select:focus {
+  outline: none;
+}
+
+.botones {
+  width: 100%;
+  margin-top: 2rem;
+  text-align: end;
+}
+
+.botones button {
+  min-width: 110px;
+  height: 30px;
+  border: none;
+  background-color: #b62a46;
+  color: #fff;
+  font-family: var(--font--banner--semi);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-right: 1.5rem;
+  padding-top: 3px;
+  border-radius: 5px;
+}
+
+.espacioI input {
+  min-width: 300px;
+  height: 37px;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4rem;
+  background: none;
+  color: #4b4b4b;
+  font-size: 0.9rem;
+  padding-left: 1rem;
+}
+
+.espacioI input:focus {
+  outline: none;
+}
+
+.terminoss {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  gap: 0.5rem;
+}
+
+.terminoss input {
+  width: 25px;
+  height: 17px;
+  appearance: none;
+  border: 1px solid #df405f;
+  border-radius: 3px;
+  position: relative;
+}
+
+.terminoss input:checked {
+  background-color: #df405f;
+  border-color: #df405f;
+}
+
+.terminoss input:checked::after {
+  content: "✓"; /* Símbolo de check */
+  color: white;
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.terminoss label {
+  font-size: 0.8rem;
+  font-family: var(--font--banner--semi);
+  color: #686868;
+}
+
+.boton_final {
+  width: 100%;
+  height: auto;
+  text-align: center;
+}
+
+.boton_final button {
+  min-width: 120px;
+  height: 30px;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--color--activo--nav);
+  color: #fff;
+  font-family: var(--font--banner--semi);
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+.step {
+  display: none;
+}
+
+.step.active {
+  display: block;
+}
+
+.contenedor_datos_juridica {
+  width: 65%;
+  height: 50%;
+}
+
+.step_j {
+  display: none;
+}
+
+.step_j.active {
+  display: block;
+}
+
+
+.error-message {
+  color: red;
+  font-size: .8rem;
+  font-family: var(--font--banner--semi);
+  margin-left: 1rem;
+}
+
+.status-message {
+  color: green;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .contenedor_general {
+    padding: 0;
+  }
+
+  .contenedor_general_a {
+    flex-direction: column;
+  }
+
+  .banner_registro {
+    width: 100%;
+    height: 50%;
+    border-radius: 0rem;
+    opacity: 0.8;
+  }
+
+  .banner_registro h1 {
+    font-size: 2rem;
+  }
+
+  .banner_registro p {
+    width: 85%;
+    font-size: 0.7rem;
+    font-weight: 400;
+  }
+
+  .btn_persona_natural {
+    margin-right: 0rem;
+    margin-bottom: 1rem;
+  }
+
+  .banner_registro .login {
+    width: 80%;
+    font-size: 0.6rem;
+  }
+
+  .contenedor_de_datos {
+    width: 100%;
+    border-radius: 0rem;
+    opacity: 0.85;
+    justify-content: start;
+  }
+
+  .titulo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .titulo h2 {
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+
+  .navegador {
+    margin-bottom: 0.5rem;
+  }
+
+  .titulo h2::before {
+    display: none;
+  }
+
+  .contenedor_datos_natural {
+    width: 90%;
+    padding-bottom: 1.5rem;
+  }
+
+  .step.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .espacioT input {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+
+  .sexo_fecha {
+    width: 100%;
+    height: 150px;
+    flex-direction: column;
+  }
+
+  .sexo_fecha input{
+    width: 95%;
+  }
+
+  .sexo_fecha select{
+    width: 95%;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+
+  .contenedor_datos_juridica {
+    width: 90%;
+    justify-content: center;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  .contenedor_general {
+    padding: 0;
+  }
+
+  .contenedor_general_a {
+    flex-direction: column;
+  }
+
+  .banner_registro {
+    width: 100%;
+    height: 50%;
+    border-radius: 0rem;
+    opacity: 0.8;
+  }
+
+  .contenedor_de_datos {
+    width: 100%;
+    border-radius: 0rem;
+    opacity: 0.85;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  .contenedor_general {
+    padding: 1rem 2rem;
+  }
+
+  .banner_registro h1 {
+    font-size: 3rem;
+  }
+
+  .banner_registro p {
+    font-size: 0.8rem;
+    font-weight: 400;
+  }
+
+  .tipo_persona button {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  .banner_registro .login {
+    width: 80%;
+  }
+
+  .titulo h2 {
+    font-size: 2rem;
+  }
+
+  .contenedor_datos_natural,
+  .contenedor_datos_juridica {
+    width: 80%;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) and (max-width: 1440px) {
+  .contenedor_general {
+    padding: 3rem 5rem;
+  }
+}

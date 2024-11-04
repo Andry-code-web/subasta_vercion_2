@@ -1,0 +1,163 @@
+@import url("https://fonts.googleapis.com/css2?family=BioRhyme:wght@200..800&family=Sedan:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Scope+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Arsenal+SC:ital,wght@0,400;0,700;1,400;1,700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+:root {
+  --font--banner--semi: "Barlow";
+  --font--banner--bool: "Roboto";
+  --font--parrafo: "Space Mono";
+  --font--header: "Sedan";
+  --font--testimoni: "Modern Antiqua";
+  --font--about: "BioRhyme";
+  --font--cont: "Scope One";
+  --font--sub--title: "Arsenal SC";
+  --font--sub--title--2: "Roboto Condensed";
+  --font--sub--title--3: "Kanit";
+  --bg--botones: #ff0000;
+  --color--sub: #b94141;
+}
+
+/* General Styles */
+
+h2 {
+  text-align: left;
+  color: var(--color--sub);
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  font-family: var(--font--sub--title--3);
+}
+
+/* Table Styles */
+/*table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  table-layout: auto;
+}
+*/
+.tabla_principal {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  table-layout: auto;
+}
+
+.tabla_letras {
+  color: #ffffff;
+  background-color: var(--color--sub);
+  font-family: var(--font--sub--title--3);
+}
+
+.tabla_borde tr td {
+  border: 1px solid #000000;
+}
+
+.contenedor_ofertas {
+  width: 50%;
+  height: auto;
+  margin: auto;
+}
+
+th, td {
+  border: 1px solid #ffffff;
+  padding: 7px;
+  text-align: center;
+}
+
+tr {
+  height: 35px;
+  text-align: center;
+}
+
+/* Titles and Summary Styles */
+.header {
+  background-color: #fe3131;
+  font-weight: bold;
+}
+
+.section-title {
+  background-color: #f21f1f;
+  font-weight: bold;
+  text-align: center;
+}
+
+.offer-summary {
+  text-align: right;
+  margin: 0;
+  font-weight: bold;
+  font-size: .9rem;
+  font-family: var(--font--sub--title--3);
+}
+
+
+/* Responsive Design */
+@media only screen and (max-width: 768px) {
+  table {
+      width: 100%;
+      table-layout: fixed;
+  }
+
+  th, td {
+      padding: 10px;
+      font-size: 14px;
+  }
+
+  td {
+      display: block;
+      text-align: right;
+      border: none;
+      border-bottom: 1px solid #ddd;
+  }
+
+  td::before {
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+  }
+
+  th {
+      display: none;
+  }
+
+  h2 {
+      font-size: 18px;
+  }
+}
+
+/* Small devices (small cell phones, 360px and up) */
+@media only screen and (min-width: 360px) and (max-width: 740px) {
+  .contenedor_ofertas {
+    display: none;
+  }
+}
+
+/* Additional media query for a specific range */
+@media only screen and (min-width: 412px) and (max-width: 915px) {
+  .contenedor_ofertas {
+    display: none;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  .contenedor_ofertas {
+    width: 79%;
+    display: none;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  .contenedor_ofertas {
+    width: 86%;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) and (max-width: 1440px) {
+  .contenedor_ofertas {
+    width: 82%;
+  }
+}

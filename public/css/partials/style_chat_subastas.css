@@ -1,0 +1,651 @@
+@import url("https://fonts.googleapis.com/css2?family=BioRhyme:wght@200..800&family=Sedan:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Scope+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Arsenal+SC:ital,wght@0,400;0,700;1,400;1,700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+  --font--banner--semi: "Barlow";
+  --font--banner--bool: "Roboto";
+  --font--parrafo: "Space Mono";
+  --font--header: "Sedan";
+  --font--testimoni: "Modern Antiqua";
+  --font--about: "BioRhyme";
+  --font--cont: "Scope One";
+  --font--sub--title: "Arsenal SC";
+  --font--sub--title--2: "Roboto Condensed";
+  --font--sub--title--3: "Kanit";
+  --bg--botones: #d30000;
+  --color--sub: #d30000;
+}
+
+
+.card {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  width: 370px;
+  height: 710px;
+  position: sticky;
+  top: 140px;
+}
+
+.card-header {
+  background-color: var(--color--sub);
+  color: white;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header .title_p {
+  width: 100%;
+  text-align: start;
+  font-size: .8rem;
+  font-family: var(--font--banner--semi);
+  font-weight: 400;
+  margin: 0;
+}
+
+/* .card-header p {
+  margin: 0;
+  font-size: 1.2rem;
+  font-family: var(--font--banner--semi);
+
+} */
+
+.analisis p {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: .9rem;
+  font-family: var(--font--sub--title);
+}
+
+.card-header .heart-icon {
+  font-size: 1.5rem;
+}
+
+/* .card-body {
+  padding: 1rem;
+  text-align: center;
+  display: block;
+}
+
+.card-body.active {
+  display: none;
+}
+
+.card-body h2 {
+  color: #BD0000;
+  font-size: .9rem;
+  font-family: var(--font--about);
+  margin: 1rem 0;
+}
+
+.card-body button {
+  width: 100%;
+  height: 45px;
+  background-color: var(--bg--botones);
+  font-family: var(--font--sub--title--3);
+  font-weight: 600;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.card-body button:hover {
+  background-color: #ffa928;
+} */
+
+.precio {
+  gap: .5rem;
+}
+
+.precio i {
+  font-size: 1.5rem;
+  color: #00722a;
+}
+
+.precio .precio_base {
+  color: #00722a !important;
+  font-family: var(--font--sub--title--2) !important;
+  font-weight: 300 !important;
+  font-size: 1.2rem;
+}
+
+.price {
+  color: #00521e;
+  font-family: var(--font--sub--title--2);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 1rem 0;
+}
+
+.incremento_precio {
+  font-size: .8rem;
+  font-family: var(--font--banner--bool);
+  margin-bottom: 2rem;
+}
+
+.incremento_precio span {
+  font-weight: 700;
+  color: #00521e;
+}
+
+#body_card,
+#body_card_puja {
+  transition: opacity 0.5s ease;
+}
+
+
+/* card_body_puja*/
+
+/* .card-body-puja {
+  padding: 1rem;
+  text-align: center;
+  display: block;
+}
+
+.card-body-puja.active {
+  display: none;
+}
+
+.card-body-puja h2 {
+  color: #BD0000;
+  font-size: .9rem;
+  font-family: var(--font--about);
+  margin: 1rem 0;
+}
+
+.card-body-puja button {
+  width: 100%;
+  height: 45px;
+  background-color: var(--bg--botones);
+  font-family: var(--font--sub--title--3);
+  font-weight: 600;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.card-body-puja button:hover {
+  background-color: #ffa928;
+} */
+
+/* Termino la subastas */
+
+/* .card-body-termino {
+  padding: 1rem;
+  text-align: center;
+  display: block;
+}
+
+.card-body-termino.active {
+  display: none;
+}
+
+.card-body-termino h2 {
+  color: #BD0000;
+  font-size: .9rem;
+  font-family: var(--font--about);
+  margin: 1rem 0;
+}
+
+.card-body-termino button {
+  width: 100%;
+  height: 45px;
+  background-color: var(--bg--botones);
+  font-family: var(--font--sub--title--3);
+  font-weight: 600;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.card-body-termino button:hover {
+  background-color: #ffa928;
+}
+ */
+
+/* Estilos específicos para el botón terminado */
+/* .card-body-termino button {
+  background-color: #9e9e9e !important;
+  opacity: 0.7;
+  cursor: not-allowed !important;
+  pointer-events: none;
+  color: #ffffff;
+}
+
+.card-body-termino button:hover {
+  background-color: #9e9e9e !important;
+}
+
+.analisis {
+  margin-bottom: 1rem;
+}
+
+.precio_con_incremento,
+.precio,
+.incremento_precio {
+  margin: 1rem 0;
+}
+
+.grid_info_card {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.grid_info_card > div {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.grid_info_card .div5 {
+  grid-column: 1 / -1;
+} */
+
+.card-body {
+  padding: .5rem 1rem 1rem 1rem;
+}
+
+
+.card-body-puja,
+.card-body-termino {
+  padding: 1rem;
+  text-align: center;
+  display: none;
+  height: auto;
+}
+
+.card-body h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #BD0000;
+  font-size: .9rem;
+  font-family: var(--font--about);
+  text-align: center;
+}
+
+.card-body-puja h2,
+.card-body-termino h2 {
+  color: #BD0000;
+  font-size: .9rem;
+  font-family: var(--font--about);
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.fecha-subasta {
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-size: 1.5rem;
+  font-family: var(--font--banner--bool);
+  font-weight: 500;
+  margin: 0;
+}
+
+.card-body button,
+.card-body-puja button,
+.card-body-termino button {
+  width: 100%;
+  height: 45px;
+  font-family: var(--font--sub--title--3);
+  font-weight: 600;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.card-body button,
+.card-body-puja button {
+  background-color: var(--bg--botones);
+}
+
+.card-body button:hover,
+.card-body-puja button:hover {
+  background-color: #ffa928;
+}
+
+.card-body-termino button {
+  background-color: #9e9e9e !important;
+  opacity: 0.7;
+  cursor: not-allowed !important;
+  pointer-events: none;
+}
+
+.analisis {
+  margin-bottom: .5rem;
+  gap: 3rem;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+.card-body .apertura_cierre {
+  width: 100%;
+  text-align: center;
+  font-family: var(--font--sub--title);
+}
+
+.card-body .apertura_cierre .titulo_cierre,
+.card-body .apertura_cierre .titulo_apertura {
+  font-weight: 400;
+  font-size: 1.1rem;
+}
+
+.titulo_cierre,
+.titulo_apertura {
+  margin: 0;
+}
+
+.horasss {
+  color: #757575 !important;
+}
+
+.precio_con_incremento,
+.precio,
+.incremento_precio {
+  margin: 0.5rem 0;
+  text-align: center;
+}
+
+.grid_info_card {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.grid_info_card>div {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.grid_info_card .div5 {
+  grid-column: 1 / -1;
+  text-align: center;
+}
+
+
+
+.form_oferta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.contenedor_input_oferta {
+  width: 100%;
+}
+
+/* From Uiverse.io by Maximinodotpy */
+.inputGroup input:hover {
+  outline: none;
+  border-color: var(--color--sub);
+  background-color: initial;
+  box-shadow: none;
+}
+
+
+.inputGroup {
+  font-family: 'Segoe UI', sans-serif;
+  width: 100%;
+  position: relative;
+}
+
+.inputGroup div input {
+  font-size: 100%;
+  padding: 0.8em;
+  outline: none;
+  border: 2px solid rgb(200, 200, 200);
+  background-color: transparent;
+  border-radius: 20px;
+  width: 65%;
+  height: 45px;
+  text-align: center;
+}
+
+.card-body .restar,
+.card-body .sumar {
+  width: 30px;
+  height: 30px;
+  border-radius: .5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputGroup label {
+  font-size: 100%;
+  position: absolute;
+  left: 0;
+  padding: 0.7em 0.8rem;
+  margin-left: 0.5em;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  color: rgb(100, 100, 100);
+}
+
+.inputGroup :is(input:focus, input:valid)~label {
+  transform: translateY(-50%) scale(.9);
+  margin: 0em;
+  margin-left: 1.3em;
+  padding: 0.4em;
+  background-color: #fff;
+}
+
+.inputGroup :is(input:focus, input:valid) {
+  border-color: var(--color--sub);
+}
+
+.Incremento {
+  margin: 0;
+  font-family: var(--font--banner--semi);
+  font-weight: 600;
+  font-size: .8rem;
+  color: var(--bg--botones);
+  margin-top: .1rem;
+  text-align: center;
+}
+
+hr {
+  margin: 0.5rem 0;
+}
+
+.chat {
+  display: none;
+  border: 1px solid #ccc;
+  padding: 1rem 10px 10px 10px;
+  width: 100%;
+  height: 90%;
+  overflow: hidden;
+  position: relative;
+}
+
+.chat.active {
+  display: block;
+}
+
+.messages {
+  height: calc(90% - 80px);
+  /* Ajustar según la altura de .content_acciones y .progress */
+  overflow-y: scroll;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-family: var(--font--banner--semi);
+  margin-bottom: 1rem;
+}
+
+.messages li {
+  list-style: none;
+  width: 100%;
+  height: 35px;
+  background: var(--bg--botones);
+  padding: 0px 1rem;
+  display: flex;
+  align-items: center;
+  color: #ffff;
+  font-family: var(--font--banner--semi);
+  font-weight: 600;
+  border-radius: .5rem;
+  margin-top: .5rem;
+}
+
+.messages::-webkit-scrollbar {
+  display: none;
+}
+
+.contenedor_subastas_input {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* .mensaje {
+  position: relative;
+  width: 70%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #BD0000;
+  border-radius: 5rem;
+} */
+
+.input_mensaje {
+  border: 1px solid #BD0000;
+  background: none;
+  width: 95%;
+  height: 40px;
+  padding: 0 2em;
+  text-align: center;
+  margin-right: 1rem;
+  box-sizing: border-box;
+  border-radius: 1rem;
+}
+
+.input_mensaje:focus {
+  outline: none;
+}
+
+.mensaje button {
+  position: absolute;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2em;
+  color: #990000;
+}
+
+.mensaje button:hover {
+  color: #BD0000;
+}
+
+.mensaje .btn-minus {
+  left: 0;
+}
+
+.mensaje .btn-plus {
+  right: 0;
+}
+
+.btn_enviar {
+  background-color: #BD0000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 30%;
+  height: 40px;
+  font-family: var(--font--banner--semi);
+  font-size: .8rem;
+}
+
+.btn_enviar:hover {
+  background-color: #990000;
+}
+
+.progress-bar {
+  transition: width 0.1s linear;
+}
+
+/* Moises_Responsive tarjeta */
+/* Small devices (small cell phones, 360px and up) */
+@media only screen and (min-width: 360px) and (max-width: 740px) {
+  .card {
+    position: relative;
+    top: 5px;
+    width: 330px;
+    height: 735px;
+  }
+  .div5 {
+    height: 35px;
+    top: 10px;
+    font-size: 13px;
+  }
+}
+
+/* Small devices (small cell phones, 412px and up) */
+@media only screen and (min-width: 412px) and (max-width: 915px) {
+  .card {
+    position: relative;
+    top: 10px;
+    width: 385px;
+    height: 730px;
+  }
+  .div5 {
+    height: 45px;
+    font-size: 17px;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  .card {
+    position: relative;
+    top: 20px;
+    height: 715px;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  .card {
+    width: 380px;
+    position: sticky;
+    height: 720px;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) and (max-width: 1440px) {
+  .card {
+    margin-top: 1rem;
+    height: 715px;
+  }
+}

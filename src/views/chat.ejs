@@ -1,0 +1,137 @@
+<!DOCTYPE html> <!-- Declara el tipo de documento como HTML5 -->
+<html lang="en"> <!-- Inicio del documento HTML, con idioma inglés -->
+
+<head> <!-- Inicio de la sección de cabecera del documento -->
+  <meta charset="UTF-8"> <!-- Define la codificación de caracteres del documento como UTF-8 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configura la vista para dispositivos móviles -->
+  
+  <!-- BOOTSTRAP CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  
+  <!-- BOOTSTRAP JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+          integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  
+  <!-- CSS Personalizado -->
+  <link rel="stylesheet" href="/css/partials/style_chat_subastas.css"> 
+  
+  <!-- FontAwesome para iconos -->
+  <script src="https://kit.fontawesome.com/78137c0870.js" crossorigin="anonymous"></script> 
+  
+  <title>Document</title> <!-- Define el título de la página -->
+</head>
+
+<body> <!-- Inicio del cuerpo del documento -->
+  
+  <div class="card"> <!-- Comienza una tarjeta Bootstrap -->
+    
+    <div class="card-header"> <!-- Encabezado de la tarjeta -->
+      
+      <div class="fecha_subasta"> <!-- Contenedor para la fecha de subasta -->
+        <p>Inicia<br>hola</p> <!-- Texto de la fecha de subasta -->
+      </div>
+      
+      <div class="hora_subasta"> <!-- Contenedor para la hora de la subasta -->
+        <p>hola</p> <!-- Texto de la hora de la subasta -->
+      </div>
+      
+    </div> <!-- Fin del encabezado de la tarjeta -->
+    
+    <div class="card-body active" id="body_card"> <!-- Cuerpo de la tarjeta con clase 'active' y ID 'body_card' -->
+      
+      <div class="analisis d-flex justify-content-center"> <!-- Contenedor de análisis con flexbox centrado -->
+        
+        <div class="vistas"> <!-- Contenedor para vistas -->
+          <p><span>VISTAS</span><span>hola</span></p> <!-- Texto de vistas -->
+        </div>
+        
+        <div class="megusta"> <!-- Contenedor para 'me gusta' -->
+          <p><span>LIKES</span><span>hola</span></p> <!-- Texto de 'me gusta' -->
+        </div>
+        
+      </div> <!-- Fin del contenedor de análisis -->
+      
+      <h2>¡Oportunidad para el que sabe!</h2> <!-- Título principal -->
+      
+      <p class="precio_con_incremento">
+        <span>Oferta Actual: </span><span>US$ hola</span> <!-- Precio con incremento -->
+      </p>
+      
+      <hr> <!-- Línea horizontal -->
+      
+      <p class="precio d-flex align-items-center justify-content-center">
+        <i class="bi bi-cash-coin d-flex"></i> <!-- Icono de moneda -->
+        <span class="precio_base">Precio base:</span> <!-- Texto de precio base -->
+        <span class="price">hola</span> <!-- Valor del precio -->
+      </p>
+      
+      <button id="participar">PARTICIPA</button> <!-- Botón para participar -->
+      
+      <p id="estado-subasta" style="display: none;"></p> <!-- Estado de la subasta, inicialmente oculto -->
+      
+      <p class="incremento_precio">
+        Incremento <span>US$100.00</span> <!-- Incremento del precio -->
+      </p>
+      
+      <div class="grid_info_card"> <!-- Contenedor de información en formato de cuadrícula -->
+        
+        <div class="div1"> <!-- Primera columna -->
+          <p>Cuota mínima de participantes: 2</p> <!-- Información de participantes -->
+        </div>
+        
+        <div class="div2"> <!-- Segunda columna -->
+          <p>Con Precio Reserva</p> <!-- Información de precio reserva -->
+        </div>
+        
+        <div class="div3"> <!-- Tercera columna -->
+          <p>Opción a Visitas previa cita</p> <!-- Información de visitas -->
+        </div>
+        
+        <div class="div4"> <!-- Cuarta columna -->
+          <p>Sin Comisión</p> <!-- Información de comisiones -->
+        </div>
+        
+      </div> <!-- Fin del contenedor de información en cuadrícula -->
+      
+    </div> <!-- Fin del cuerpo de la tarjeta -->
+    
+    <!-- Chat de pujas -->
+    <div id="chat" class="chat active"> <!-- Contenedor del chat con clase 'active' -->
+      
+      <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar" id="progressBar" style="width: 100%"></div> <!-- Barra de progreso -->
+      </div>
+      
+      <div class="prorroga_esperando"></div> <!-- Contenedor para prórroga -->
+      
+      <div id="messages" class="messages"> <!-- Contenedor de mensajes del chat -->
+      </div>
+      
+      <div class="contenedor_subastas_input"> <!-- Contenedor para entradas de subasta -->
+        
+        <!-- Input para la última puja +100 (no editable) -->
+        <div class="content_acciones_ d-flex justify-content-center mb-3">
+          <div class="mensaje">
+            <input type="text" id="lastBidInput" placeholder="Última Puja" class="input_mensaje" disabled /> <!-- Campo no editable -->
+          </div>
+          <button id="sendLastBidButton" class="btn_enviar">Enviar</button> <!-- Botón para enviar -->
+        </div>
+        
+        <!-- Input para puja personalizada (editable) -->
+        <div class="content_acciones d-flex justify-content-center">
+          <div class="mensaje">
+            <input type="text" id="customBidInput" placeholder="Ingresa tu oferta" class="input_mensaje" /> <!-- Campo editable -->
+          </div>
+          <button id="sendCustomBidButton" class="btn_enviar">Enviar Puja</button> <!-- Botón para enviar -->
+        </div>
+        
+      </div> <!-- Fin del contenedor para entradas de subasta -->
+      
+    </div> <!-- Fin del contenedor del chat -->
+    
+  </div> <!-- Fin de la tarjeta -->
+
+</body> <!-- Fin del cuerpo del documento -->
+
+</html> <!-- Fin del documento HTML -->

@@ -1,0 +1,117 @@
+<!DOCTYPE html> <!-- Define el tipo de documento como HTML5 -->
+<html lang="en">
+<!-- Establece el idioma de la página como inglés -->
+
+<head>
+  <meta charset="UTF-8"> <!-- Establece la codificación de caracteres a UTF-8 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Configura la vista para dispositivos móviles -->
+
+  <!-- FAVICON -->
+  <link rel="shortcut icon" href="/img/footer_logo.svg" type="image/x-icon">
+  <!-- Establece un favicon para la página -->
+
+  <!-- BOOTSTRAP -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <!-- Enlaza Bootstrap para estilos -->
+
+  <!-- BOOSTRAP SCRIPT -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> <!-- Enlaza scripts de Bootstrap -->
+
+  <!-- BOOTSSTRAP ICON -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Enlaza iconos de Bootstrap -->
+
+  <!-- ESTILOS -->
+  <link rel="stylesheet" href="/css/style_politicas_cookies.css">
+  <!-- Enlaza la hoja de estilos para la política de cookies -->
+
+  <!-- ESTILOS DE COMPONENTES -->
+  <link rel="stylesheet" href="/css/partials/styles_header.css"> <!-- Enlaza estilos para el encabezado -->
+  <link rel="stylesheet" href="/css/partials/styles_footer.css"> <!-- Enlaza estilos para el pie de página -->
+  <link rel="stylesheet" href="/css/partials/styles_whatsapp_flot.css"> <!-- Enlaza estilos para WhatsApp flotante -->
+  <link rel="stylesheet" href="/css/partials/styles_search.css"> <!-- Enlaza estilos para la búsqueda -->
+
+  <!-- ICONS -->
+  <script src="https://kit.fontawesome.com/78137c0870.js" crossorigin="anonymous"></script>
+  <!-- Enlaza Font Awesome para iconos -->
+
+  <title>Subasta Sur || Políticas de cookies</title> <!-- Título de la pestaña del navegador -->
+</head>
+
+<body>
+
+  <%- include('partials/header') %>
+  <!-- Incluye el encabezado de la página -->
+
+  <section class="cookies">
+    <!-- Sección que detalla la política de cookies -->
+    <div class="contenedor_cookies">
+      <!-- Contenedor para el contenido de la política -->
+      <h1>
+        <span><img src="/img/vecteezy_confused-man-with-question-mark-concept-flat-illustration_.jpg" alt=""></span> <!-- Imagen relacionada con la política de cookies -->
+        <span>Política de Cookies</span> <!-- Título de la sección -->
+      </h1>
+      <p>
+        Un cookie es un pequeño archivo de texto no ejecutable que es almacenado en la computadora del
+        usuario cuando él
+        navega por el Portal Subastasur.
+        <!-- Definición de cookies -->
+        El Portal Subastasur utiliza dos tipos de cookies: (i) los “cookies de sesión”
+        que retienen información durante la visita del usuario, por ejemplo, si el usuario está rellenando
+        más de un
+        formulario, solamente tiene que digitar la información una vez, y (ii) los "cookies persistentes"
+        que permanecen
+        en la computadora del usuario después de la navegación y auxilian el monitoreo de las secciones del
+        Portal
+        visitadas por el Usuario para mejorar los servicios brindados y la experiencia del usuario.
+        <!-- Descripción de los tipos de cookies -->
+        Las cookies no poseen ninguna información personal o confidencial sobre los usuarios. El usuario
+        puede optar por
+        aceptar o rechazar las cookies. La mayoría de los navegadores web acepta cookies automáticamente,
+        pero el
+        usuario podrá modificar la configuración de su navegador para rechazar cookies. Entretanto, eso
+        podrá impedir el
+        usuario de obtener la mejor experiencia de navegación en el Portal.
+        <!-- Información sobre la aceptación de cookies -->
+        El Portal Subastasur podrá alterar la Política de Cookies en cualquier momento. Esas alteraciones
+        serán
+        publicadas en el Portal Subastasur. Para aclarar sus dudas, por favor, contacte el Portal Subastasur
+        a través de
+        la dirección electrónica.
+        <!-- Notificación sobre cambios en la política -->
+      </p>
+    </div>
+  </section>
+
+  <!-- WHATSAPP FLOTANTE -->
+  <%- include('partials/whatsapp_flot') %>
+  <!-- Incluye el WhatsApp flotante -->
+
+  <%- include('partials/footer') %>
+  <!-- Incluye el pie de página -->
+
+  <!-- SCRIPTS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => { // Espera a que el contenido del DOM esté cargado
+      const botonActivar = document.getElementById("btn_menu"); // Obtiene el botón para activar el menú
+      const botonCerrar = document.getElementById("btn_close"); // Obtiene el botón para cerrar el menú
+      const contenederMenu = document.getElementsByClassName("menu_desplegable")[0]; // Obtiene el contenedor del menú desplegable
+
+      botonActivar.addEventListener('click', () => { // Agrega un evento al botón de activar
+        contenederMenu.classList.add("active"); // Agrega la clase "active" al menú para mostrarlo
+      });
+
+      botonCerrar.addEventListener('click', () => { // Agrega un evento al botón de cerrar
+        contenederMenu.classList.remove("active"); // Remueve la clase "active" al menú para ocultarlo
+      });
+    });
+  </script>
+
+  <script src="/js/partials/script_header.js"></script> <!-- Enlaza el script del encabezado -->
+  <script src="/js/partials/script_whatsapp_flot.js"></script>
+  <!-- Enlaza el script para WhatsApp flotante -->
+
+</body>
+
+</html>

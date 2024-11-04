@@ -1,0 +1,526 @@
+@import url("https://fonts.googleapis.com/css2?family=BioRhyme:wght@200..800&family=Sedan:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Scope+One&display=swap");
+
+:root {
+  --font--banner--semi: url("/fonts/segoeuithis.ttf");
+  --font--banner--bool: url("/fonts/segoeuithibd.ttf");
+  --font--parrafo: "Space Mono";
+  --font--header: "Sedan";
+  --font--testimoni: "Modern Antiqua";
+  --font--about: "BioRhyme";
+  --font--cont: "Scope One";
+  --color--label: #989898;
+  --color--activo--nav: #c72c3b;
+  /* Color rojo activo */
+  --color--inactivo--nav: #b62a46;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.contenedor {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imagen {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  position: relative;
+  left: 8%;
+}
+
+.regreso {
+  margin-left: 3rem;
+}
+
+.imagen_fondo {
+  height: 90%;
+}
+
+.fondo {
+  width: 100%;
+  height: 100%;
+  background-image: url("/img/color_fondo_login.svg");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+}
+
+.content_form h2 {
+  font-family: var(--font--about);
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+}
+
+.content_form form {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content_form form label {
+  font-size: 0.9rem;
+  font-family: var(--font--header);
+  color: var(--color--label);
+  margin-bottom: 0.3rem;
+}
+
+.content_form form input {
+  width: 100%;
+  height: 45px;
+  border-radius: 10px;
+  border: none;
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+.content_form form input:focus {
+  outline: none;
+}
+
+.content_form form input::placeholder {
+  color: #acacac;
+}
+
+.content_form form button {
+  width: 100%;
+  height: 40px;
+  background-color: #ed5544;
+  border-radius: 20px;
+  border: none;
+  color: #fff;
+  font-family: var(--font--testimoni);
+  margin-top: 1rem;
+}
+
+.content_form form .registrar {
+  width: 100%;
+  height: 40px;
+  background-color: #ed5544;
+  border-radius: 20px;
+  border: none;
+  color: #fff;
+  font-family: var(--font--testimoni);
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.content_form form .regresar {
+  display: none;
+}
+
+.subastar {
+  margin-top: 0.5rem;
+  text-align: center;
+  color: #ed5544;
+  font-family: var(--font--about);
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: ease-in-out 0.3s;
+}
+
+.subastar span {
+  text-decoration: underline;
+  color: #000;
+  transition: ease-in-out 0.3s;
+}
+
+.subastar:hover {
+  color: var(--color--sub);
+}
+
+.subastar:hover span {
+  color: #ed5544;
+}
+
+.content_contra {
+  position: relative;
+}
+
+.content_contra {
+  position: relative;
+  /* Make the container relative */
+  display: flex;
+  flex-direction: column;
+}
+
+.input-container {
+  position: relative;
+  text-align: end;
+  /* Make this container relative for positioning the button inside it */
+}
+
+#contraseña {
+  width: 100%;
+  /* Make sure the input takes the full width */
+  padding-right: 2.5rem;
+  /* Add padding to make space for the button */
+  margin-bottom: 0;
+}
+
+.mostarC {
+  width: auto !important;
+  height: auto !important;
+  position: absolute;
+  right: 1.5rem;
+  top: 40%;
+  transform: translateY(-50%);
+  border: none !important;
+  background: none !important;
+  cursor: pointer;
+  padding: 0 !important;
+  color: #ed5544 !important;
+  margin: 0 !important;
+}
+
+.mostarC i {
+  font-size: 1.1rem;
+}
+
+.olvide{
+  font-size: .9rem;
+  font-family: var(--font--banner--bool);
+  color: var(--color--inactivo--nav);
+  text-decoration: none;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+.olvide:hover{
+  text-decoration: underline;
+}
+
+
+-------------------------
+.swal2-container {
+  width: 300px;
+  height: 200px;
+  background-color: #851414;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+.swal2-icon {
+  font-size: 12px; 
+}
+.my-custom-list-item {
+  list-style: none;
+  margin-bottom: 10px;
+  font-family: var(--font--banner--bool);
+  text-align: left;
+  font-size: 20px;
+}
+.swal2-title {
+  font-size: 1.5rem;
+  color: #333;
+  /*font-family: var(--font--testimoni);*/
+  /*font-family: var(--font--about);*/
+  /*font-family: var(--font--header);*/
+  font-family: var(--font--banner--bool);
+  
+}
+.contactos {
+  margin-top: 11px;
+}
+/*Boton Contactanos_aqui*/
+.botoncito {
+  position: relative;
+  padding: 10px 20px;
+  border-radius: 7px;
+  border: 1px solid rgb(196, 142, 25);
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 200;
+  letter-spacing: 2px;
+  background: transparent;
+  color: #fff;
+  overflow: hidden;
+  box-shadow: 0 0 0 0 transparent;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+
+.botoncito:hover {
+  background: rgb(218, 149, 21);
+  box-shadow: 0 0 30px 5px rgba(205, 108, 22, 0.815);
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+.botoncito:hover::before {
+  -webkit-animation: sh02 0.5s 0s linear;
+  -moz-animation: sh02 0.5s 0s linear;
+  animation: sh02 0.5s 0s linear;
+}
+
+.botoncito::before {
+  content: '';
+  display: block;
+  width: 0px;
+  height: 86%;
+  position: absolute;
+  top: 7%;
+  left: 0%;
+  opacity: 0;
+  background: #fff;
+  box-shadow: 0 0 50px 30px #fff;
+  -webkit-transform: skewX(-20deg);
+  -moz-transform: skewX(-20deg);
+  -ms-transform: skewX(-20deg);
+  -o-transform: skewX(-20deg);
+  transform: skewX(-20deg);
+}
+
+.contactos {
+  width: 50%;
+  text-align: center;
+  margin-top: 1rem;
+  font-family: var(--font--about);
+}
+
+.botonSoporte {
+  background-color: #ed5544;
+  width: 40%;
+  height: 40PX;
+  color: #fff;
+  border-radius: 20px;
+  font-family: var(--font--testimoni);
+  font-size: 0.9rem;
+  margin-top: .5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+
+
+@keyframes sh02 {
+  from {
+    opacity: 0;
+    left: 0%;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    left: 100%;
+  }
+}
+
+.botoncito:active {
+  box-shadow: 0 0 0 0 transparent;
+  -webkit-transition: box-shadow 0.2s ease-in;
+  -moz-transition: box-shadow 0.2s ease-in;
+  transition: box-shadow 0.2s ease-in;
+}
+
+
+/* Animación de deslizamiento desde la izquierda */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+}
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Aplicar animación a la clase .slideInLeft */
+.slideInLeft {
+  animation: slideInLeft 0.5s ease forwards;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .imagen {
+    display: none;
+  }
+
+  .imagen_fondo {
+    opacity: 0.8;
+  }
+
+  .content_form form {
+    width: 95%;
+  }
+
+  .content_form {
+    width: 80%;
+  }
+
+  .content_form form label {
+    color: #000;
+  }
+
+  .content_form form .regresar {
+    display: block;
+    width: 100%;
+    height: 40px;
+    background-color: #ed5544;
+    border-radius: 20px;
+    border: none;
+    color: #fff;
+    font-family: var(--font--testimoni);
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .g-recaptcha {
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .contactos{
+    width: 70%;
+    font-size: .9rem;
+    margin-top: .5rem;
+    margin-bottom: 0;
+  }
+
+  .botonSoporte{
+    width: 70%;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  .imagen {
+    display: none;
+  }
+
+  .content_form {
+    width: 100%;
+    height: 100%;
+  }
+
+  .content_form h2 {
+    color: #000;
+  }
+
+  .content_form form label {
+    color: #ffff;
+  }
+
+  .subastar {
+    color: #ffff;
+    font-size: 0.9rem;
+
+  }
+  .content_form form label {
+    color: #000;
+  }
+  .subastar span {
+    color: #000;
+  }
+
+  .content_form form .regresar {
+    display: block;
+    width: 100%;
+    height: 40px;
+    background-color: #ed5544;
+    border-radius: 20px;
+    border: none;
+    color: #fff;
+    font-family: var(--font--testimoni);
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+  }
+  .g-recaptcha {
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  .content_form form {
+    width: 70%;
+  }
+
+  .g-recaptcha {
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .contactos{
+    font-size: .8rem;
+    margin-top: .5rem;
+    margin-bottom: 0rem;
+  }
+
+  .botonSoporte{
+    width: 60%;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) and (max-width: 1440px) {
+  .content_form form {
+    width: 60%;
+  }
+
+  .g-recaptcha {
+    /* font-size: .9rem;
+      margin-top: 1rem; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+  }
+}

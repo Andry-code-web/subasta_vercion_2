@@ -1,0 +1,7 @@
+.whatsapp_flotante {
+    position: fixed; /* Fija el ícono en la ventana */
+    bottom: 2rem; /* Inicialmente a 2rem de la parte inferior */
+    right: 2rem;
+    transition: bottom .1s ease; /* Suave transición cuando cambia la posición */
+}
+

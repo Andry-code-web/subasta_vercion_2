@@ -1,0 +1,504 @@
+@import url("https://fonts.googleapis.com/css2?family=BioRhyme:wght@200..800&family=Sedan:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Scope+One&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+  --font--banner--semi: "Barlow";
+  --font--banner--bool: "Roboto";
+  --font--parrafo: "Space Mono";
+  --font--header: "Sedan";
+  --font--testimoni: "Modern Antiqua";
+  --font--about: "BioRhyme";
+  --font--cont: "Scope One";
+  --font--header--v2: "Poppins";
+  --bg--botones: #d30000;
+  --color--sub: #d30000;
+}
+
+/* HEADER */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 95px;
+    background-color: #fff;
+    box-shadow: 0px 2px 10px #000;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    z-index: 100;
+    font-family: var(--font--header--v2) !important;
+}
+
+.menu_icon {
+    display: none;
+}
+
+.logo {
+    width: 12%;
+}
+
+.logo img {
+    width: 100%;
+}
+
+.session p {
+    color: #fff;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+.ingresar {
+    padding: .1rem .6rem .2rem .6rem !important;
+    background-color: #B20000;
+    border-radius: 5px;
+}
+
+.ingresar:hover {
+    background-color: #d30000;
+}
+
+.ingresar span i {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.ingresar span a {
+    text-decoration: none;
+    font-size: 1rem;
+    font-family: var(--font--parrafo);
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.5s;
+    font-weight: 600;
+}
+
+header nav {
+    display: flex;
+    gap: 2rem;
+}
+
+header nav a {
+    font-size: 1.1rem;
+    font-family: var(--font--header--v2);
+    font-weight: 500;
+    text-decoration: none;
+    color: #000;
+    transition: all 0.3s;
+}
+
+header nav a:hover {
+    transform: scale(1.1);
+}
+
+.session {
+    padding: .1rem .6rem .2rem .6rem !important;
+    background-color: #B20000;
+    border-radius: 5px;
+}
+
+header .session p .btn_menu {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+header .session p .btn_menu i {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.menu_desplegable {
+    min-width: 300px;
+    height: 100vh;
+    position: fixed;
+    right: 0;
+    top: 0;
+    background-color: #7a0000;
+    padding: 1rem;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.5s,
+        opacity 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53),
+        transform 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    transform: translateX(100%);
+    z-index: 100;
+}
+
+.menu_desplegable.active {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.perfil_user {
+    color: #fff;
+}
+
+.menu_desplegable div ul {
+    list-style: none;
+}
+
+.menu_desplegable div ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-family: var(--font--banner--bool);
+    font-weight: 400;
+    transition: ease-in .3s;
+}
+
+.menu_desplegable div ul li a:hover {
+    font-size: 1.1rem;
+    border-bottom: 2px solid #fff;
+}
+
+.cabezera_menu h3 {
+    color: #fff;
+}
+
+.cabezera_menu button {
+    background: none;
+    border: none;
+    transition: ease 0.3s;
+    color: #fff;
+}
+
+.cabezera_menu button:hover {
+    font-size: 1.2rem;
+}
+
+.navbar-expand-lg .navbar-nav{
+    gap: 1rem;
+}
+
+
+.navbar-nav{
+    color: #000 !important;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+    /* HEADER */
+    header {
+        height: 53px;
+        box-shadow: none;
+    }
+
+    .menu_icon {
+        display: block;
+    }
+
+    .menu_activar {
+        background: none;
+        border: none;
+    }
+
+    .menu_activar i {
+        font-size: 1.3rem ;
+        color: #000;
+    }
+
+    .menu_navegador {
+        position: absolute;
+        top: 0;
+        left: -300px;
+        width: 300px;
+        height: 100vh;
+        transition: ease-in .3s;
+    }
+
+    .menu_navegador.active {
+        position: absolute;
+        top: 0rem;
+        left: 0px;
+        width: 100%;
+        height: 100vh;
+        background-color: #a30000db;
+        transition: ease-out .3s;
+    }
+
+    .cerrar_contet {
+        text-align: end;
+        margin-top: .9rem;
+        margin-right: .7rem;
+        margin-bottom: 2rem;
+    }
+
+    .menu_cerrar {
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .menu_cerrar i {
+        font-size: 2.5rem;
+        color: #fff;
+    }
+
+    .navegador {
+        list-style: none;
+        text-align: center;
+        padding: 0;
+    }
+
+    .navegador li {
+        margin-bottom: 1.5rem;
+        margin-left: 1rem;
+    }
+
+    .item_buscador{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navegador li a {
+        font-family: var(--font--banner--semi);
+        font-size: 1.2rem;
+        font-weight: 500;
+        text-decoration: none;
+        color: #fff;
+    }
+
+    .ceparador{
+        color: #fff;
+        height: 1.5px;
+    }
+
+    .logo {
+        width: 35%;
+    }
+
+    header nav {
+        display: none;
+    }
+
+    .ingresar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: .5rem;
+    }
+
+    .ingresar span i {
+        font-size: 1.2rem;
+    }
+
+    .ingresar span a {
+        font-size: .7rem;
+    }
+
+    .session{
+        padding: 0rem .2rem 0rem .4rem !important;
+    }
+
+    .session p span{
+        font-size: .5rem;
+        font-weight: 600;
+    }
+
+    header .session p .btn_menu i {
+        font-size: 1.1rem;
+    }
+
+    .navbar{
+        display: none !important;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 768) {
+     
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+
+    /* HEADER */
+    header {
+        height: 75px;
+    }
+
+    .menu_icon {
+        display: block;
+    }
+
+    .menu_activar {
+        background: none;
+        border: none;
+    }
+
+    .menu_activar i {
+        font-size: 1.5rem;
+        color: #000;
+    }
+
+    .menu_navegador {
+        position: absolute;
+        top: 0;
+        left: -300px;
+        width: 300px;
+        height: 100vh;
+        transition: ease-in .3s;
+    }
+
+    .menu_navegador.active {
+        position: absolute;
+        top: 0rem;
+        left: 0px;
+        width: 300px;
+        height: 100vh;
+        background-color: #a30000db;
+        transition: ease-out .3s;
+    }
+
+    .cerrar_contet {
+        text-align: end;
+        margin-top: .9rem;
+        margin-right: .7rem;
+        margin-bottom: 2rem;
+    }
+
+    .menu_cerrar {
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .menu_cerrar i {
+        font-size: 2.5rem;
+        color: #fff;
+    }
+
+    .navegador {
+        list-style: none;
+    }
+
+    .navegador li {
+        margin-bottom: 1.5rem;
+        margin-left: 1rem;
+    }
+
+    .item_buscador{
+        margin-left: 0 !important;
+    }
+
+    .navegador li a {
+        font-family: var(--font--banner--semi);
+        font-size: 1.2rem;
+        font-weight: 500;
+        text-decoration: none;
+        color: #fff;
+    }
+
+
+    .logo {
+        width: 25%;
+    }
+
+    header nav {
+        display: none;
+    }
+
+    .ingresar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: .5rem;
+    }
+
+    .ingresar span i {
+        font-size: 1.2rem;
+    }
+
+    .ingresar span a {
+        font-size: .7rem;
+
+    }
+
+    .navbar{
+        display: none !important;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+
+    /* HEADER */
+    header {
+        height: 60px;
+        box-shadow: 0px 1px 10px #ccc;
+    }
+
+    .session p {
+        font-size: .5rem;
+    }
+
+    .session p span {
+        font-size: .8rem;
+    }
+
+    .ingresar span i {
+        font-size: 1.1rem;
+        font-weight: 300;
+    }
+
+    .ingresar span a {
+        font-size: .7rem;
+    }
+
+    header nav a {
+        font-size: .8rem;
+    }
+
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) and (max-width: 1440px) {
+
+    /* HEADER */
+    header {
+        height: 70px;
+        box-shadow: 0px 1px 10px #ccc;
+    }
+
+    .logo {
+        width: 12%;
+    }
+
+    .session p {
+        font-size: .7rem;
+    }
+
+    .session p span {
+        font-size: .9rem;
+    }
+
+    .ingresar {
+        padding: .05rem .4rem .1rem .4rem;
+    }
+
+    .ingresar span i {
+        font-size: 1.2rem;
+        font-weight: 400;
+    }
+
+    .ingresar span a {
+        font-size: .9rem;
+    }
+
+    header nav a {
+        font-size: .8rem;
+        font-family: var(--font--header--v2);
+    }
+
+}

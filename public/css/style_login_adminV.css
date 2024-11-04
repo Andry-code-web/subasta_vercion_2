@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=BioRhyme:wght@200..800&family=Sedan:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Scope+One&display=swap');
+
+:root {
+    --font--banner--semi: url("/fonts/segoeuithibd.ttf");
+    --font--banner--bool: url("/fonts/segoeuithibd.ttf");
+    --font--parrafo: "Space Mono";
+    --font--header: "Sedan";
+    --font--testimoni: "Modern Antiqua";
+    --font--about: "BioRhyme";
+    --font--cont: "Scope One";
+    --bg--botones: #A29060;
+    --color--sub: #C5AC75;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.content {
+    width: 100%;
+    height: 100vh;
+    background-image: url("/img/fondo_admiV.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.content .content_form {
+    width: 30%;
+    height: auto;
+    padding: 1rem;
+    position: absolute;
+    top: 50%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+}
+
+.content .content_form h1 {
+    font-family: var(--font--parrafo);
+    font-weight: 600;
+    letter-spacing: -.1rem;
+    font-size: 3rem;
+}
+
+.content_form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content_form form .inputs {
+    width: 70%;
+}
+
+.content .content_form h1 .dos {
+    margin-left: -1.5rem;
+    color: #d10000;
+}
+
+.content .content_form h2 {
+    font-family: var(--font--parrafo);
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+.content_form form input[name="usuario"] {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 50px;
+    padding: 0 1rem;
+    box-shadow: 3px 5px 15px rgba(63, 63, 63, 0.411);
+}
+
+.content_form form input[name="usuario"]:focus {
+    outline: none;
+}
+
+.content_form form .input_contra {
+    position: relative;
+}
+
+.content_form form .input_contra .password-input {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 50px;
+    padding: 0 1rem;
+    padding-right: 40px;
+    /* espacio para el botón */
+    box-shadow: 3px 5px 15px rgba(63, 63, 63, 0.411);
+}
+
+.content_form form .input_contra .password-input:focus {
+    outline: none;
+}
+
+.content_form form .input_contra .toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 1.2rem;
+}
+
+.content_form form .input_contra .toggle-password:focus {
+    outline: none;
+}
+
+.content_form form .inputs a {
+    width: 100%;
+    color: #8a8a8a;
+    font-size: .9rem;
+    font-weight: 500;
+    transition: ease-in .2s;
+    text-align: end;
+    margin-top: .5rem;
+    margin-bottom: 1rem;
+}
+
+.content_form form .inputs a:hover {
+    color: #b3b3b3;
+}
+
+.content_form form .btn_enviar {
+    width: 200px;
+    height: 35px;
+    border: none;
+    background-color: #d10000;
+    color: white;
+    font-weight: 600;
+    border-radius: 50px;
+    box-shadow: 1px 3px 5px rgba(63, 63, 63, 0.411);
+}
+
+a {
+    text-decoration: none;
+}
+
+.btn_registro{
+    width: 200px;
+    height: 35px;
+    border: none;
+    background-color: #d10000;
+    color: white;
+    font-weight: 600;
+    border-radius: 50px;
+    box-shadow: 1px 3px 5px rgba(63, 63, 63, 0.411);
+}
+
+.regresar{
+    margin-top: .5rem;
+    font-weight: 400;
+    cursor: pointer;
+}
+  
+.regresar span a{
+    border: none;
+    font-weight: 500;
+    color: #d10000;
+    text-decoration: underline;
+}

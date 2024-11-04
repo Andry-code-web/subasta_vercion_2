@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <!-- ICONS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/css/style_adminV.css">
+
+    <style>
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 350px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .title {
+            font-size: 28px;
+            color: royalblue;
+            font-weight: 600;
+            letter-spacing: -1px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding-left: 30px;
+        }
+
+        .title::before,
+        .title::after {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            left: 0px;
+            background-color: royalblue;
+        }
+
+        .title::before {
+            width: 18px;
+            height: 18px;
+            background-color: royalblue;
+        }
+
+        .title::after {
+            width: 18px;
+            height: 18px;
+            animation: pulse 1s linear infinite;
+        }
+
+        .message,
+        .signin {
+            color: rgba(88, 87, 87, 0.822);
+            font-size: 14px;
+        }
+
+        .message {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .signin {
+            text-align: center;
+        }
+
+        .signin a {
+            color: royalblue;
+            font-weight: 600;
+        }
+
+        .signin a:hover {
+            text-decoration: underline royalblue;
+        }
+
+        .flex {
+            display: flex;
+            width: 100%;
+            gap: 6px;
+        }
+
+        .form label {
+            position: relative;
+        }
+
+        .form label .input {
+            width: 100%;
+            padding: 10px 10px 20px 10px;
+            outline: 0;
+            border: 1px solid rgba(105, 105, 105, 0.397);
+            border-radius: 10px;
+        }
+
+        .form label .input+span {
+            position: absolute;
+            left: 10px;
+            top: 15px;
+            color: grey;
+            font-size: 0.9em;
+            cursor: text;
+            transition: 0.3s ease;
+        }
+
+        .form label .input:placeholder-shown+span {
+            top: 15px;
+            font-size: 0.9em;
+        }
+
+        .form label .input:focus+span,
+        .form label .input:valid+span {
+            top: 0px;
+            font-size: 0.7em;
+            font-weight: 600;
+        }
+
+        .form label .input:valid+span {
+            color: green;
+        }
+
+        .submit {
+            border: none;
+            outline: none;
+            background-color: royalblue;
+            padding: 10px;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 16px;
+            transform: .3s ease;
+        }
+
+        .submit:hover {
+            background-color: rgb(56, 90, 194);
+            cursor: pointer;
+        }
+
+        @keyframes pulse {
+            from {
+                transform: scale(0.9);
+                opacity: 1;
+            }
+
+            to {
+                transform: scale(1.8);
+                opacity: 0;
+            }
+        }
+    </style>
+
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="d-flex">
+        <!-- Sidebar del administrador -->
+        <div class="sidebar p-3">
+            <div>
+                <!-- Logo y nombre del dashboard -->
+                <div class="mb-4 logo">
+                    <div class="d-flex align-items-center justify-content-center logo_title">
+                        <img src="/img/footer_logo.svg" alt="">
+                        <h2 class="text-white">Subastas</h2>
+                    </div>
+                    <p class="text-white">Admin General</p>
+                </div>
+                <!-- Menú de navegación -->
+                <ul class="nav flex-column">
+                    <!-- Opciones del menú -->
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
+                    </li>
+                    <!-- Otras opciones del menú -->
+                </ul>
+            </div>
+            <!-- Perfil del usuario -->
+            <div class="user-profile mt-auto d-flex align-items-center flex-column">
+                <div class="d-flex">
+                    <img src="https://placehold.co/40x40" alt="Profile Picture" class="rounded-circle me-2">
+                    <div>
+                        <strong>Admin General</strong><br>
+                        <small>
+
+                        </small>
+                    </div>
+                </div>
+                <a href="/admin/logout" class="btn btn-danger btn-sm ms-2">Cerrar Sesión</a>
+                <!-- Botón de cierre de sesión -->
+            </div>
+        </div>
+        <!-- Contenido principal -->
+        <div class="main-content">
+            <!-- Encabezado y barra de navegación -->
+            <div class="d-flex justify-content-between mb-4">
+                <h1>Dashboard - Admin General</h1>
+                <!-- Opciones de perfil y configuración -->
+                <div class="d-flex align-items-center">
+                    <span class="me-3">
+
+                    </span>
+                    <img src="https://placehold.co/40x40" alt="Profile" class="rounded-circle">
+                </div>
+            </div>
+            <!-- Sección de estadísticas -->
+            <div class="w-100 d-flex justify-content-center align-items-center">
+                <form class="form" action="/admin/editarUsuario/<%= <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <!-- ICONS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/css/style_adminV.css">
+
+    <style>
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 350px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .title {
+            font-size: 28px;
+            color: royalblue;
+            font-weight: 600;
+            letter-spacing: -1px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding-left: 30px;
+        }
+
+        .title::before,
+        .title::after {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            left: 0px;
+            background-color: royalblue;
+        }
+
+        .title::before {
+            width: 18px;
+            height: 18px;
+            background-color: royalblue;
+        }
+
+        .title::after {
+            width: 18px;
+            height: 18px;
+            animation: pulse 1s linear infinite;
+        }
+
+        .message,
+        .signin {
+            color: rgba(88, 87, 87, 0.822);
+            font-size: 14px;
+        }
+
+        .message {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .signin {
+            text-align: center;
+        }
+
+        .signin a {
+            color: royalblue;
+            font-weight: 600;
+        }
+
+        .signin a:hover {
+            text-decoration: underline royalblue;
+        }
+
+        .flex {
+            display: flex;
+            width: 100%;
+            gap: 6px;
+        }
+
+        .form label {
+            position: relative;
+        }
+
+        .form label .input {
+            width: 100%;
+            padding: 10px 10px 20px 10px;
+            outline: 0;
+            border: 1px solid rgba(105, 105, 105, 0.397);
+            border-radius: 10px;
+        }
+
+        .form label .input+span {
+            position: absolute;
+            left: 10px;
+            top: 15px;
+            color: grey;
+            font-size: 0.9em;
+            cursor: text;
+            transition: 0.3s ease;
+        }
+
+        .form label .input:placeholder-shown+span {
+            top: 15px;
+            font-size: 0.9em;
+        }
+
+        .form label .input:focus+span,
+        .form label .input:valid+span {
+            top: 0px;
+            font-size: 0.7em;
+            font-weight: 600;
+        }
+
+        .form label .input:valid+span {
+            color: green;
+        }
+
+        .submit {
+            border: none;
+            outline: none;
+            background-color: royalblue;
+            padding: 10px;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 16px;
+            transform: .3s ease;
+        }
+
+        .submit:hover {
+            background-color: rgb(56, 90, 194);
+            cursor: pointer;
+        }
+
+        @keyframes pulse {
+            from {
+                transform: scale(0.9);
+                opacity: 1;
+            }
+
+            to {
+                transform: scale(1.8);
+                opacity: 0;
+            }
+        }
+    </style>
+
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="d-flex">
+        <!-- Sidebar del administrador -->
+        <div class="sidebar p-3">
+            <div>
+                <!-- Logo y nombre del dashboard -->
+                <div class="mb-4 logo">
+                    <div class="d-flex align-items-center justify-content-center logo_title">
+                        <img src="/img/footer_logo.svg" alt="">
+                        <h2 class="text-white">Subastas</h2>
+                    </div>
+                    <p class="text-white">Admin General</p>
+                </div>
+                <!-- Menú de navegación -->
+                <ul class="nav flex-column">
+                    <!-- Opciones del menú -->
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
+                    </li>
+                    <!-- Otras opciones del menú -->
+                </ul>
+            </div>
+            <!-- Perfil del usuario -->
+            <div class="user-profile mt-auto d-flex align-items-center flex-column">
+                <div class="d-flex">
+                    <img src="https://placehold.co/40x40" alt="Profile Picture" class="rounded-circle me-2">
+                    <div>
+                        <strong>Admin General</strong><br>
+                        <small>
+
+                        </small>
+                    </div>
+                </div>
+                <a href="/admin/logout" class="btn btn-danger btn-sm ms-2">Cerrar Sesión</a>
+                <!-- Botón de cierre de sesión -->
+            </div>
+        </div>
+        <!-- Contenido principal -->
+        <div class="main-content">
+            <!-- Encabezado y barra de navegación -->
+            <div class="d-flex justify-content-between mb-4">
+                <h1>Dashboard - Admin General</h1>
+                <!-- Opciones de perfil y configuración -->
+                <div class="d-flex align-items-center">
+                    <span class="me-3">
+
+                    </span>
+                    <img src="https://placehold.co/40x40" alt="Profile" class="rounded-circle">
+                </div>
+            </div>
+            <!-- Sección de estadísticas -->
+            <div class="w-100 d-flex justify-content-center align-items-center">
+                <form class="form" action="/admin/editarAdminV/<%= adminV.id %>" method="POST">
+                    <p class="title">Editar</p>
+                    <p class="message">
+                        Admin vendedor:
+                        <%= adminV.nombre %>
+                    </p>
+                    <div class="flex">
+                        <label for="nombre" class="form-label">
+                            <input class="input" type="text" id="nombre" name="nombre" placeholder="" required="">
+                            <span>
+                                
+                            </span>
+                        </label>
+                        <label for="apellidos" class="form-label">
+                            <input class="input" type="text" id="apellidos" name="apellidos" placeholder="" required="">
+                            <span>
+                               
+                            </span>
+                        </label>
+                    </div>
+
+                    <label for="dni" class="form-label">
+                        <input class="input" type="text" id="dni" name="dni" placeholder="" required="">
+                        <span>
+                            <%= adminV.nombre_usuario %>
+                        </span>
+                    </label>
+
+                    <label for="correo_electronico" class="form-label">
+                        <input class="input" type="text" id="correo_electronico" name="correo_electronico"
+                            placeholder="" required="">
+                        <span>
+                            
+                        </span>
+                    </label>
+
+                    <button type="submit" class="submit">Actualizar</button>
+                    <p class="signin">REGRESAR A <a href="/admin/adminG">DASHBOARD</a> </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>.id %>" method="POST">
+                    <p class="title">Editar</p>
+                    <p class="message">
+                        Usuario:
+                        <%= adminV.nombre %>
+                    </p>
+                    <div class="flex">
+                        <label for="nombre" class="form-label">
+                            <input class="input" type="text" id="nombre" name="nombre" placeholder="" required="">
+                            <span>
+                                <%= usuario.nombre %>
+                            </span>
+                        </label>
+                        <label for="apellidos" class="form-label">
+                            <input class="input" type="text" id="apellidos" name="apellidos" placeholder="" required="">
+                            <span>
+                                <%= usuario.apellidos %>
+                            </span>
+                        </label>
+                    </div>
+
+                    <label for="dni" class="form-label">
+                        <input class="input" type="text" id="dni" name="dni" placeholder="" required="">
+                        <span>
+                            <%= usuario.dni %>
+                        </span>
+                    </label>
+
+                    <label for="correo_electronico" class="form-label">
+                        <input class="input" type="text" id="correo_electronico" name="correo_electronico"
+                            placeholder="" required="">
+                        <span>
+                            <%= usuario.correo_electronico %>
+                        </span>
+                    </label>
+
+                    <button type="submit" class="submit">Actualizar</button>
+                    <p class="signin">REGRESAR A <a href="/admin/adminG">DASHBOARD</a> </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
