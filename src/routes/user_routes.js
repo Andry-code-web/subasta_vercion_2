@@ -696,7 +696,7 @@ router.get('/subasta/:id', (req, res) => {
 
       // Use ultima_oferta from the query result
       const ofertaActual = formatNumber(subasta.ultima_oferta);
-      const initialPrice = subasta.ultima_oferta || subasta.precio_base;
+      const initialPrice = /* subasta.ultima_oferta ||  */subasta.precio_base;
 
       const fechaFormateada = subasta.fecha_formateada;
       const [day, dayNumber] = fechaFormateada.split(' ');

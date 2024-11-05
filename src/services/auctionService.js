@@ -19,9 +19,10 @@ class AuctionService {
            JOIN ofertas o ON u.id = o.id_usuario  
            WHERE o.id_subasta = s.id 
            ORDER BY o.fecha_subasta, o.hora_subasta DESC 
-           LIMIT 1) as current_winner
+           LIMIT 1) as current_winner,
+          (SELECT COUNT(*) FROM ofertas WHERE id_subasta = s.id) as bid_count
       FROM subastas s 
-      WHERE s.id = ?`,  
+      WHERE s.id = ?`,
       [room]
     );
 
@@ -36,20 +37,18 @@ class AuctionService {
       startTime: results[0].fecha_hora_inicio,
       endTime: results[0].fecha_hora_fin,
       messages,
+      isFirstBid: results[0].bid_count === 0
     };
   }
 
-  // Guardar una nueva puja
   static async saveBid(room, userId, bidValue, username) {
     try {
-      // Guardar la puja en la tabla de ofertas
       await conection.promise().query(
         `INSERT INTO ofertas (id_subasta, id_usuario, monto_oferta, fecha_subasta, hora_subasta) 
          VALUES (?, ?, ?, CURDATE(), CURTIME())`,
         [room, userId, bidValue]
       );
 
-      // Actualizar la subasta con la nueva puja y el ganador actual
       await conection.promise().query(
         `UPDATE subastas 
          SET currentWinner = ?, currentBid = ? 
@@ -57,7 +56,6 @@ class AuctionService {
         [username, bidValue, room]
       );
 
-      // Guardar un mensaje sobre la puja
       await MessageService.saveMessage(
         room,
         userId,
@@ -65,7 +63,16 @@ class AuctionService {
         bidValue
       );
 
-      return true;
+      // Verificar si es la primera puja
+      const [bidCount] = await conection.promise().query(
+        'SELECT COUNT(*) as count FROM ofertas WHERE id_subasta = ?',
+        [room]
+      );
+
+      return {
+        success: true,
+        isFirstBid: bidCount[0].count === 1
+      };
     } catch (error) {
       console.error("Error al guardar puja:", error);
       throw error;

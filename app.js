@@ -70,19 +70,15 @@ io.on('connection', (socket) => {
       if (auctionState) {
         socket.emit('auctionState', {
           ...auctionState,
-          timeLeft: countdownService.getTimeLeft(room) // Aquí accedemos a getTimeLeft
+          timeLeft: countdownService.getTimeLeft(room),
+          countdownRunning: countdownService.isRunning(room)
         });
-
-        if (!auctionState.auctionEnded) {
-          countdownService.startCountdown(room);
-        }
       }
     } catch (error) {
       console.error('Error al unirse a la sala:', error);
     }
   });
 
-  // Manejo de pujas
   socket.on('bid', async (data) => {
     try {
       const userId = await AuctionService.getUserId(data.user);
@@ -91,13 +87,20 @@ io.on('connection', (socket) => {
         return;
       }
 
-      const success = await AuctionService.saveBid(data.room, userId, data.bid, data.user);
-      if (success) {
-        countdownService.resetCountdown(data.room);
+      const result = await AuctionService.saveBid(data.room, userId, data.bid, data.user);
+      if (result.success) {
+        // Iniciar o reiniciar el contador con cada puja
+        if (!countdownService.isRunning(data.room)) {
+          countdownService.startCountdown(data.room);
+        } else {
+          countdownService.resetCountdown(data.room);
+        }
+        
         const updatedState = await AuctionService.getAuctionState(data.room);
         io.to(data.room).emit('auctionState', {
           ...updatedState,
-          timeLeft: countdownService.getTimeLeft(data.room)
+          timeLeft: countdownService.getTimeLeft(data.room),
+          countdownRunning: true
         });
       }
     } catch (error) {
