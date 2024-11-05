@@ -10,8 +10,8 @@ require("dotenv").config();
 // Conección a la base de datos
 const { conection } = require("./src/database/db");
 const sessionStore = require("./src/database/sessionStore");
-const AuctionService = require("./src/services/AuctionService");
-const MessageService = require("./src/services/MessageService");
+const AuctionService = require("./src/services/auctionService");
+const MessageService = require("./src/services/messageService");
 const CountdownService = require('./src/services/countdownService');
 
 const app = express();
