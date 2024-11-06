@@ -45,11 +45,17 @@
   <a href="/" class="logo"><img src="/img/SUBASTA-SUR-ROJO-HORIZONTAL.png" alt=""></a>
 
 
+  <a href="/subastas_en_vivo" class="button-with-icon">
+    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+      <path fill="#fff" d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256-96a96 96 0 1 1 0 192 96 96 0 1 1 0-192z" />
+    </svg>
+    <span class="text">En vivo</span>
+  </a>
+
   <nav class="navbar navbar-expand-lg">
 
     <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -93,33 +99,6 @@
           </form>
         </div>
 
-
-        <!-- CSS para estilos de sugerencias -->
-        <!-- <style>
-          .suggestions {
-            list-style-type: none;
-            padding: 0;
-            margin-top: 3rem;
-            border: 1px solid #ccc;
-            max-height: 200px;
-            overflow-y: auto;
-            position: absolute;
-            z-index: 100;
-          }
-
-          .suggestions li {
-            padding: 10px;
-            background-color: white;
-            cursor: pointer;
-          }
-
-          .suggestions li:hover {
-            background-color: #f0f0f0;
-          }
-        </style> -->
-
-
-
       </div>
     </div>
   </nav>
@@ -127,49 +106,49 @@
 
   <div class="session">
     <% if (usuario) { %>
-      <p class="d-flex align-items-center ">
-        <span>
-          <%= usuario.nombre %>
-        </span>
-        <button class="btn_menu ms-1" id="btn_menu">
-          <i class="bi bi-list"></i>
-        </button>
-      <div class="menu_desplegable d-flex flex-column justify-content-between">
-        <div>
-          <div class="cabezera_menu d-flex justify-content-between">
-            <h3>Subastas</h3>
-            <button id="btn_close">
-              <i class="bi bi-x-lg"></i>
-            </button>
-          </div>
-          <ul>
-            <li><a href="#">Me gusta</a></li>
-            <li><a href="/editar_user/<%= usuario.id %>">Editar usuario</a></li>
-          </ul>
+    <p class="d-flex align-items-center ">
+      <span>
+        <%= usuario.nombre %>
+      </span>
+      <button class="btn_menu ms-1" id="btn_menu">
+        <i class="bi bi-list"></i>
+      </button>
+    <div class="menu_desplegable d-flex flex-column justify-content-between">
+      <div>
+        <div class="cabezera_menu d-flex justify-content-between">
+          <h3>Subastas</h3>
+          <button id="btn_close">
+            <i class="bi bi-x-lg"></i>
+          </button>
         </div>
-        <div class="perfil_user">
-          <div class="d-flex flex-row">
-            <i class="bi bi-person-bounding-box" style="font-size: 2.5rem; color: #fff; margin-right: 1rem;"></i>
-            <div class="d-flex flex-column">
-              <strong>Cliente</strong>
-              <small>
-                <%= usuario.nombre %>
-              </small>
-              <a href="/logout" class="btn btn-danger btn-sm ms-2">Cerrar Sesión</a>
-            </div>
-          </div>
-        </div>
-        <% } else { %>
-          <p class="ingresar">
-            <span class="">
-              <i class="bi bi-person"></i>
-            </span>
-            <span>
-              <a href="/login" class="ingresar_ligin">Ingresar</a>
-
-            </span>
-          </p>
-          <% } %>
+        <ul>
+          <li><a href="#">Me gusta</a></li>
+          <li><a href="/editar_user/<%= usuario.id %>">Editar usuario</a></li>
+        </ul>
       </div>
+      <div class="perfil_user">
+        <div class="d-flex flex-row">
+          <i class="bi bi-person-bounding-box" style="font-size: 2.5rem; color: #fff; margin-right: 1rem;"></i>
+          <div class="d-flex flex-column">
+            <strong>Cliente</strong>
+            <small>
+              <%= usuario.nombre %>
+            </small>
+            <a href="/logout" class="btn btn-danger btn-sm ms-2">Cerrar Sesión</a>
+          </div>
+        </div>
+      </div>
+      <% } else { %>
+      <p class="ingresar">
+        <span class="">
+          <i class="bi bi-person"></i>
+        </span>
+        <span>
+          <a href="/login" class="ingresar_ligin">Ingresar</a>
+
+        </span>
+      </p>
+      <% } %>
+    </div>
   </div>
 </header>

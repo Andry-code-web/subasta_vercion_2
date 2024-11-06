@@ -1239,4 +1239,81 @@ router.post("/enviar/formulario", (req, res) => {
   });
 });
 
+
+/* SUBASTAS EN VIVO*/
+
+router.get("/subastas_en_vivo", (req, res) => {
+  const now = moment().tz("America/Lima").format('YYYY-MM-DD HH:mm:ss');
+
+  const querySubastasEnCurso = `
+    SELECT s.*, 
+      DATE_FORMAT(s.fecha_subasta, '%W %d') AS fecha_formateada, 
+      DATE_FORMAT(s.hora_subasta, '%h:%i %p') AS hora_formateada, 
+      CONCAT(s.fecha_subasta, ' ', s.hora_subasta) AS fecha_hora_subasta,
+      IFNULL(l.like_count, 0) AS like_count,
+      IFNULL(
+        (SELECT monto_oferta 
+         FROM ofertas 
+         WHERE id_subasta = s.id 
+         ORDER BY fecha_subasta DESC, hora_subasta DESC 
+         LIMIT 1), 
+        s.precio_base
+      ) AS ultima_oferta
+    FROM subastas s
+    LEFT JOIN (
+      SELECT subasta_id, COUNT(*) AS like_count
+      FROM likes
+      GROUP BY subasta_id
+    ) l ON s.id = l.subasta_id
+    WHERE ? BETWEEN CONCAT(s.fecha_subasta, ' ', s.hora_subasta) 
+      AND DATE_ADD(CONCAT(s.fecha_subasta, ' ', s.hora_subasta), INTERVAL 5 MINUTE)`;
+
+  conection.query(querySubastasEnCurso, [now], (error, subastas) => {
+    if (error) {
+      console.error("Error al obtener subastas en curso", error);
+      return res.status(500).send("Error al obtener subastas en curso");
+    }
+
+    const subastasIds = subastas.map(subasta => subasta.id);
+
+    // Verifica si hay subastas antes de consultar las imágenes
+    if (subastasIds.length === 0) {
+      return res.render("envivo", {
+        usuario: req.session.usuario,
+        subastas: [],
+        formatNumber: (num) => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      });
+    }
+
+    // Consulta para obtener las imágenes de todas las subastas en curso
+    const queryImagenes = `
+      SELECT id_subasta, imagen 
+      FROM imagenes_propiedad 
+      WHERE id_subasta IN (?)`;
+
+    conection.query(queryImagenes, [subastasIds], (error, imagenes) => {
+      if (error) {
+        console.error("Error al obtener imágenes de subasta", error);
+        return res.status(500).send("Error al obtener imágenes de subasta");
+      }
+
+      const subastasConImagenes = subastas.map(subasta => {
+        const imagenesSubasta = imagenes.filter(imagen => imagen.id_subasta === subasta.id);
+        return {
+          ...subasta,
+          imagenes: imagenesSubasta.map(img => img.imagen.toString("base64")),
+        };
+      });
+
+      res.render("envivo", {
+        usuario: req.session.usuario,
+        subastas: subastasConImagenes,
+        formatNumber: (num) => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      });
+    });
+  });
+});
+
+
+
 module.exports = router;

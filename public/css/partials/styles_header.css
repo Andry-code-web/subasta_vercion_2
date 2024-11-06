@@ -5,16 +5,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
-  --font--banner--semi: "Barlow";
-  --font--banner--bool: "Roboto";
-  --font--parrafo: "Space Mono";
-  --font--header: "Sedan";
-  --font--testimoni: "Modern Antiqua";
-  --font--about: "BioRhyme";
-  --font--cont: "Scope One";
-  --font--header--v2: "Poppins";
-  --bg--botones: #d30000;
-  --color--sub: #d30000;
+    --font--banner--semi: "Barlow";
+    --font--banner--bool: "Roboto";
+    --font--parrafo: "Space Mono";
+    --font--header: "Sedan";
+    --font--testimoni: "Modern Antiqua";
+    --font--about: "BioRhyme";
+    --font--cont: "Scope One";
+    --font--header--v2: "Poppins";
+    --bg--botones: #d30000;
+    --color--sub: #d30000;
 }
 
 /* HEADER */
@@ -74,6 +74,75 @@ header {
     text-decoration: none;
     transition: all 0.5s;
     font-weight: 600;
+}
+
+.button-with-icon {
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #980f0f;
+    font-family: "Istok Web", sans-serif;
+    letter-spacing: 1px;
+    padding: 0 12px;
+    text-align: center;
+    width: 120px;
+    height: 40px;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: normal;
+    border-radius: 3px;
+    outline: none;
+    user-select: none;
+    cursor: pointer;
+    transform: translateY(0px);
+    position: relative;
+    box-shadow:
+        inset 0 30px 30px -15px rgba(255, 255, 255, 0.1),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.3),
+        inset 0 1px 20px rgba(0, 0, 0, 0),
+        0 3px 0 #980f0f,
+        0 3px 2px rgba(0, 0, 0, 0.2),
+        0 5px 10px rgba(0, 0, 0, 0.1),
+        0 10px 20px rgba(0, 0, 0, 0.1);
+    background: #cc1515;
+    color: white;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+    transition: 150ms all ease-in-out;
+    text-decoration: none;
+}
+
+.button-with-icon .icon {
+    margin-right: 8px;
+    width: 24px;
+    height: 24px;
+    transition: all 0.5s ease-in-out;
+}
+
+.button-with-icon:active {
+    transform: translateY(3px);
+    box-shadow:
+        inset 0 16px 2px -15px rgba(0, 0, 0, 0),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.15),
+        inset 0 1px 20px rgba(0, 0, 0, 0.1),
+        0 0 0 #980f0f,
+        0 0 0 2px rgba(255, 255, 255, 0.5),
+        0 0 0 rgba(0, 0, 0, 0),
+        0 0 0 rgba(0, 0, 0, 0);
+}
+
+.button-with-icon:hover .text {
+    transform: translateX(80px);
+}
+
+.button-with-icon:hover .icon {
+    transform: translate(30px);
+}
+
+.text {
+    margin-top: .1rem;
+    font-size: .8rem;
+    transition: all 0.5s ease-in-out;
 }
 
 header nav {
@@ -173,12 +242,12 @@ header .session p .btn_menu i {
     font-size: 1.2rem;
 }
 
-.navbar-expand-lg .navbar-nav{
+.navbar-expand-lg .navbar-nav {
     gap: 1rem;
 }
 
 
-.navbar-nav{
+.navbar-nav {
     color: #000 !important;
 }
 
@@ -202,7 +271,7 @@ header .session p .btn_menu i {
     }
 
     .menu_activar i {
-        font-size: 1.3rem ;
+        font-size: 1.3rem;
         color: #000;
     }
 
@@ -254,7 +323,7 @@ header .session p .btn_menu i {
         margin-left: 1rem;
     }
 
-    .item_buscador{
+    .item_buscador {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -268,7 +337,7 @@ header .session p .btn_menu i {
         color: #fff;
     }
 
-    .ceparador{
+    .ceparador {
         color: #fff;
         height: 1.5px;
     }
@@ -296,11 +365,11 @@ header .session p .btn_menu i {
         font-size: .7rem;
     }
 
-    .session{
+    .session {
         padding: 0rem .2rem 0rem .4rem !important;
     }
 
-    .session p span{
+    .session p span {
         font-size: .5rem;
         font-weight: 600;
     }
@@ -309,15 +378,13 @@ header .session p .btn_menu i {
         font-size: 1.1rem;
     }
 
-    .navbar{
+    .navbar {
         display: none !important;
     }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) and (max-width: 768) {
-     
-}
+@media only screen and (min-width: 600px) and (max-width: 768) {}
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) and (max-width: 992px) {
@@ -387,7 +454,7 @@ header .session p .btn_menu i {
         margin-left: 1rem;
     }
 
-    .item_buscador{
+    .item_buscador {
         margin-left: 0 !important;
     }
 
@@ -424,7 +491,7 @@ header .session p .btn_menu i {
 
     }
 
-    .navbar{
+    .navbar {
         display: none !important;
     }
 }
