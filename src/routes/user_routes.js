@@ -616,6 +616,7 @@ router.get('/subasta/:id', (req, res) => {
   const subastaId = req.params.id;
   const usuarioId = req.session.usuario ? req.session.usuario.id : null;
 
+  // Consulta mejorada para obtener datos de la subasta
   const querySubasta = `
     SELECT s.*, 
       DATE_FORMAT(s.fecha_subasta, '%W %d') AS fecha_formateada, 
@@ -623,14 +624,10 @@ router.get('/subasta/:id', (req, res) => {
       CONCAT(s.fecha_subasta, ' ', s.hora_subasta) AS fecha_hora_subasta,
       CONCAT(s.fecha_activacion, ' ', s.hora_activacion) AS fecha_hora_apertura_subasta,
       IFNULL(l.like_count, 0) AS like_count,
-      IFNULL(
-        (SELECT monto_oferta 
-         FROM ofertas 
-         WHERE id_subasta = s.id 
-         ORDER BY fecha_subasta DESC, hora_subasta DESC 
-         LIMIT 1), 
-        s.precio_base
-      ) as ultima_oferta
+      IFNULL(s.currentBid, s.precio_base) as ultima_oferta,
+      s.auctionEnded,
+      s.currentWinner,
+      s.currentBid
     FROM subastas s
     LEFT JOIN (
       SELECT subasta_id, COUNT(*) AS like_count
@@ -670,11 +667,13 @@ router.get('/subasta/:id', (req, res) => {
   const now = moment().tz("America/Lima");
   const fechaActual = now.format('YYYY-MM-DD HH:mm:ss');
 
+  // Registrar visita
   conection.query(queryRegistrarVisita, [subastaId, usuarioId], (error) => {
     if (error) {
       console.error("Error al registrar la visita", error);
     }
 
+    // Obtener datos de la subasta
     conection.query(querySubasta, [subastaId], (error, resultadoSubasta) => {
       if (error) {
         console.error("Error al obtener datos de subasta", error);
@@ -688,16 +687,13 @@ router.get('/subasta/:id', (req, res) => {
       const subasta = resultadoSubasta[0];
       const fechaHoraSubasta = moment(subasta.fecha_hora_subasta).tz("America/Lima");
       const fechaHoraAperturaSubasta = moment(subasta.fecha_hora_apertura_subasta).tz("America/Lima");
+      const fechaHoraFinSubasta = fechaHoraSubasta;
 
-      const duracionSubasta = 5;
-      const fechaHoraFinSubasta = fechaHoraSubasta.clone().add(duracionSubasta, 'minutes');
-      const estaEnCurso = now.isBetween(fechaHoraSubasta, fechaHoraFinSubasta, null, '[]');
-      const estaTerminada = now.isAfter(fechaHoraFinSubasta);
+      const estaTerminada = subasta.auctionEnded === 1 || subasta.currentWinner !== null || subasta.currentBid !== null;
+      const estaEnCurso = !estaTerminada && now.isAfter(fechaHoraFinSubasta);
 
-      // Use ultima_oferta from the query result
       const ofertaActual = formatNumber(subasta.ultima_oferta);
-      const initialPrice = /* subasta.ultima_oferta ||  */subasta.precio_base;
-
+      const initialPrice = subasta.precio_base;
       const fechaFormateada = subasta.fecha_formateada;
       const [day, dayNumber] = fechaFormateada.split(' ');
       const fechaFormateadaEsp = `${translateDay(day)} ${dayNumber}`;
@@ -767,6 +763,7 @@ router.get('/subasta/:id', (req, res) => {
     });
   });
 });
+
 
 
 
@@ -1266,7 +1263,7 @@ router.get("/subastas_en_vivo", (req, res) => {
       GROUP BY subasta_id
     ) l ON s.id = l.subasta_id
     WHERE ? BETWEEN CONCAT(s.fecha_subasta, ' ', s.hora_subasta) 
-      AND DATE_ADD(CONCAT(s.fecha_subasta, ' ', s.hora_subasta), INTERVAL 5 MINUTE)`;
+      AND DATE_ADD(CONCAT(s.fecha_subasta, ' ', s.hora_subasta), INTERVAL 360 MINUTE)`;
 
   conection.query(querySubastasEnCurso, [now], (error, subastas) => {
     if (error) {
@@ -1314,6 +1311,9 @@ router.get("/subastas_en_vivo", (req, res) => {
   });
 });
 
-
+//ingreso a la propuesta
+router.get('/propuesta/comprar', (req, res) => {
+  res.render('propuesta',{ usuario: req.session.usuario })
+})
 
 module.exports = router;

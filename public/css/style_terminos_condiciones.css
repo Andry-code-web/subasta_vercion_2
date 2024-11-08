@@ -65,6 +65,21 @@
     text-align: justify;
 }
 
+
+.contenedor_terminos dl{
+    width: 80%;
+    margin-left: 4.5rem;
+    font-family: var(--font--parrafo);
+}
+
+.contenedor_terminos dl dt{
+    margin-left: 0rem;
+    font-family: var(--font--banner--semi);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--bg--botones);
+}
+
 .contenedor_terminos ul,
 .contenedor_terminos ol{
     width: 80%;
