@@ -113,6 +113,25 @@ router.get("/", (req, res) => {
   });
 });
 
+
+const AuctionService = require("../services/AuctionService");
+
+router.get('/auction-state/:id', async (req, res) => {
+  const auctionId = req.params.id;
+  try {
+    const auctionState = await AuctionService.getAuctionState(auctionId);
+    if (auctionState) {
+      res.json(auctionState);
+    } else {
+      res.status(404).send('Subasta no encontrada');
+    }
+  } catch (error) {
+    console.error("Error al obtener el estado de la subasta:", error);
+    res.status(500).send('Error en el servidor');
+  }
+});
+
+
 router.post("/", (req, res) => {
   const { nombre, texto, rating } = req.body;
 

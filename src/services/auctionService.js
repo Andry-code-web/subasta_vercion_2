@@ -29,7 +29,7 @@ class AuctionService {
     if (results.length === 0) return null;
 
     const messages = await MessageService.getMessages(room);
-
+  
     return {
       auctionEnded: results[0].auctionEnded === 1,
       currentWinner: results[0].current_winner || null,
@@ -49,13 +49,8 @@ class AuctionService {
         [room, userId, bidValue]
       );
 
-      await conection.promise().query(
-        `UPDATE subastas 
-         SET currentWinner = ?, currentBid = ? 
-         WHERE id = ?`,
-        [username, bidValue, room]
-      );
-
+      // Ya no actualizamos el ganador aquí
+      // Solo guardamos el mensaje de la puja
       await MessageService.saveMessage(
         room,
         userId,
@@ -79,20 +74,81 @@ class AuctionService {
     }
   }
 
-  // Finalizar la subasta
+
+  /* faltata guardar el ganador y quitar las oportunidades si gana */
+
+
+  // Finalizar la subasta y guardar el ganador
   static async endAuction(room) {
     try {
-      await conection
-        .promise()
-        .query("UPDATE subastas SET auctionEnded = true WHERE id = ?", [room]);
-      return true;
+      // Obtener la última oferta más alta
+      const [lastBid] = await conection.promise().query(
+        `SELECT o.*, u.usuario
+         FROM ofertas o
+         JOIN usuarios u ON o.id_usuario = u.id
+         WHERE o.id_subasta = ?
+         ORDER BY o.monto_oferta DESC, o.fecha_subasta DESC, o.hora_subasta DESC
+         LIMIT 1`,
+        [room]
+      );
+
+      // Obtener información de la subasta
+      const [subastaInfo] = await conection.promise().query(
+        `SELECT * FROM subastas WHERE id = ?`,
+        [room]
+      );
+
+      if (!subastaInfo[0]) {
+        throw new Error('Subasta no encontrada');
+      }
+
+      let winner = null;
+      let finalBid = null;
+      let message = '';
+
+      if (lastBid && lastBid.length > 0) {
+        // Si hubo pujas, usar la más alta
+        winner = lastBid[0].usuario;
+        finalBid = lastBid[0].monto_oferta;
+        message = `¡Subasta finalizada! Ganador: ${winner} con una oferta de ${finalBid}`;
+      } else {
+        // Si no hubo pujas, marcar como desierta
+        winner = 'DESIERTA';
+        finalBid = subastaInfo[0].precio_base;
+        message = '¡Subasta finalizada sin ofertas! Subasta declarada desierta.';
+      }
+
+      // Actualizar la subasta con el resultado final
+      await conection.promise().query(
+        `UPDATE subastas 
+         SET auctionEnded = true,
+             currentWinner = ?,
+             currentBid = ?,
+             fecha_hora_fin = NOW(),
+             status = ?
+         WHERE id = ?`,
+        [winner, finalBid, 'finalizada', room]
+      );
+
+      // Guardar mensaje final
+      await MessageService.saveMessage(
+        room,
+        lastBid?.[0]?.id_usuario || null, // Si no hay ganador, el ID será null
+        message,
+        finalBid
+      );
+
+      return {
+        winner: winner,
+        finalBid: finalBid,
+        message: message
+      };
     } catch (error) {
       console.error("Error al finalizar subasta:", error);
       throw error;
     }
   }
 
-  // Obtener el ID del usuario a partir de su nombre
   static async getUserId(username) {
     try {
       const [results] = await conection

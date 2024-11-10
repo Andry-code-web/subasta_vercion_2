@@ -152,52 +152,72 @@
     border-top: 1.5px solid #969696; 
     margin: 0;
 }
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .contenedor_cards{
+        grid-template-columns: repeat(1, 1fr);
+        padding: 0rem 1rem;
+        column-gap: 1rem;
+        margin-top: 5rem;
+    }
+
+    .card {
+        width: 90%;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .contenedor_cards{
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0rem 1rem;
+        column-gap: 1rem;
+        margin-top: 6rem;
+    }
+
+    .card {
+        width: 90%;
+    }
 /* 
-.button,
-.button__icon,
-.button__text {
-    transition: all 0.3s;
+    .image_container{
+        height: 8rem;
+    } */
 }
 
-.button .button__text {
-    transform: translateX(22px);
-    color: #fff;
-    font-weight: 600;
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+    .contenedor_cards{
+        grid-template-columns: repeat(3, 1fr);
+        padding: 0rem 1rem;
+        column-gap: 1rem;
+        margin-top: 5rem;
+    }
+
+    .card {
+        width: 90%;
+    }
+
+    .image_container{
+        height: 8rem;
+    }
 }
 
-.button .button__icon {
-    position: absolute;
-    transform: translateX(109px);
-    height: 100%;
-    width: 39px;
-    background-color: #171979;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) and (max-width: 1440px) {
+    .contenedor_cards{
+        grid-template-columns: repeat(4, 1fr);
+        padding: 0rem 1rem;
+        column-gap: 1rem;
+    }
 
-.button .svg {
-    width: 20px;
-    fill: #fff;
+    .card {
+        width: 95%;
+    }
 }
-
-.button:hover {
-    background: #172779;
-}
-
-.button:hover .button__text {
-    color: transparent;
-}
-
-.button:hover .button__icon {
-    width: 148px;
-    transform: translateX(0);
-}
-
-.button:active .button__icon {
-    background-color: #146c54;
-}
-
-.button:active {
-    border: 1px solid #146c54;
-} */

@@ -650,18 +650,21 @@
           console.log('se realizó clic');
 
           const usuarioId = await obtenerIdUsuario();
-          const fechaHoraFinSubasta = new Date("<%= subasta.fecha_hora_subasta %>"); // Asegúrate de que este valor esté en formato correcto (ISO 8601)
+          /* const fechaHoraFinSubasta = new Date("<%= subasta.fecha_hora_subasta %>"); // Asegúrate de que este valor esté en formato correcto (ISO 8601)
           const now = new Date(); // Obtén la fecha y hora actuales
 
           console.log('Fecha fin subasta:', fechaHoraFinSubasta);
           console.log('Fecha actual:', now);
           console.log('¿Subasta finalizada?', now > fechaHoraFinSubasta);
 
-          const margenDeTiempo = 5 * 60 * 1000; // 5 minutos en milisegundos
+          const margenDeTiempo = 5 * 60 * 1000; // 5 minutos en milisegundos */
+
+
+          const estadoTerminado = <%= estaTerminada %>;
 
           // Verificar si la subasta ha finalizado
-          // Verificar si la subasta ha finalizado
-          if (now.getTime() > fechaHoraFinSubasta.getTime() + margenDeTiempo) {
+          // Verificar si la subasta ha finalizadonow.getTime() > fechaHoraFinSubasta.getTime() + margenDeTiempo
+          if (estadoTerminado) {
             Swal.fire({
               icon: 'warning',
               title: "Terminó la subasta",
