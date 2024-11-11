@@ -133,9 +133,9 @@ CREATE TABLE `subastas` (
   `fecha_subasta` date DEFAULT NULL,
   `hora_subasta` time DEFAULT NULL,
   `id_admin_vendedor` int DEFAULT NULL,
+  `like_count` int DEFAULT '0',
   `auctionEnded` tinyint(1) DEFAULT '0',
   `currentWinner` varchar(255) DEFAULT NULL,
-  `like_count` int DEFAULT '0',
   `currentBid` bigint DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 

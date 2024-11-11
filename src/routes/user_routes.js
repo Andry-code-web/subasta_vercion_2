@@ -114,7 +114,7 @@ router.get("/", (req, res) => {
 });
 
 
-const AuctionService = require("../services/AuctionService");
+const AuctionService = require("../services/auctionService");
 
 router.get('/auction-state/:id', async (req, res) => {
   const auctionId = req.params.id;
