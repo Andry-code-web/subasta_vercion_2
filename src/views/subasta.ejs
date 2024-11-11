@@ -415,27 +415,27 @@
       const sendCustomBidButton = document.getElementById('sendCustomBidButton');
       const countdownElement = document.getElementById('countdown-min');
       const prorroga = document.querySelector('.prorroga_esperando');
-  
+
       let currentBid = parseInt('<%= subasta.precio_base %>');
       let minBid = currentBid;
       let username = '<%= usuario ? usuario.nombre : "Invitado" %>';
       let auctionInProgress = false;
       let auctionEnded = false;
       let countdownRunning = false;
-  
+
       const auctionRoom = '<%= subasta.id %>';
-  
+
       function init() {
         socket.emit('joinRoom', auctionRoom, username);
       }
-  
+
       socket.on('auctionState', (state) => {
         console.log('Estado recibido:', state);
         currentBid = Number(state.currentBid);
         minBid = state.currentBid;
         auctionEnded = state.auctionEnded;
         countdownRunning = state.countdownRunning;
-  
+
         messages.innerHTML = '';
         if (state.messages && state.messages.length > 0) {
           state.messages.forEach(msg => {
@@ -443,20 +443,20 @@
           });
           messages.scrollTop = messages.scrollHeight;
         }
-  
+
         messageInput.value = formatNumber(currentBid + 100);
-  
+
         if (auctionEnded) {
           disableButtons();
         }
-  
+
         if (countdownRunning) {
           updateTimerDisplay(state.timeLeft);
         } else {
           countdownElement.textContent = "03:00";
         }
       });
-  
+
       socket.on('auctionAlert', (data) => {
         Swal.fire({
           title: data.message,
@@ -465,23 +465,23 @@
           showConfirmButton: false
         });
       });
-  
+
       socket.on('syncCountdown', (timeLeft) => {
         updateTimerDisplay(timeLeft);
         showProrrogaMessage();
       });
-  
+
       socket.on('updateCountdown', (timeLeft) => {
         updateTimerDisplay(timeLeft);
       });
-  
+
       socket.on('auctionEnded', async (data) => {
         auctionEnded = true;
         auctionInProgress = false;
         countdownRunning = false;
-  
+
         const state = await fetch(`/auction-state/${auctionRoom}`).then(res => res.json());
-        
+
         Swal.fire({
           title: '¡Subasta finalizada!',
           text: `El ganador es: ${state.currentWinner} con una oferta de US$${formatNumber(state.currentBid)}`,
@@ -493,27 +493,27 @@
             window.location.href = '/catalogo';
           }
         });
-  
+
         disableButtons();
         countdownElement.textContent = "00:00";
       });
-  
+
       function updateTimerDisplay(timeLeft) {
         const minutes = Math.floor(timeLeft / 60);
         const seconds = timeLeft % 60;
         countdownElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
       }
-  
+
       function showProrrogaMessage() {
         prorroga.textContent = "¡Prórroga! Se reinició el tiempo";
         setTimeout(() => {
           prorroga.textContent = "";
         }, 3000);
       }
-  
+
       function handleBid(bidValue) {
         if (auctionEnded) return;
-  
+
         if (isNaN(bidValue) || bidValue <= minBid) {
           Swal.fire({
             title: `La puja debe ser mayor a $${formatNumber(minBid)}.`,
@@ -521,19 +521,19 @@
           });
           return;
         }
-  
+
         socket.emit('bid', {
           user: username,
           bid: bidValue,
           room: auctionRoom
         });
       }
-  
+
       sendButton.addEventListener('click', () => {
         const bidValue = parseInt(messageInput.value.replace(/,/g, ''));
         handleBid(bidValue);
       });
-  
+
       sendCustomBidButton.addEventListener('click', () => {
         const bidValue = parseInt(customBidInput.value.replace(/,/g, ''));
         if (isNaN(bidValue) || customBidInput.value.trim() === '') {
@@ -546,7 +546,7 @@
         handleBid(bidValue);
         customBidInput.value = '';
       });
-  
+
       function displayMessage(data) {
         const li = document.createElement('li');
         li.innerHTML = `<i class="fa-solid fa-share" style="color: #ffffff; margin-right: .5rem; font-size: .9rem;"></i> <b>${data.user}:</b> $${formatNumber(data.bid)}`;
@@ -555,18 +555,18 @@
         setTimeout(() => li.classList.remove('shake-animation'), 2000);
         messages.scrollTop = messages.scrollHeight;
       }
-  
+
       function disableButtons() {
         sendButton.disabled = true;
         sendCustomBidButton.disabled = true;
         messageInput.disabled = true;
         customBidInput.disabled = true;
       }
-  
+
       function formatNumber(num) {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
       }
-  
+
       init();
     });
   </script>

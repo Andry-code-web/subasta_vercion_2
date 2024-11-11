@@ -2,7 +2,6 @@ class CountdownService {
   constructor(io) {
     this.io = io;
     this.countdowns = new Map();
-    this.hasStarted = new Map();
     this.FULL_TIME = 180; // 3 minutos en segundos
   }
 
@@ -13,29 +12,34 @@ class CountdownService {
 
     const countdown = {
       timeLeft: this.FULL_TIME,
-      interval: setInterval(() => {
+      interval: setInterval(async () => {
         const current = this.countdowns.get(room);
         if (!current) return;
 
         current.timeLeft -= 1;
-        
+
         if (current.timeLeft === 120) {
-          this.io.to(room).emit("auctionAlert", { 
-            message: "¡A la una!", 
-            timeLeft: current.timeLeft 
-          });
+          this.io.to(room).emit("auctionAlert", { message: "¡A la una!", timeLeft: current.timeLeft });
         } else if (current.timeLeft === 60) {
-          this.io.to(room).emit("auctionAlert", { 
-            message: "¡A las dos!", 
-            timeLeft: current.timeLeft 
-          });
+          this.io.to(room).emit("auctionAlert", { message: "¡A las dos!", timeLeft: current.timeLeft });
         } else if (current.timeLeft === 0) {
-          this.io.to(room).emit("auctionAlert", { 
-            message: "¡A las tres!", 
-            timeLeft: current.timeLeft 
-          });
-          this.stopCountdown(room);
-          this.io.to(room).emit("auctionEnded", { timeExpired: true });
+          this.io.to(room).emit("auctionAlert", { message: "¡A las tres!", timeLeft: current.timeLeft });
+          
+          try {
+            const AuctionService = require('./auctionService');
+            const result = await AuctionService.endAuction(room);
+            
+            this.stopCountdown(room);
+            
+            // Emitir el evento de finalización con los datos del ganador
+            this.io.to(room).emit("auctionEnded", {
+              timeExpired: true,
+              winner: result.winner,
+              finalBid: result.finalBid
+            });
+          } catch (error) {
+            console.error('Error al finalizar la subasta:', error);
+          }
           return;
         }
 
@@ -53,26 +57,31 @@ class CountdownService {
       clearInterval(countdown.interval);
       countdown.timeLeft = this.FULL_TIME;
       
-      countdown.interval = setInterval(() => {
+      countdown.interval = setInterval(async () => {
         countdown.timeLeft -= 1;
         
         if (countdown.timeLeft === 120) {
-          this.io.to(room).emit("auctionAlert", { 
-            message: "¡A la una!", 
-            timeLeft: countdown.timeLeft 
-          });
+          this.io.to(room).emit("auctionAlert", { message: "¡A la una!", timeLeft: countdown.timeLeft });
         } else if (countdown.timeLeft === 60) {
-          this.io.to(room).emit("auctionAlert", { 
-            message: "¡A las dos!", 
-            timeLeft: countdown.timeLeft 
-          });
+          this.io.to(room).emit("auctionAlert", { message: "¡A las dos!", timeLeft: countdown.timeLeft });
         } else if (countdown.timeLeft === 0) {
-          this.io.to(room).emit("auctionAlert", { 
-            message: "¡A las tres!", 
-            timeLeft: countdown.timeLeft 
-          });
-          this.stopCountdown(room);
-          this.io.to(room).emit("auctionEnded", { timeExpired: true });
+          this.io.to(room).emit("auctionAlert", { message: "¡A las tres!", timeLeft: countdown.timeLeft });
+          
+          try {
+            const AuctionService = require('./auctionService');
+            const result = await AuctionService.endAuction(room);
+            
+            this.stopCountdown(room);
+            
+            // Emitir el evento de finalización con los datos del ganador
+            this.io.to(room).emit("auctionEnded", {
+              timeExpired: true,
+              winner: result.winner,
+              finalBid: result.finalBid
+            });
+          } catch (error) {
+            console.error('Error al finalizar la subasta:', error);
+          }
           return;
         }
 
@@ -94,7 +103,8 @@ class CountdownService {
   }
 
   getTimeLeft(room) {
-    return this.countdowns.get(room)?.timeLeft || this.FULL_TIME;
+    const countdown = this.countdowns.get(room);
+    return countdown ? countdown.timeLeft : null;
   }
 
   isRunning(room) {
