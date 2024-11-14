@@ -413,7 +413,7 @@
       const customBidInput = document.getElementById('customBidInput');
       const sendButton = document.getElementById('sendButton');
       const sendCustomBidButton = document.getElementById('sendCustomBidButton');
-      const countdownElement = document.getElementById('countdown-min');
+      const progressBar = document.querySelector('.progress-bar');
       const prorroga = document.querySelector('.prorroga_esperando');
 
       let currentBid = parseInt('<%= subasta.precio_base %>');
@@ -449,12 +449,6 @@
         if (auctionEnded) {
           disableButtons();
         }
-
-        if (countdownRunning) {
-          updateTimerDisplay(state.timeLeft);
-        } else {
-          countdownElement.textContent = "03:00";
-        }
       });
 
       socket.on('auctionAlert', (data) => {
@@ -466,13 +460,13 @@
         });
       });
 
-      socket.on('syncCountdown', (timeLeft) => {
-        updateTimerDisplay(timeLeft);
+      socket.on('syncProgress', (percentage) => {
+        progressBar.style.width = percentage + '%';
         showProrrogaMessage();
       });
 
-      socket.on('updateCountdown', (timeLeft) => {
-        updateTimerDisplay(timeLeft);
+      socket.on('updateProgress', (percentage) => {
+        progressBar.style.width = percentage + '%';
       });
 
       socket.on('auctionEnded', async (data) => {
@@ -495,14 +489,8 @@
         });
 
         disableButtons();
-        countdownElement.textContent = "00:00";
+        progressBar.style.width = '0%';
       });
-
-      function updateTimerDisplay(timeLeft) {
-        const minutes = Math.floor(timeLeft / 60);
-        const seconds = timeLeft % 60;
-        countdownElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-      }
 
       function showProrrogaMessage() {
         prorroga.textContent = "¡Prórroga! Se reinició el tiempo";
@@ -736,7 +724,7 @@
             value: deposit
           } = await Swal.fire({
             title: "Depósito requerido",
-            text: "Debes depositar 300 dólares para participar en 5 subasta.",
+            text: "Debes depositar 500 dólares para participar en 10 subasta.",
             showCancelButton: true,
             confirmButtonText: 'Ya deposité',
             cancelButtonText: 'No deposité',

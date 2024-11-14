@@ -2,7 +2,7 @@ class CountdownService {
   constructor(io) {
     this.io = io;
     this.countdowns = new Map();
-    this.FULL_TIME = 180; // 3 minutos en segundos
+    this.FULL_TIME = 60; // 
   }
 
   startCountdown(room) {
@@ -17,10 +17,13 @@ class CountdownService {
         if (!current) return;
 
         current.timeLeft -= 1;
+        
+        // Calculate progress percentage
+        const progressPercentage = (current.timeLeft / this.FULL_TIME) * 100;
 
-        if (current.timeLeft === 120) {
+        if (progressPercentage <= 50 && progressPercentage > 49) {
           this.io.to(room).emit("auctionAlert", { message: "¡A la una!", timeLeft: current.timeLeft });
-        } else if (current.timeLeft === 60) {
+        } else if (progressPercentage <= 25 && progressPercentage > 24) {
           this.io.to(room).emit("auctionAlert", { message: "¡A las dos!", timeLeft: current.timeLeft });
         } else if (current.timeLeft === 0) {
           this.io.to(room).emit("auctionAlert", { message: "¡A las tres!", timeLeft: current.timeLeft });
@@ -31,7 +34,6 @@ class CountdownService {
             
             this.stopCountdown(room);
             
-            // Emitir el evento de finalización con los datos del ganador
             this.io.to(room).emit("auctionEnded", {
               timeExpired: true,
               winner: result.winner,
@@ -43,7 +45,7 @@ class CountdownService {
           return;
         }
 
-        this.io.to(room).emit("updateCountdown", current.timeLeft);
+        this.io.to(room).emit("updateProgress", progressPercentage);
       }, 1000),
     };
 
@@ -60,9 +62,11 @@ class CountdownService {
       countdown.interval = setInterval(async () => {
         countdown.timeLeft -= 1;
         
-        if (countdown.timeLeft === 120) {
+        const progressPercentage = (countdown.timeLeft / this.FULL_TIME) * 100;
+
+        if (progressPercentage <= 50 && progressPercentage > 49) {
           this.io.to(room).emit("auctionAlert", { message: "¡A la una!", timeLeft: countdown.timeLeft });
-        } else if (countdown.timeLeft === 60) {
+        } else if (progressPercentage <= 25 && progressPercentage > 24) {
           this.io.to(room).emit("auctionAlert", { message: "¡A las dos!", timeLeft: countdown.timeLeft });
         } else if (countdown.timeLeft === 0) {
           this.io.to(room).emit("auctionAlert", { message: "¡A las tres!", timeLeft: countdown.timeLeft });
@@ -73,7 +77,6 @@ class CountdownService {
             
             this.stopCountdown(room);
             
-            // Emitir el evento de finalización con los datos del ganador
             this.io.to(room).emit("auctionEnded", {
               timeExpired: true,
               winner: result.winner,
@@ -85,10 +88,10 @@ class CountdownService {
           return;
         }
 
-        this.io.to(room).emit("updateCountdown", countdown.timeLeft);
+        this.io.to(room).emit("updateProgress", progressPercentage);
       }, 1000);
 
-      this.io.to(room).emit("syncCountdown", this.FULL_TIME);
+      this.io.to(room).emit("syncProgress", 100);
     } else {
       this.startCountdown(room);
     }
