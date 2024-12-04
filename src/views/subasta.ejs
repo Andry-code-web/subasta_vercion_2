@@ -890,43 +890,49 @@
   </script>
 
   <script>
-    const btnRestar = document.getElementById('restar');
-    const btnSumatoria = document.getElementById('sumatoria');
-    const input = document.getElementById('valorOferta');
-    const incremento = 100;
-    // Valor base con prefijo
-    // Valor base con prefijo, eliminando la coma de ofertaActual
-    let valorBase = Number("<%= ofertaActual.replace(/,/g, '') %>"); // Convierte a número eliminando cualquier coma
-    input.value = `US$ ${formatearNumero(valorBase)}`; // Mostrar el precio base con el prefijo
+  const btnRestar = document.getElementById('restar');
+  const btnSumatoria = document.getElementById('sumatoria');
+  const input = document.getElementById('valorOferta');
+  const ofertaActual = <%- JSON.stringify(ofertaMaxima) %>;
+  const incremento = 100;
 
-    function formatearNumero(numero) {
-      return numero.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); // Agregar comas
-    }
+  // Valor base inicial
+  let valorBase = isNaN(ofertaActual) ? 0 : ofertaActual;
+  
+  // Establecer el valor inicial según si hay una oferta actual o no
+  input.value = ofertaActual ? `US$ ${formatearNumero(ofertaActual)}` : `US$ ${formatearNumero(valorBase)}`;
 
-    function actualizarValor(nuevoValor) {
-      input.value = `US$ ${formatearNumero(nuevoValor)}`; // Mostrar el valor actualizado con el prefijo
-    }
-    // Sumar
-    btnSumatoria.addEventListener('click', () => {
-      let valorActual = parseFloat(input.value.replace(/US\$ |,/g, '')); // Eliminar el prefijo y comas
+  // Función para formatear números con comas
+  function formatearNumero(numero) {
+      return numero.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  // Función para actualizar el valor del input
+  function actualizarValor(nuevoValor) {
+      input.value = `US$ ${formatearNumero(nuevoValor)}`;
+  }
+
+  // Sumar
+  btnSumatoria.addEventListener('click', () => {
+      let valorActual = parseFloat(input.value.replace(/US\$ |,/g, ''));
       if (!isNaN(valorActual)) {
-        actualizarValor(valorActual + incremento);
+          actualizarValor(valorActual + incremento);
       }
-    });
-    // Restar
-    btnRestar.addEventListener('click', () => {
-      let valorActual = parseFloat(input.value.replace(/US\$ |,/g, '')); // Eliminar el prefijo y comas
-      if (!isNaN(valorActual) && valorActual > valorBase) { // Solo permitir restar si es mayor que el valor base
-        actualizarValor(valorActual - incremento);
+  });
+
+  // Restar
+  btnRestar.addEventListener('click', () => {
+      let valorActual = parseFloat(input.value.replace(/US\$ |,/g, ''));
+      if (!isNaN(valorActual) && valorActual > valorBase) {
+          actualizarValor(valorActual - incremento);
       } else {
-        //alert("No se puede disminuir por debajo del precio base."); // Mensaje si se intenta restar demasiado
-        Swal.fire({
-          icon: 'error',
-          title: 'No se puede disminuir por debajo del precio base',
-        })
+          Swal.fire({
+              icon: 'error',
+              title: 'No se puede disminuir por debajo del precio base',
+          });
       }
-    });
-  </script>
+  });
+</script>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
