@@ -492,6 +492,48 @@
         progressBar.style.width = '0%';
       });
 
+     /*  socket.on('bid', async (data) => {
+        try {
+          if (!data.user || !data.bid || !data.room || data.bid <= 0) {
+            console.error("Datos de puja inválidos:", data);
+            return;
+          }
+
+          const userId = await AuctionService.getUserId(data.user);
+          if (!userId) {
+            console.error('Usuario no encontrado:', data.user);
+            return;
+          }
+
+          const auctionState = await AuctionService.getAuctionState(data.room);
+          if (auctionState) {
+            if (auctionState.current_bid >= data.bid) {
+              console.log("La puja es menor o igual a la actual. Ignorando...");
+              return; // Ignorar la puja si el monto no es mayor
+            }
+
+            const result = await AuctionService.saveBid(data.room, userId, data.bid, data.user);
+            if (result.success) {
+              if (!countdownService.isRunning(data.room)) {
+                countdownService.startCountdown(data.room);
+              } else {
+                countdownService.resetCountdown(data.room);
+              }
+
+              const updatedState = await AuctionService.getAuctionState(data.room);
+              io.to(data.room).emit('auctionState', {
+                ...updatedState,
+                timeLeft: countdownService.getTimeLeft(data.room),
+                countdownRunning: true,
+              });
+            }
+          }
+        } catch (error) {
+          console.error('Error al procesar puja:', error);
+          socket.emit('errorMessage', 'Hubo un problema al procesar tu puja.');
+        }
+      });*/
+      
       function showProrrogaMessage() {
         prorroga.textContent = "¡Prórroga! Se reinició el tiempo";
         setTimeout(() => {
@@ -893,40 +935,48 @@
     const btnRestar = document.getElementById('restar');
     const btnSumatoria = document.getElementById('sumatoria');
     const input = document.getElementById('valorOferta');
+    const ofertaActual = <%- JSON.stringify(ofertaMaxima) %>;
     const incremento = 100;
-    // Valor base con prefijo
-    // Valor base con prefijo, eliminando la coma de ofertaActual
-    let valorBase = Number("<%= ofertaActual.replace(/,/g, '') %>"); // Convierte a número eliminando cualquier coma
-    input.value = `US$ ${formatearNumero(valorBase)}`; // Mostrar el precio base con el prefijo
 
+    // Valor base inicial
+    let valorBase = isNaN(ofertaActual) ? 0 : ofertaActual;
+
+    // Establecer el valor inicial según si hay una oferta actual o no
+    input.value = ofertaActual ? `US$ ${formatearNumero(ofertaActual)}` : `US$ ${formatearNumero(valorBase)}`;
+
+    // Función para formatear números con comas
     function formatearNumero(numero) {
-      return numero.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); // Agregar comas
+      return numero.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
 
+    // Función para actualizar el valor del input
     function actualizarValor(nuevoValor) {
-      input.value = `US$ ${formatearNumero(nuevoValor)}`; // Mostrar el valor actualizado con el prefijo
+      input.value = `US$ ${formatearNumero(nuevoValor)}`;
     }
+
     // Sumar
     btnSumatoria.addEventListener('click', () => {
-      let valorActual = parseFloat(input.value.replace(/US\$ |,/g, '')); // Eliminar el prefijo y comas
+      let valorActual = parseFloat(input.value.replace(/US\$ |,/g, ''));
       if (!isNaN(valorActual)) {
         actualizarValor(valorActual + incremento);
       }
     });
+
     // Restar
     btnRestar.addEventListener('click', () => {
-      let valorActual = parseFloat(input.value.replace(/US\$ |,/g, '')); // Eliminar el prefijo y comas
-      if (!isNaN(valorActual) && valorActual > valorBase) { // Solo permitir restar si es mayor que el valor base
+      let valorActual = parseFloat(input.value.replace(/US\$ |,/g, ''));
+      if (!isNaN(valorActual) && valorActual > valorBase) {
         actualizarValor(valorActual - incremento);
       } else {
-        //alert("No se puede disminuir por debajo del precio base."); // Mensaje si se intenta restar demasiado
         Swal.fire({
           icon: 'error',
           title: 'No se puede disminuir por debajo del precio base',
-        })
+        });
       }
     });
   </script>
+
+
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {

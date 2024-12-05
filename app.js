@@ -7,20 +7,25 @@ const bodyParser = require("body-parser");
 const path = require("path");
 require("dotenv").config();
 
-// Conección a la base de datos
+// Conexión a la base de datos
 const { conection } = require("./src/database/db");
 const sessionStore = require("./src/database/sessionStore");
 const AuctionService = require("./src/services/auctionService");
 const MessageService = require("./src/services/messageService");
 const CountdownService = require('./src/services/countdownService');
+const BotService = require('./src/services/botService');
 
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 const port = process.env.PORT || 3000;
 
-// Instanciar CountdownService
+// Instanciar servicios
 const countdownService = new CountdownService(io);
+const botService = new BotService(io);
+
+// Conjunto para rastrear salas con bots activos
+const activeBotRooms = new Set();
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -71,7 +76,7 @@ io.on('connection', (socket) => {
         socket.emit('auctionState', {
           ...auctionState,
           timeLeft: countdownService.getTimeLeft(room),
-          countdownRunning: countdownService.isRunning(room)
+          countdownRunning: countdownService.isRunning(room),
         });
       }
     } catch (error) {
@@ -81,34 +86,46 @@ io.on('connection', (socket) => {
 
   socket.on('bid', async (data) => {
     try {
+      if (!data.user || !data.bid || !data.room || data.bid <= 0) {
+        console.error("Datos de puja inválidos:", data);
+        return;
+      }
+
       const userId = await AuctionService.getUserId(data.user);
       if (!userId) {
         console.error('Usuario no encontrado:', data.user);
         return;
       }
 
+      const auctionState = await AuctionService.getAuctionState(data.room);
+      if (auctionState && auctionState.current_bid === auctionState.base_price) {
+        if (!activeBotRooms.has(data.room)) {
+          botService.startBotBidding(data.room);
+          activeBotRooms.add(data.room);
+        }
+      }
+
       const result = await AuctionService.saveBid(data.room, userId, data.bid, data.user);
       if (result.success) {
-        // Iniciar o reiniciar el contador con cada puja
         if (!countdownService.isRunning(data.room)) {
           countdownService.startCountdown(data.room);
         } else {
           countdownService.resetCountdown(data.room);
         }
-        
+
         const updatedState = await AuctionService.getAuctionState(data.room);
         io.to(data.room).emit('auctionState', {
           ...updatedState,
           timeLeft: countdownService.getTimeLeft(data.room),
-          countdownRunning: true
+          countdownRunning: true,
         });
       }
     } catch (error) {
       console.error('Error al procesar puja:', error);
+      socket.emit('errorMessage', 'Hubo un problema al procesar tu puja.');
     }
   });
 
-  // Manejo de mensajes
   socket.on('sendMessage', (data) => {
     const { subastaId, userId, mensaje, monto } = data;
 
@@ -117,12 +134,10 @@ io.on('connection', (socket) => {
         console.error('Error al guardar el mensaje:', error);
         return;
       }
-      // Emitir el mensaje guardado a todos los clientes en la sala
       io.to(subastaId).emit('newMessage', { messageId, userId, mensaje, monto });
     });
   });
 
-  // Finalizar subasta
   socket.on('endAuction', async (room) => {
     try {
       await AuctionService.endAuction(room);
@@ -141,7 +156,6 @@ io.on('connection', (socket) => {
 
 server.timeout = 0;
 
-// Iniciar el servidor
 server.listen(port, () => {
   console.log(`El servidor está corriendo en el puerto ${port}`);
 });

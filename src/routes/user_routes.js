@@ -665,7 +665,12 @@ router.get('/subasta/:id', (req, res) => {
     ORDER BY fecha_subasta DESC, hora_subasta DESC 
     LIMIT 10`;
   const queryContarPujas = 'SELECT COUNT(*) AS total_pujas FROM ofertas WHERE id_subasta = ?';
+  const queryMaxOfertaSubasta = `
+  SELECT IFNULL(MAX(monto_oferta), ?) AS oferta_maxima
+  FROM ofertas 
+  WHERE id_subasta = ?`;
 
+  
   function formatNumber(num) {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
@@ -745,34 +750,49 @@ router.get('/subasta/:id', (req, res) => {
 
               const totalPujas = resultadoPujas[0].total_pujas;
 
-              conection.query(queryOfertasSubastas, [subastaId], (error, resultadoOfertas) => {
+              conection.query(queryMaxOfertaSubasta, [subasta.precio_base, subastaId], (error, resultadoMaxOferta) => {
                 if (error) {
-                  console.error("Error al obtener ofertas de la subasta", error);
-                  return res.status(500).send("Error al obtener ofertas de la subasta");
+                  console.error("Error al obtener oferta máxima", error);
+                  return res.status(500).send("Error al obtener oferta máxima");
                 }
-
-                resultadoOfertas.forEach(oferta => {
-                  oferta.fecha_subasta_formateada = moment(oferta.fecha_subasta).tz("America/Lima").format('DD/MM/YYYY [GMT -05:00]');
-                });
-
-                res.render("subasta", {
-                  usuario: req.session.usuario,
-                  subasta,
-                  imagenes: resultadoImagenes.map(img => img.imagen.toString('base64')),
-                  anexos: resultadoAnexos.map(anexo => ({ id: anexo.id, url: anexo.anexo })),
-                  estaEnCurso,
-                  estaTerminada,
-                  fechaFormateadaEsp,
-                  formatNumber,
-                  totalVisitas,
-                  totalPujas,
-                  ofertaActual,
-                  initialPrice,
-                  fechaHoraSubasta: fechaHoraSubasta.format(),
-                  fechaHoraFinSubasta: fechaHoraFinSubasta.format(),
-                  fechaHoraAperturaSubasta: fechaHoraAperturaSubasta.format(),
-                  fechaActual,
-                  oferta: resultadoOfertas
+              
+                // Obtener la oferta máxima o el precio base si no hay ofertas
+                const ofertaMaxima = resultadoMaxOferta[0].oferta_maxima;
+              
+                // Convertir la oferta máxima a un formato legible
+                const ofertaMaximaFormateada = formatNumber(ofertaMaxima);
+              
+                // Continuar con el flujo normal de las consultas y pasar la oferta máxima al frontend
+                conection.query(queryOfertasSubastas, [subastaId], (error, resultadoOfertas) => {
+                  if (error) {
+                    console.error("Error al obtener ofertas de la subasta", error);
+                    return res.status(500).send("Error al obtener ofertas de la subasta");
+                  }
+              
+                  resultadoOfertas.forEach(oferta => {
+                    oferta.fecha_subasta_formateada = moment(oferta.fecha_oferta).tz("America/Lima").format('DD/MM/YYYY [GMT -05:00]');
+                  });
+              
+                  res.render("subasta", {
+                    usuario: req.session.usuario,
+                    subasta,
+                    imagenes: resultadoImagenes.map(img => img.imagen.toString('base64')),
+                    anexos: resultadoAnexos.map(anexo => ({ id: anexo.id, url: anexo.anexo })),
+                    estaEnCurso,
+                    estaTerminada,
+                    fechaFormateadaEsp,
+                    formatNumber,
+                    totalVisitas,
+                    totalPujas,
+                    ofertaActual,
+                    ofertaMaxima: ofertaMaximaFormateada, // Aquí pasas la oferta máxima o precio base al frontend
+                    initialPrice,
+                    fechaHoraSubasta: fechaHoraSubasta.format(),
+                    fechaHoraFinSubasta: fechaHoraFinSubasta.format(),
+                    fechaHoraAperturaSubasta: fechaHoraAperturaSubasta.format(),
+                    fechaActual,
+                    oferta: resultadoOfertas
+                  });
                 });
               });
             });
@@ -1332,7 +1352,7 @@ router.get("/subastas_en_vivo", (req, res) => {
 
 //ingreso a la propuesta
 router.get('/propuesta/comprar', (req, res) => {
-  res.render('propuesta',{ usuario: req.session.usuario })
+  res.render('propuesta', { usuario: req.session.usuario })
 })
 
 module.exports = router;

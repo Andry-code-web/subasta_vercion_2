@@ -77,7 +77,7 @@
 
     <p class="precio_con_incremento">
       <span>Precio Inicial: </span>
-      <span>US$ <%= ofertaActual %></span>
+      <span>US$ <%= ofertaMaxima %></span>
     </p>
 
     <hr>
@@ -92,7 +92,7 @@
       <div class="inputGroup">
         <div class="d-flex justify-content-evenly align-items-center">
           <button class="restar" id="restar">-</button>
-          <input type="text" value="<%= ofertaActual %>" id="valorOferta">
+          <input type="text" value="<%= ofertaMaxima %>" id="valorOferta">
           <button class="sumar" id="sumatoria">+</button>
         </div>
         <p class="Incremento">Incremento US$100.00</p>
