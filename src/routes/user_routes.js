@@ -805,7 +805,6 @@ router.get('/subasta/:id', (req, res) => {
 
 
 
-
 // Ruta para obtener la puja más alta de una subasta
 router.get("/puja-mas-alta/:idSubasta", (req, res) => {
   const idSubasta = req.params.idSubasta;
