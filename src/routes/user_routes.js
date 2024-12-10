@@ -17,7 +17,7 @@ const isAuthenticated = (req, res, next) => {
   }
 };
 
-router.get("/", (req, res) => {
+/* router.get("/", (req, res) => {
   // Consulta para obtener todas las subastas, incluyendo likes
   let querySubastas = `
     SELECT s.*, IFNULL(l.like_count, 0) AS like_count
@@ -111,7 +111,7 @@ router.get("/", (req, res) => {
       });
     });
   });
-});
+}); */
 
 
 const AuctionService = require("../services/auctionService");
@@ -132,7 +132,7 @@ router.get('/auction-state/:id', async (req, res) => {
 });
 
 
-router.post("/", (req, res) => {
+/* router.post("/", (req, res) => {
   const { nombre, texto, rating } = req.body;
 
   if (!nombre || !texto || !rating) {
@@ -151,7 +151,7 @@ router.post("/", (req, res) => {
     }
     res.redirect("/");
   });
-});
+}); */
 
 /* LOGIN, LOGOUT GET POST */
 router.get("/login", (req, res) => {
@@ -408,7 +408,7 @@ router.post("/registro", (req, res) => {
 
 //hasta aiqui funciona
 // Catálogo con funcionalidad de búsqueda
-router.get("/catalogo", (req, res) => {
+router.get("/", (req, res) => {
   const { categoria, page = 1, estado, search } = req.query; // Parámetros de la consulta
   const usuario_id = req.session.usuario ? req.session.usuario.id : null;
   const limit = 12; // Número de subastas por página

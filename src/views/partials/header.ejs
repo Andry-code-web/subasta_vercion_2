@@ -11,12 +11,12 @@
         </button>
       </div>
       <ul class="navegador">
-        <li>
+        <!-- <li>
           <a href="/">Inicio</a>
         </li>
-        <hr class="ceparador">
+        <hr class="ceparador"> -->
         <li>
-          <a href="/catalogo">Catalogo</a>
+          <a href="/">Catalogo</a>
         </li>
         <hr class="ceparador">
         <li>
@@ -28,7 +28,7 @@
         </li>
         <li class="item_buscador">
           <div class="group ms-3">
-            <form id="search-form" action="/catalogo" method="GET">
+            <form id="search-form" action="/" method="GET">
               <input id="search-input" placeholder="Buscar marca o modelo" type="search" class="input" name="search">
               <button type="submit" class="btn_buscar">Buscar</button>
               <!-- <ul id="suggestions-list" class="suggestions"></ul> -->
@@ -66,20 +66,19 @@
               Categorias
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/catalogo?categoria=auto">Autos y Motos</a></li>
-              <li><a class="dropdown-item" href="/catalogo">Camiones y autobuses</a></li>
-              <li><a class="dropdown-item" href="/catalogo">Maquinaria de construccion y Agricola</a></li>
-              <li><a class="dropdown-item" href="/catalogo">Industrial, Maquinaria y Equipos</a></li>
-              <li><a class="dropdown-item" href="/catalogo">Movimiento y Transporte</a></li>
+              <li><a class="dropdown-item" href="/?categoria=camioneta">Camionetas</a></li>
+              <li><a class="dropdown-item" href="/?categoria=auto">Autos</a></li>
+              <li><a class="dropdown-item" href="/?categoria=moto">Motos</a></li>
+              <li><a class="dropdown-item" href="/?categoria=camioneta">Camiones</a></li>
             </ul>
           </li>
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" aria-current="page" href="/">Inicio</a>
-          </li>
+          </li> -->
 
           <li class="nav-item">
-            <a class="nav-link" href="/catalogo">Catalogo</a>
+            <a class="nav-link" href="/">Catalogo</a>
           </li>
 
           <li class="nav-item">
@@ -92,7 +91,7 @@
         </ul>
 
         <div class="group ms-3">
-          <form id="search-form" action="/catalogo" method="GET">
+          <form id="search-form" action="/" method="GET">
             <input id="search-input" placeholder="Buscar marca o modelo" type="search" class="input" name="search">
             <button type="submit" class="btn_buscar">Buscar</button>
             <!-- <ul id="suggestions-list" class="suggestions"></ul> -->
