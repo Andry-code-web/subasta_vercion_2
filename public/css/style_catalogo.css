@@ -12,7 +12,7 @@
   --font--about: "BioRhyme";
   --font--cont: "Scope One";
   --font--header--v2: "Poppins";
-  --bg--botones: #A29060;
+  --bg--botones: #d30000;
   --color--sub: #C5AC75;
 }
 
@@ -406,6 +406,20 @@ header .session p .btn_menu i {
   height: 100%;
 }
 
+.icono_martillo {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: var(--bg--botones);
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
 .carousel-inner {
   height: 200px;
 }
@@ -586,6 +600,16 @@ header .session p .btn_menu i {
 .button:hover {
   color: var(--black);
   background: var(--white);
+}
+
+.button_detalles{
+  background-color: #FB9A1F;
+  padding: .5rem 1rem;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: .5rem;
+  margin-left: 2.5rem;
+  color: #fff;
 }
 
 /*Hover*/
@@ -793,7 +817,7 @@ header .session p .btn_menu i {
 }
 
 .subasta-finalizada {
-  background-color: #7a0000;
+  background-color: var(--bg--botones);
   color: white;
   padding: 5px;
   border-radius: 5px;
@@ -826,13 +850,13 @@ header .session p .btn_menu i {
     margin-left: 2rem;
   }
 
-  .btn_fechas_F_A{
+  .btn_fechas_F_A {
     height: 93px;
     flex-direction: column;
     gap: 0.5rem;
   }
 
-  .btn_fechas_F_A a{
+  .btn_fechas_F_A a {
     padding: 4px 12px;
     font-size: 13px;
   }
@@ -932,11 +956,11 @@ header .session p .btn_menu i {
     margin-top: 0rem;
   }
 
-.card{
-  width: 314px;
-}
+  .card {
+    width: 314px;
+  }
 
-  .contenido_card_grid{
+  .contenido_card_grid {
     grid-template-columns: repeat(1, 1fr);
   }
 
@@ -962,7 +986,7 @@ header .session p .btn_menu i {
     align-items: center;
   }
 
-  .btn_fechas_F_A{
+  .btn_fechas_F_A {
     height: 100px;
     gap: 2rem;
   }
@@ -1068,12 +1092,12 @@ header .session p .btn_menu i {
     width: 56%;
   }
 
-  .card{
+  .card {
     width: 287px;
   }
 
-  .contenido_card_grid{
-    grid-template-columns: repeat(3,1fr);
+  .contenido_card_grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 
 }
@@ -1112,10 +1136,11 @@ header .session p .btn_menu i {
     width: 50%;
   }
 
-  .contenido_card_grid{
-    grid-template-columns: repeat(3,1fr);
+  .contenido_card_grid {
+    grid-template-columns: repeat(3, 1fr);
   }
-  .card{
+
+  .card {
     padding: 19px;
     width: 295px;
   }

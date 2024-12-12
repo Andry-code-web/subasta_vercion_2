@@ -19,7 +19,7 @@
     <div class="contenedor_general_a">
       <div class="banner_registro d-flex justify-content-center align-items-center flex-column">
         <h1>Bienvenido</h1>
-        <p> Podrás ver todos los detalles de las propiedades y participar en las subastas activas.</p>
+        <p> Podrás ver todos los detalles de los vehiculos y participar en las subastas activas.</p>
         <div class="tipo_persona">
           <button class="btn_persona_natural" onclick="PersonaNatural()">Persona natural</button>
           <button type="button" onclick="PersonaJuridica()">Persona jurídica</button>
@@ -31,7 +31,7 @@
       </div>
       <div class="contenedor_de_datos d-flex flex-column align-items-center">
         <div class="titulo">
-          <h2>Crea una cuenta Subasta Sur</h2>
+          <h2>Crea una cuenta SubastaSur</h2>
         </div>
         <div class="navegador d-flex justify-content-center flex-row">
           <div class="nav_datos uno active" id="step-1">
@@ -55,22 +55,22 @@
               <h5>Datos Personales Persona Natural</h5>
               <div class="espacioT nombre row">
                 <div class="col">
-                  <input type="text" name="nombre_apellidos" placeholder="Nombre y Apellidos" id="input_nombre">
+                  <input type="text" name="nombre_apellidos" placeholder="Nombre y Apellidos*" id="input_nombre">
                   <span id="nombreError" class="error-message"></span> <!-- Mensaje de error para Nombre -->
                 </div>
                 <div class="col">
-                  <input type="text" name="dni_ce" placeholder="DNI" id="input_dni">
+                  <input type="text" name="dni_ce" placeholder="DNI*" id="input_dni">
                   <span id="dniError" class="error-message"></span> <!-- Mensaje de error para DNI -->
                 </div>
               </div>
 
               <div class="espacioT email row">
                 <div class="col">
-                  <input type="email" name="email" placeholder="Email" id="email">
+                  <input type="email" name="email" placeholder="Email*" id="email">
                   <span id="emailError" class="error-message"></span> <!-- Mensaje de error para Email -->
                 </div>
                 <div class="col">
-                  <input type="email" name="confirmacion_email" placeholder="Confirmación Email"
+                  <input type="email" name="confirmacion_email" placeholder="Confirmación Email*"
                     id="confirmacion_email">
                   <span id="confirmacion_emailError" class="error-message"></span>
                   <!-- Mensaje de error para Confirmación Email -->
@@ -79,12 +79,12 @@
 
               <div class="espacioT sexo_fecha row">
                 <div class="col">
-                  <input type="date" name="fecha_nacimiento" placeholder="Fecha de Nacimiento" id="fecha_nacimiento">
+                  <input type="date" name="fecha_nacimiento" placeholder="Fecha de Nacimiento*" id="fecha_nacimiento">
                   <span id="fechaNacimientoError" class="error-message"></span>
                   <!-- Mensaje de error para Fecha de Nacimiento -->
                 </div>
                 <div class="col">
-                  <select name="sexo" id="sexo">
+                  <select name="sexo*" id="sexo">
                     <option value="">Seleccionar Sexo</option>
                     <option value="M">Masculino</option>
                     <option value="F">Femenino</option>
@@ -108,10 +108,10 @@
                   <input type="tel" name="celular" placeholder="Celular" id="celular">
                   <span id="celularError" class="error-message"></span> <!-- Mensaje de error para Celular -->
                 </div>
-                <div class="col">
+                <!-- <div class="col">
                   <input type="tel" name="telefono" placeholder="Teléfono" id="telefono">
-                  <span id="telefonoError" class="error-message"></span> <!-- Mensaje de error para Teléfono -->
-                </div>
+                  <span id="telefonoError" class="error-message"></span>
+                </div> -->
               </div>
 
               <div class="botones">
@@ -187,7 +187,7 @@
               </div>
               <div class="espacioT row">
                 <input class="col" type="tel" name="celular" placeholder="Celular">
-                <input class="col" type="tel" name="telefono" placeholder="Telefono">
+                <!-- <input class="col" type="tel" name="telefono" placeholder="Telefono"> -->
               </div>
               <div class="botones">
                 <button type="button" onclick="nextStepJ(1)">

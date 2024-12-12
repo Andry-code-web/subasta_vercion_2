@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="/css/partials/styles_tabla_Ofertas.css">
   <!-- ICONS -->
   <script src="https://kit.fontawesome.com/78137c0870.js" crossorigin="anonymous"></script>
-  <title>Subasta Sur || subasta</title>
+  <title>SubastaSur || subasta</title>
   <script src="/socket.io/socket.io.js"></script>
 
   <style>
@@ -215,7 +215,7 @@
             <h4>INFORMACIÓN DE APERTURA</h4>
             <p style="margin: 0;">
               <span>Vendedor: </span>
-              <span>Subasta Sur</span>
+              <span>SubastaSur</span>
             </p>
             <p class="precio_apertura">
               <span>Oferta inicial: </span>
@@ -484,7 +484,7 @@
           confirmButtonText: 'Ir al catálogo',
         }).then((result) => {
           if (result.isConfirmed) {
-            window.location.href = '/catalogo';
+            window.location.href = '/';
           }
         });
 
@@ -702,7 +702,7 @@
               showCancelButton: false,
               confirmButtonText: 'Ir al catálogo',
               preConfirm: () => {
-                window.location.href = '/catalogo';
+                window.location.href = '/c';
               }
             });
             return; // Salir del evento si la subasta ha terminado
@@ -753,7 +753,7 @@
               htmlContainer: 'custom-html-container'
             },
             onDismiss: () => {
-              window.location.href = '/catalogo';
+              window.location.href = '/';
             }
           });
 
@@ -771,7 +771,7 @@
             confirmButtonText: 'Ya deposité',
             cancelButtonText: 'No deposité',
             onDismiss: () => {
-              window.location.href = '/catalogo';
+              window.location.href = '/';
             }
           });
 
@@ -810,14 +810,14 @@
                           text: "Se está procesando el depósito. Por favor, espera...",
                           confirmButtonText: 'Ok'
                         }).then(() => {
-                          window.location.href = '/catalogo';
+                          window.location.href = '/';
                         });
                       } else {
-                        window.location.href = '/catalogo';
+                        window.location.href = '/';
                       }
                     });
                   } else {
-                    window.location.href = '/catalogo';
+                    window.location.href = '/';
                   }
                 });
               }
@@ -833,7 +833,7 @@
               confirmButtonText: 'Ya envié',
               cancelButtonText: 'Regresar',
               onDismiss: () => {
-                window.location.href = '/catalogo';
+                window.location.href = '/';
               }
             }).then(result => {
               if (result.isConfirmed) {
@@ -842,11 +842,11 @@
                   text: "Se está procesando el depósito. Por favor, espera...",
                   confirmButtonText: 'Ok',
                   onDismiss: () => {
-                    window.location.href = '/catalogo';
+                    window.location.href = '/';
                   }
                 });
               } else {
-                window.location.href = '/catalogo';
+                window.location.href = '/';
               }
             });
           }

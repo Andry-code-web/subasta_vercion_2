@@ -226,6 +226,9 @@
             <div class="carousel-inner">
               <% subasta.imagenes.forEach((imagen, index) => { %>
               <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+                <span class="icono_martillo">
+                  <i class="fa-solid fa-gavel fa-bounce"></i>
+                </span>
                 <img src="data:image/jpeg;base64,<%= imagen %>" class="d-block w-100" alt="Imagen de propiedad">
               </div>
               <% }) %>
@@ -279,6 +282,11 @@
                 US$
                 <span>
                   <%= subasta.precio_base %>
+                </span>
+                <span>
+                  <a href="/subasta/<%= subasta.id %>" class="button_detalles">
+                    <span class="button-text">Detalles</span>
+                  </a>
                 </span>
               </p>
             </div>

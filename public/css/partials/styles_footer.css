@@ -14,12 +14,15 @@
     --font--cont: "Scope One";
     --font--header--v2: "Poppins";
     --bg--botones: #d30000;
-    --color--sub: #d30000;
+    --color--sub: #fff;
 }
 
 /* FOOTER */
 footer {
     width: 100%;
+    background: #292929;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 .contenedor_superior {
@@ -49,6 +52,7 @@ footer {
     font-weight: 500;
     text-transform: uppercase;
     margin-top: 3.5%;
+    color: #fff;
 }
 
 .categoria2 {
@@ -118,10 +122,12 @@ footer {
 .descricion_footer{
     margin: 0;
     text-align: justify;
+    color: #fff;
 }
 
 .img_redes{
     width: 80%;
+    filter: invert(1) sepia(1) saturate(100%);
 }
 
 /* Extra small devices (phones, 600px and down) */
