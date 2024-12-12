@@ -233,6 +233,9 @@
             <li class="nav-item" role="presentation">
               <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Anexos</button>
             </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="proseso-tab" data-bs-toggle="tab" data-bs-target="#proseso-tab-pane" type="button" role="tab" aria-controls="proseso-tab-pane" aria-selected="false">Bases de la Subasta</button>
+            </li>
           </ul>
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
@@ -343,6 +346,11 @@
               <% } else { %>
               <p>No hay anexos disponibles.</p>
               <% } %>
+            </div>
+
+            <!-- Mostrar anexos en la vista -->
+            <div class="tab-pane fade contet_pdf" id="proseso-tab-pane" role="tabpanel" aria-labelledby="proseso-tab" tabindex="0">
+              <h1>Bases</h1>
             </div>
           </div>
         </div>
@@ -491,6 +499,14 @@
         disableButtons();
         progressBar.style.width = '0%';
       });
+
+      /* socket.on('resetProgressBar', () => {
+    // Aquí reinicias la barra de progreso al 100% o al valor deseado
+    progressBar.style.width = '100%'; // Si deseas reiniciar a 100%
+    // También puedes mostrar el mensaje si es necesario
+    showProrrogaMessage();
+}); */
+
 
      /*  socket.on('bid', async (data) => {
         try {

@@ -177,7 +177,7 @@ header .session p .btn_menu i {
 
 
 /* Estilos del título y la imagen del encabezado */
-.header {
+/* .header {
   position: relative;
 }
 
@@ -215,6 +215,33 @@ header .session p .btn_menu i {
 .header .overlay p {
   font-size: 1rem;
   font-family: var(--font--banner--semi);
+} */
+
+
+/* BANNER */
+.banner {
+  /*   position: relative; */
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  margin-top: 6rem;
+}
+
+.carousel {
+  width: 100%;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 8% !important;
+}
+
+.carousel-icon i,
+.carousel-next-icon i {
+  font-size: 3rem;
+  color: #fff;
 }
 
 /* Estilos del formulario de búsqueda */
@@ -824,7 +851,7 @@ header .session p .btn_menu i {
 }
 
 .subasta-activa {
-  background-color: rgb(255, 81, 0);
+  background-color: #25d366;
   color: #ffff;
   padding: 5px;
   border-radius: 5px;

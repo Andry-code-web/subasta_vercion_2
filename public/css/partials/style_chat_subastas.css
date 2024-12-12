@@ -25,9 +25,9 @@
   border-radius: 0.5rem;
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
   width: 370px;
-  height: 710px;
+  height: 770px;
   position: sticky;
-  top: 140px;
+  top: 135px;
 }
 
 .card-header {

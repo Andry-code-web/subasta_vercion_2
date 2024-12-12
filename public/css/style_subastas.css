@@ -358,10 +358,10 @@
   cursor: default;
 }
 
-.grid_info_card .div5 {
+/* .grid_info_card .div5 {
   grid-column: span 2 / span 2;
-  /* margin-top: 1rem; */
-}
+  margin-top: 1rem;
+} */
 
 .grid_info_card .div1 p,
 .grid_info_card .div2 p,
