@@ -45,7 +45,7 @@ h2 {
 
 .tabla_letras {
   color: #ffffff;
-  background-color: var(--color--sub);
+  background-color: #e40303;
   font-family: var(--font--sub--title--3);
 }
 

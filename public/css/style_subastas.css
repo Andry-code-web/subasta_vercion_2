@@ -319,7 +319,8 @@
 .precio_con_incremento span:last-child {
   font-size: 1.4rem;
   font-family: var(--font--banner--bool);
-  color: #00722a;
+  color: #000;
+  font-weight: 600;
 }
 
 .info_apertura p span:last-child {
