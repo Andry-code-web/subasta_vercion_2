@@ -36,8 +36,6 @@
   flex-direction: column;
   justify-content: center;
   gap: 1rem;
-  position: relative;
-  left: 8%;
 }
 
 .regreso {
@@ -45,7 +43,7 @@
 }
 
 .imagen_fondo {
-  height: 90%;
+  height: 100%;
 }
 
 .fondo {
