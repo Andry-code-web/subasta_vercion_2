@@ -890,10 +890,14 @@ header .session p .btn_menu i {
   margin-top: 1rem;
 }
 
-.fecha_ubicacion_subastas .ubicacion_subasta{
+.fecha_ubicacion_subastas .ubicacion_subasta {
   margin: 0;
   padding: 0;
-  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
 }
 
 /* Extra small devices (phones, 600px and down) */

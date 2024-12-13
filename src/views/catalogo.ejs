@@ -402,7 +402,14 @@
           </div>
 
           <div class="d-flex justify-content-around align-items-center fecha_ubicacion_subastas">
-            <div>
+            <div style="
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            justify-content: center;
+            align-items: center;
+        ">
+              Inicia en:
               <!-- Mostrar la fecha de la subasta -->
               <% 
           // Comprobamos el estado de la subasta basado en act_fina
@@ -431,7 +438,8 @@
             </div>
             <div>
               <p class="ubicacion_subasta">
-                <strong><%= subasta.ubicacion %></strong>
+                Ubicacion:
+                <strong style="  text-transform: uppercase;"><%= subasta.ubicacion %></strong>
               </p>
             </div>
           </div>
