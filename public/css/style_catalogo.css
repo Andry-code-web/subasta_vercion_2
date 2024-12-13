@@ -861,7 +861,7 @@ header .session p .btn_menu i {
 
 .footer {
   float: right;
-  margin: 28px 0 0 18px;
+ /*  margin: 28px 0 0 18px; */
   font-size: 13px;
   color: #636363;
 }
@@ -875,15 +875,26 @@ header .session p .btn_menu i {
   color: white;
   padding: 5px;
   border-radius: 5px;
+  margin: 0;
 }
 
 .subasta-activa {
   background-color: #25d366;
   color: #ffff;
-  padding: 5px;
+  padding: 5px 20px;
   border-radius: 5px;
 }
 
+.fecha_ubicacion_subastas{
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.fecha_ubicacion_subastas .ubicacion_subasta{
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+}
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {

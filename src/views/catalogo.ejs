@@ -401,6 +401,41 @@
             </button>
           </div>
 
+          <div class="d-flex justify-content-around align-items-center fecha_ubicacion_subastas">
+            <div>
+              <!-- Mostrar la fecha de la subasta -->
+              <% 
+          // Comprobamos el estado de la subasta basado en act_fina
+          if (subasta.act_fina === 'finalizada') {
+              // Si la subasta está marcada como finalizada
+              %>
+              <p class="footer subasta-finalizada">
+                <i class="fa-solid fa-gavel" style="color: #ffffff;"></i>
+                <span class="date">
+                  <%= subasta.fecha_formateada %>
+                </span>
+              </p>
+              <%
+          } else {
+              // La subasta está activa
+              %>
+              <p class="footer subasta-activa">
+                <i class="fa-solid fa-gavel fa-bounce" style="color: #ffffff;"></i>
+                <span class="date">
+                  <%= subasta.fecha_formateada %>
+                </span>
+              </p>
+              <%
+          }
+          %>
+            </div>
+            <div>
+              <p class="ubicacion_subasta">
+                <strong><%= subasta.ubicacion %></strong>
+              </p>
+            </div>
+          </div>
+
           <a href="/subasta/<%= subasta.id %>" class="card_likeada_info">
             <p class="card-title">
               <span>
@@ -462,31 +497,6 @@
               <i class="bi bi-heart like-icon <%= subasta.liked_by_user ? 'd-none' : 'like-empty' %>"></i>
             </button>
 
-            <!-- Mostrar la fecha de la subasta -->
-            <% 
-// Comprobamos el estado de la subasta basado en act_fina
-if (subasta.act_fina === 'finalizada') {
-    // Si la subasta está marcada como finalizada
-    %>
-            <p class="footer subasta-finalizada">
-              <i class="fa-solid fa-gavel" style="color: #ffffff;"></i>
-              <span class="date">
-                <%= subasta.fecha_formateada %>
-              </span>
-            </p>
-            <%
-} else {
-    // La subasta está activa
-    %>
-            <p class="footer subasta-activa">
-              <i class="fa-solid fa-gavel fa-bounce" style="color: #ffffff;"></i>
-              <span class="date">
-                <%= subasta.fecha_formateada %>
-              </span>
-            </p>
-            <%
-}
-%>
 
 
 
