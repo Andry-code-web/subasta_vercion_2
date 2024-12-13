@@ -235,6 +235,15 @@
   /* Alinea el texto a la izquierda */
 }
 
+.nav-link{
+  color: #000 !important;
+}
+
+.nav-tabs .nav-link.active{
+  background-color: #BD0000 !important;
+  color: #fff !important;
+}
+
 .info_apertura_redes {
   width: 100%;
   height: auto;
@@ -372,6 +381,7 @@
   font-family: var(--font--banner--bool);
   margin: 0;
   padding: 0;
+  text-align: center;
 }
 
 .grid_info_card .div5 a {
@@ -429,6 +439,49 @@
   text-decoration: underline;
 }
 
+
+.contet_bases{
+  padding: 1rem 1.5rem;
+}
+
+.contet_bases h2{
+  font-size: 1.5rem;
+  color: #990000;
+  font-family: var(--font--banner--semi);
+}
+
+.contet_bases h3{
+  font-size: 1.3rem;
+  color: #000;
+  font-family: var(--font--sub--title);
+  font-weight: 500;
+}
+
+ul li span{
+  font-size: 1rem;
+  font-family: var(--font--sub--title);
+  color: #494949;
+  font-weight: 700;
+}
+
+.section_durante p,
+.section_pagos p{
+  font-size: 1rem;
+  font-family: var(--font--sub--title);
+}
+
+.section_durante p strong,
+.section_pagos p strong{
+  font-size: 1.05rem;
+  font-family: var(--font--sub--title);
+  font-weight: 700; 
+}
+
+.section_durante ul li,
+.section_pagos ul li{
+  font-size: 1rem;
+  font-family: var(--font--sub--title);
+}
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {

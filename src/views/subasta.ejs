@@ -348,9 +348,53 @@
               <% } %>
             </div>
 
-            <!-- Mostrar anexos en la vista -->
-            <div class="tab-pane fade contet_pdf" id="proseso-tab-pane" role="tabpanel" aria-labelledby="proseso-tab" tabindex="0">
-              <h1>Bases</h1>
+            <!-- Mostrar bases de la subasta  -->
+            <div class="tab-pane fade contet_bases" id="proseso-tab-pane" role="tabpanel" aria-labelledby="proseso-tab" tabindex="0">
+              <h2>Bases del Portal SUBASTASUR</h2>
+
+              <div class="section">
+                <h3>Definiciones</h3>
+                <ul>
+                  <li><span class="highlight">ADJUDICADO:</span> Postor ganador del lote en atención a su mejor oferta.</li>
+                  <li><span class="highlight">LOTE:</span> Bien mueble de la subasta electrónica.</li>
+                  <li><span class="highlight">OFERTA:</span> Propuesta(s) de compra ingresadas en el portal de SUBASTASUR.</li>
+                  <li><span class="highlight">VENDEDOR:</span> Empresa dueña de los activos, contrata a SUBASTASUR para llevar a cabo el servicio de venta por el portal.</li>
+                  <li><span class="highlight">PARTICIPANTE Y/O POSTOR:</span> Usuario (persona natural o jurídica) que acepta los Términos y Condiciones para la subasta Electrónica y realiza una o más ofertas en la plataforma de Subastas de SUBASTASUR.</li>
+                  <li><span class="highlight">USUARIO:</span> Persona Individual, Persona Jurídica y/o Extranjero debidamente registrada en el sistema de SUBASTASUR.</li>
+                  <li><span class="highlight">PRECIO BASE:</span> Todo lote o bien mostrado en la web, iniciará con un valor que no implica la aceptación de venta por parte del vendedor (EXISTE UN PRECIO DE RESERVA).</li>
+                </ul>
+              </div>
+
+              <div class="section_durante">
+                <h3>Durante el Remate</h3>
+                <p>La Subasta tendrá una fecha y horario previsto de cierre que se indica en el portal de SUBASTASUR (para tal efecto, existe un reloj en el Portal SUBASTASUR). SUBASTASUR se reserva el derecho de anular y/o aplazar la subasta por inconvenientes técnicos que se puedan suscitar.</p>
+                <ul>
+                  <li>Se recomienda a los interesados ingresar su oferta con un mínimo de 20 segundos antes que el reloj llegue a cero.</li>
+                  <li>EL VENDEDOR y SUBASTASUR se reservan el derecho de retirar de la subasta los activos que cuenten con algún problema de documentación, físico, mecánico u otro que imposibiliten la venta.</li>
+                  <li>Los ofertantes no podrán solicitar eliminar ofertas una vez ejecutadas en nuestro sistema.</li>
+                </ul>
+              </div>
+
+              <div class="section_pagos">
+                <h3>Pagos</h3>
+                <ul>
+                  <li>En caso de que se acepte la oferta del Mejor Ofertante y posterior al pago de la totalidad a EL VENDEDOR, SUBASTASUR procederá a facturar el 10% de garantía retenida como concepto de comisión de intermediación de la venta.</li>
+                  <li>El precio final del bien deberá pagarse a EL VENDEDOR, a más tardar, 48 horas posterior a la comunicación de SUBASTASUR, vía correo electrónico registrado del usuario ganador.</li>
+                  <li>El pago será mediante depósito, transferencia bancaria o Cheque de Gerencia a las siguientes cuentas:</li>
+                </ul>
+                <p><strong>Cuenta para Depósito de la Garantía</strong></p>
+                <ul>
+                  <li><span class="highlight">Banco:</span> BANCO DE CRÉDITO DEL PERÚ</li>
+                  <li><span class="highlight">Cuenta Corriente Soles:</span></li>
+                  <li><span class="highlight">Código de Cuenta Interbancaria:</span></li>
+                  <li><span class="highlight">Titular:</span> SUBASTA SUR SAC</li>
+                  <li><span class="highlight">RUC:</span> 2060935301</li>
+                </ul>
+                <p><strong>ENTREGA DEL AUTO</strong></p>
+                <p>La entrega del lote es “donde está y como está”, por tanto, será responsabilidad del adjudicado retirar todos los suministros de almacén de dicho lugar dentro de los 3 días hábiles siguientes a la adjudicación y trasladarlos a su lugar de destino final. De no retirar los bienes dentro del plazo antes indicado se aplicarán costos de almacenaje.</p>
+                <p><strong>Devolución de la Garantía</strong></p>
+                <p>SUBASTASUR devolverá la Garantía de los 500 Dólares en un aproximado de 5 a 7 días hábiles. Esta será notificada por correo o podrá solicitarse a <a href="mailto:devoluciones@subastasur.com">devoluciones@subastasur.com</a>.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -508,48 +552,48 @@
 }); */
 
 
-     /*  socket.on('bid', async (data) => {
-        try {
-          if (!data.user || !data.bid || !data.room || data.bid <= 0) {
-            console.error("Datos de puja inválidos:", data);
-            return;
-          }
+      /*  socket.on('bid', async (data) => {
+         try {
+           if (!data.user || !data.bid || !data.room || data.bid <= 0) {
+             console.error("Datos de puja inválidos:", data);
+             return;
+           }
 
-          const userId = await AuctionService.getUserId(data.user);
-          if (!userId) {
-            console.error('Usuario no encontrado:', data.user);
-            return;
-          }
+           const userId = await AuctionService.getUserId(data.user);
+           if (!userId) {
+             console.error('Usuario no encontrado:', data.user);
+             return;
+           }
 
-          const auctionState = await AuctionService.getAuctionState(data.room);
-          if (auctionState) {
-            if (auctionState.current_bid >= data.bid) {
-              console.log("La puja es menor o igual a la actual. Ignorando...");
-              return; // Ignorar la puja si el monto no es mayor
-            }
+           const auctionState = await AuctionService.getAuctionState(data.room);
+           if (auctionState) {
+             if (auctionState.current_bid >= data.bid) {
+               console.log("La puja es menor o igual a la actual. Ignorando...");
+               return; // Ignorar la puja si el monto no es mayor
+             }
 
-            const result = await AuctionService.saveBid(data.room, userId, data.bid, data.user);
-            if (result.success) {
-              if (!countdownService.isRunning(data.room)) {
-                countdownService.startCountdown(data.room);
-              } else {
-                countdownService.resetCountdown(data.room);
-              }
+             const result = await AuctionService.saveBid(data.room, userId, data.bid, data.user);
+             if (result.success) {
+               if (!countdownService.isRunning(data.room)) {
+                 countdownService.startCountdown(data.room);
+               } else {
+                 countdownService.resetCountdown(data.room);
+               }
 
-              const updatedState = await AuctionService.getAuctionState(data.room);
-              io.to(data.room).emit('auctionState', {
-                ...updatedState,
-                timeLeft: countdownService.getTimeLeft(data.room),
-                countdownRunning: true,
-              });
-            }
-          }
-        } catch (error) {
-          console.error('Error al procesar puja:', error);
-          socket.emit('errorMessage', 'Hubo un problema al procesar tu puja.');
-        }
-      });*/
-      
+               const updatedState = await AuctionService.getAuctionState(data.room);
+               io.to(data.room).emit('auctionState', {
+                 ...updatedState,
+                 timeLeft: countdownService.getTimeLeft(data.room),
+                 countdownRunning: true,
+               });
+             }
+           }
+         } catch (error) {
+           console.error('Error al procesar puja:', error);
+           socket.emit('errorMessage', 'Hubo un problema al procesar tu puja.');
+         }
+       });*/
+
       function showProrrogaMessage() {
         prorroga.textContent = "¡Prórroga! Se reinició el tiempo";
         setTimeout(() => {

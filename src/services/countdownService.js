@@ -2,7 +2,7 @@ class CountdownService {
   constructor(io) {
     this.io = io;
     this.countdowns = new Map();
-    this.FULL_TIME = 20; // 
+    this.FULL_TIME = 10; // 
   }
 
   startCountdown(room) {

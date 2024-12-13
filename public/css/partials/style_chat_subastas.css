@@ -314,14 +314,22 @@
   transition: background-color 0.3s ease;
 }
 
-.card-body button,
-.card-body-puja button {
+.card-body button{
   background-color: var(--bg--botones);
+  
 }
 
-.card-body button:hover,
-.card-body-puja button:hover {
+.card-body button:hover{
   background-color: #ffa928;
+}
+
+.card-body-puja button {
+  background-color: #00521e;
+}
+
+.card-body-puja button:hover {
+  background-color: #00722a;
+  
 }
 
 .card-body-termino button {
@@ -346,13 +354,14 @@
 
 .card-body .apertura_cierre .titulo_cierre,
 .card-body .apertura_cierre .titulo_apertura {
-  font-weight: 400;
+  font-weight: 600;
   font-size: 1.1rem;
 }
 
 .titulo_cierre,
 .titulo_apertura {
   margin: 0;
+  color: #000;
 }
 
 .horasss {

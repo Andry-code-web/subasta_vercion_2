@@ -448,7 +448,7 @@ header .session p .btn_menu i {
 }
 
 .carousel-inner {
-  height: 200px;
+  height: 310px;
 }
 
 .carousel-item {
@@ -635,7 +635,7 @@ header .session p .btn_menu i {
   font-size: 1rem;
   text-decoration: none;
   border-radius: .5rem;
-  margin-left: 2.5rem;
+  margin-left: 1rem;
   color: #fff;
 }
 
