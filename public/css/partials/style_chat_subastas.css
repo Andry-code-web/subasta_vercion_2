@@ -125,7 +125,7 @@
   font-family: var(--font--sub--title--2);
   font-size: 1.1rem;
   font-weight: 600;
-  margin: 1rem 0;
+  margin: .2rem 0;
 }
 
 .incremento_precio {
@@ -273,7 +273,7 @@
 
 .card-body h2 {
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: .5rem;
   color: #BD0000;
   font-size: .9rem;
   font-family: var(--font--about);
@@ -599,6 +599,31 @@ hr {
 .progress-bar {
   transition: width 0.1s linear;
 }
+
+.estado_subasta_actualizar {
+  color: red;
+  font-size: 0.9rem;
+  font-family: var(--font--banner--bool);
+  margin: 0;
+  padding: 0;
+  animation: palpito 2s infinite;
+}
+
+@keyframes palpito {
+  0% {
+    transform: scale(1); /* Estado inicial */
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1); /* Crece ligeramente */
+    opacity: 0.8; /* Reduce ligeramente la opacidad */
+  }
+  100% {
+    transform: scale(1); /* Vuelve al tamaño original */
+    opacity: 1;
+  }
+}
+
 
 /* Moises_Responsive tarjeta */
 /* Small devices (small cell phones, 360px and up) */

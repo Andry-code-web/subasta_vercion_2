@@ -89,9 +89,9 @@ class BotService {
                 } finally {
                     setTimeout(() => {
                         this.processingBids.delete(bidKey);
-                    }, 300);
+                    }, 50);
                 }
-            }, 50); // Tiempo entre pujas reducido a 500ms
+            }, 2000); // Tiempo entre pujas reducido a 500ms
     
             this.bidTimeouts.set(room, timeout);
         } catch (error) {

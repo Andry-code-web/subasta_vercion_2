@@ -412,7 +412,6 @@
     <div class="d-flex justify-content-around align-items-center">
       <h2>OFERTAS CONSOLIDADAS</h2>
       <p class="offer-summary"><strong>Total de ofertantes: <%= totalPujas %> </strong></p>
-
     </div>
 
     <table class="tabla_principal">
@@ -529,11 +528,14 @@
         const state = await fetch(`/auction-state/${auctionRoom}`).then(res => res.json());
 
         Swal.fire({
-          title: '¡Subasta finalizada!',
-          text: `El ganador es: ${state.currentWinner} con una oferta de US$${formatNumber(state.currentBid)}`,
-          icon: 'success',
+          title: '¡Felicidades!',
+          text: `El ganador es: ${state.currentWinner} con una oferta de US$${formatNumber(state.currentBid)}\n\nRecibira en breves un correo del portal de Subastasur`,
+          imageUrl: '/img/confeti.gif',
+          imageWidth: 150,
+          imageHeight: 150,
+          imageAlt: 'GIF personalizado',
           allowOutsideClick: false,
-          confirmButtonText: 'Ir al catálogo',
+          confirmButtonText: 'Vamos por mas Subastas'
         }).then((result) => {
           if (result.isConfirmed) {
             window.location.href = '/';
@@ -1214,7 +1216,7 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const countdownElement = document.getElementById("countdown-timer");
-      const estadoSubasta = document.getElementById("estado_subasta");
+      /* const estadoSubasta = document.getElementById("estado_subasta"); */
 
       //fecha de la subasta
       const fechaIniciSubasta = new Date("<%= fechaHoraSubasta %>").getTime();
@@ -1226,7 +1228,7 @@
 
         if (timeLeftAntes <= 0) {
           clearInterval(IntervalId);
-          estadoSubasta.innerHTML = "La subasta a comenzado actualize la pagina";
+          /* estadoSubasta.innerHTML = "La subasta a comenzado actualize la pagina"; */
           countdownElement.innerHTML = "0d 0h 0m 0s";
           return;
         }

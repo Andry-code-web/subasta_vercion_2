@@ -2,38 +2,43 @@ class CountdownService {
   constructor(io) {
     this.io = io;
     this.countdowns = new Map();
-    this.FULL_TIME = 10; // 
+    this.FULL_TIME = 20; // 
   }
 
   startCountdown(room) {
     if (this.countdowns.has(room)) {
       clearInterval(this.countdowns.get(room).interval);
     }
-
+  
     const countdown = {
       timeLeft: this.FULL_TIME,
       interval: setInterval(async () => {
         const current = this.countdowns.get(room);
         if (!current) return;
-
+  
         current.timeLeft -= 1;
-        
+  
         // Calculate progress percentage
         const progressPercentage = (current.timeLeft / this.FULL_TIME) * 100;
-
+  
+        // A la una (50%)
         if (progressPercentage <= 50 && progressPercentage > 49) {
           this.io.to(room).emit("auctionAlert", { message: "¡A la una!", timeLeft: current.timeLeft });
-        } else if (progressPercentage <= 25 && progressPercentage > 24) {
+        } 
+        // A las dos (25%)
+        else if (progressPercentage <= 25 && progressPercentage > 24) {
           this.io.to(room).emit("auctionAlert", { message: "¡A las dos!", timeLeft: current.timeLeft });
-        } else if (current.timeLeft === 0) {
+        } 
+        // A las tres (0%)
+        else if (current.timeLeft === 0) {
           this.io.to(room).emit("auctionAlert", { message: "¡A las tres!", timeLeft: current.timeLeft });
-          
+  
           try {
             const AuctionService = require('./auctionService');
             const result = await AuctionService.endAuction(room);
-            
+  
             this.stopCountdown(room);
-            
+  
             this.io.to(room).emit("auctionEnded", {
               timeExpired: true,
               winner: result.winner,
@@ -44,11 +49,11 @@ class CountdownService {
           }
           return;
         }
-
+  
         this.io.to(room).emit("updateProgress", progressPercentage);
       }, 1000),
     };
-
+  
     this.countdowns.set(room, countdown);
     return countdown.timeLeft;
   }
@@ -58,25 +63,25 @@ class CountdownService {
     if (countdown) {
       clearInterval(countdown.interval);
       countdown.timeLeft = this.FULL_TIME;
-      
+  
       countdown.interval = setInterval(async () => {
         countdown.timeLeft -= 1;
-        
+  
         const progressPercentage = (countdown.timeLeft / this.FULL_TIME) * 100;
-
-        if (progressPercentage <= 50 && progressPercentage > 49) {
+  
+        if (Math.ceil(progressPercentage) === 50) {
           this.io.to(room).emit("auctionAlert", { message: "¡A la una!", timeLeft: countdown.timeLeft });
-        } else if (progressPercentage <= 25 && progressPercentage > 24) {
+        } else if (Math.ceil(progressPercentage) === 25) {
           this.io.to(room).emit("auctionAlert", { message: "¡A las dos!", timeLeft: countdown.timeLeft });
         } else if (countdown.timeLeft === 0) {
           this.io.to(room).emit("auctionAlert", { message: "¡A las tres!", timeLeft: countdown.timeLeft });
-          
+  
           try {
             const AuctionService = require('./auctionService');
             const result = await AuctionService.endAuction(room);
-            
+  
             this.stopCountdown(room);
-            
+  
             this.io.to(room).emit("auctionEnded", {
               timeExpired: true,
               winner: result.winner,
@@ -87,10 +92,10 @@ class CountdownService {
           }
           return;
         }
-
+  
         this.io.to(room).emit("updateProgress", progressPercentage);
       }, 1000);
-
+  
       this.io.to(room).emit("syncProgress", 100);
     } else {
       this.startCountdown(room);
