@@ -237,6 +237,9 @@ router.post("/registro", (req, res) => {
   const datos = req.body;
 
   // Determinar el tipo de persona y asignar valores predeterminados
+  // Obtener la fecha actual para la fecha de registro
+  const fechaRegistro = new Date().toISOString().split('T')[0];
+
   if (datos.tipo_persona === "natural") {
     // Persona Natural
     const valores = {
@@ -262,6 +265,7 @@ router.post("/registro", (req, res) => {
       usuario: datos.usuario || "0",
       contraseña: datos.contraseña || "0",
       terminos_y_condiciones: parseInt(datos.terminos_y_condiciones) ? 1 : 0,
+      fecha_registro: fechaRegistro,
     };
 
     // Encriptar la contraseña
@@ -280,8 +284,8 @@ router.post("/registro", (req, res) => {
             nombre_apellidos, dni_ce, fecha_nacimiento, sexo, estado_civil,
             ruc, nombre_comercial, actividad_comercial,
             departamento, provincia, distrito, direccion, numero, complemento,
-            usuario, contraseña, terminos_y_condiciones
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            usuario, contraseña, terminos_y_condiciones, fecha_registro
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `;
 
       conection.query(
@@ -309,6 +313,7 @@ router.post("/registro", (req, res) => {
           valores.usuario,
           valores.contraseña,
           valores.terminos_y_condiciones,
+          valores.fecha_registro,
         ],
         (err, results) => {
           if (err) {
@@ -344,6 +349,7 @@ router.post("/registro", (req, res) => {
       usuario: datos.usuario || "0",
       contraseña: datos.contraseña || "0",
       terminos_y_condiciones: parseInt(datos.terminos_y_condiciones) ? 1 : 0,
+      fecha_registro: fechaRegistro,
     };
 
     // Encriptar la contraseña
@@ -362,8 +368,8 @@ router.post("/registro", (req, res) => {
             nombre_apellidos, dni_ce, fecha_nacimiento, sexo, estado_civil,
             ruc, nombre_comercial, actividad_comercial,
             departamento, provincia, distrito, direccion, numero, complemento,
-            usuario, contraseña, terminos_y_condiciones
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            usuario, contraseña, terminos_y_condiciones, fecha_registro
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `;
 
       conection.query(
@@ -391,6 +397,7 @@ router.post("/registro", (req, res) => {
           valores.usuario,
           valores.contraseña,
           valores.terminos_y_condiciones,
+          valores.fecha_registro,
         ],
         (err, results) => {
           if (err) {
@@ -670,7 +677,7 @@ router.get('/subasta/:id', (req, res) => {
   FROM ofertas 
   WHERE id_subasta = ?`;
 
-  
+
   function formatNumber(num) {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
@@ -755,24 +762,24 @@ router.get('/subasta/:id', (req, res) => {
                   console.error("Error al obtener oferta máxima", error);
                   return res.status(500).send("Error al obtener oferta máxima");
                 }
-              
+
                 // Obtener la oferta máxima o el precio base si no hay ofertas
                 const ofertaMaxima = resultadoMaxOferta[0].oferta_maxima;
-              
+
                 // Convertir la oferta máxima a un formato legible
                 const ofertaMaximaFormateada = formatNumber(ofertaMaxima);
-              
+
                 // Continuar con el flujo normal de las consultas y pasar la oferta máxima al frontend
                 conection.query(queryOfertasSubastas, [subastaId], (error, resultadoOfertas) => {
                   if (error) {
                     console.error("Error al obtener ofertas de la subasta", error);
                     return res.status(500).send("Error al obtener ofertas de la subasta");
                   }
-              
+
                   resultadoOfertas.forEach(oferta => {
                     oferta.fecha_subasta_formateada = moment(oferta.fecha_oferta).tz("America/Lima").format('DD/MM/YYYY [GMT -05:00]');
                   });
-              
+
                   res.render("subasta", {
                     usuario: req.session.usuario,
                     subasta,
