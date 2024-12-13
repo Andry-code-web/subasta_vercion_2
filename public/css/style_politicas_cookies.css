@@ -37,7 +37,7 @@
 }
 
 .contenedor_cookies h1{
-    color: var(--color--sub);
+    color: #d30000;
     font-family: var(--font--banner--bool);
     font-size: 1.7rem;
     font-weight: 400;
