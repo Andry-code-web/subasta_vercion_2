@@ -66,6 +66,7 @@ footer {
 .categoria2 a {
     text-decoration: none;
     color: var(--color--footer-letras);
+    font-size: .9rem;
 }
 
 .ayuda {
@@ -78,6 +79,7 @@ footer {
 .ayuda a {
     text-decoration: none;
     color: var(--color--footer-letras);
+    font-size: .9rem;
 }
 
 .terminos_condiciones {
@@ -96,6 +98,10 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.terminos_f a{
+    font-size: .9rem;
 }
 
 .redes_sociales {
@@ -124,6 +130,7 @@ footer {
     margin: 0;
     text-align: justify;
     color: #fff !important;
+    font-size: .9rem;
 }
 
 .img_redes{

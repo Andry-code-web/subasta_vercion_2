@@ -377,7 +377,7 @@
         <% subastas.forEach(subasta => { %>
         <div class="card">
           <div id="carouselExample<%= subasta.id %>" class="carousel slide slider">
-            <div class="carousel-inner">
+            <div class="carousel-inner baner_img_subasta">
               <% subasta.imagenes.forEach((imagen, index) => { %>
               <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
                 <span class="icono_martillo">
@@ -430,12 +430,17 @@
 
             <div class="precio_info_cata">
               <p class="card_precios">
-                Precio Base
+                Precio Base:
+                <span class="precio_catalogo_base">US$ <%= subasta.precio_base %></span>
               </p>
               <p class="precio_info">
-                US$
                 <span>
-                  <%= subasta.precio_base %>
+                  <a href="/subasta/<%= subasta.id %>" class="button_subasta">
+                    <span class="button-text">
+                      <i class="fa-solid fa-car" style="color: #ffffff; margin-right: .2rem;"></i>
+                      Subastas
+                    </span>
+                  </a>
                 </span>
                 <span>
                   <a href="/subasta/<%= subasta.id %>" class="button_detalles">
