@@ -1358,7 +1358,11 @@ router.get("/subastas_en_vivo", (req, res) => {
       GROUP BY subasta_id
     ) l ON s.id = l.subasta_id
     WHERE ? BETWEEN CONCAT(s.fecha_subasta, ' ', s.hora_subasta) 
-      AND DATE_ADD(CONCAT(s.fecha_subasta, ' ', s.hora_subasta), INTERVAL 360 MINUTE)`;
+      AND DATE_ADD(CONCAT(s.fecha_subasta, ' ', s.hora_subasta), INTERVAL 360 MINUTE)
+      AND s.auctionEnded = 0   -- Excluir subastas que ya han terminado
+      AND s.currentWinner IS NULL  -- Excluir subastas que ya tienen un ganador
+      AND s.currentBid IS NULL    -- Excluir subastas que ya tienen una puja activa
+  `;
 
   conection.query(querySubastasEnCurso, [now], (error, subastas) => {
     if (error) {
@@ -1381,7 +1385,8 @@ router.get("/subastas_en_vivo", (req, res) => {
     const queryImagenes = `
       SELECT id_subasta, imagen 
       FROM imagenes_propiedad 
-      WHERE id_subasta IN (?)`;
+      WHERE id_subasta IN (?)
+    `;
 
     conection.query(queryImagenes, [subastasIds], (error, imagenes) => {
       if (error) {
@@ -1405,6 +1410,7 @@ router.get("/subastas_en_vivo", (req, res) => {
     });
   });
 });
+
 
 //ingreso a la propuesta
 router.get('/propuesta/comprar', (req, res) => {
