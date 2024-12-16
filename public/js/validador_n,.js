@@ -191,37 +191,59 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function finalizarForm(event) {
         event.preventDefault(); // Evitar el envío del formulario por defecto
-
+    
         const terminosChecked = document.querySelector('#terminos_y_condiciones').checked;
-        const usuario = document.querySelector('#usuario').value;
-        const contraseña = document.querySelector('#contraseña').value;
-
+    
         if (!terminosChecked) {
-            alert('Debes aceptar los términos y condiciones.');
+            Swal.fire({
+                icon: 'warning',
+                title: 'Términos y condiciones',
+                text: 'Debes aceptar los términos y condiciones.',
+            });
             return;
         }
-
-        // Aquí puedes agregar más validaciones si es necesario
-
-        const formData = new FormData(document.querySelector('#registroForm'));
-
+    
+        const formData = new FormData(document.querySelector('#formularioRegistro'));
+    
         fetch('/registro', {
             method: 'POST',
             body: formData
         })
-            .then(response => {
-                if (response.ok) {
-                    window.location.href = '/login'; // Redirige al usuario a la página de login
-                } else {
-                    return response.text().then(text => {
-                        alert('Error: ' + text);
-                    });
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
+        .then(response => {
+            if (response.ok) {
+                return response.json(); // Continuar con la respuesta exitosa
+            } else {
+                // Si la respuesta no es exitosa, tratarla como un error
+                return response.json(); // Asumimos que el mensaje de error está en formato JSON
+            }
+        })
+        .then(data => {
+            if (data.error) {
+                // Si el backend devuelve un error, lo mostramos con SweetAlert2
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: data.error, // El mensaje de error que proviene del backend
+                });
+            } else {
+                // Si no hay error, redirigir al login
+                window.location.href = '/login';
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Ocurrió un error durante el registro',
             });
+        });
     }
+    
+    
+    
+    
+    
 
     // Inicializa el primer paso como activo
     nextStep(0);

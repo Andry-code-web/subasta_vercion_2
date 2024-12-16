@@ -236,95 +236,119 @@ const saltRounds = 10; // Puedes ajustar el número de rondas de sal
 router.post("/registro", (req, res) => {
   const datos = req.body;
 
+
+  // Función para verificar si el DNI ya existe
+  const checkDNIExists = (dni) => {
+    return new Promise((resolve, reject) => {
+      const sql = "SELECT COUNT(*) AS count FROM usuarios WHERE dni_ce = ?";
+      conection.query(sql, [dni], (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(results[0].count > 0);
+        }
+      });
+    });
+  };
+
   // Determinar el tipo de persona y asignar valores predeterminados
   // Obtener la fecha actual para la fecha de registro
   const fechaRegistro = new Date().toISOString().split('T')[0];
 
+
   if (datos.tipo_persona === "natural") {
-    // Persona Natural
-    const valores = {
-      tipo_persona: datos.tipo_persona,
-      email: datos.email || "0",
-      confirmacion_email: datos.confirmacion_email || "0",
-      celular: datos.celular || "0",
-      telefono: datos.telefono || "0",
-      nombre_apellidos: datos.nombre_apellidos || "0",
-      dni_ce: datos.dni_ce || "0",
-      fecha_nacimiento: datos.fecha_nacimiento || "0000-00-00",
-      sexo: datos.sexo || "0",
-      estado_civil: datos.estado_civil || "0",
-      ruc: null,
-      nombre_comercial: null,
-      actividad_comercial: null,
-      departamento: datos.departamento || "0",
-      provincia: datos.provincia || "0",
-      distrito: datos.distrito || "0",
-      direccion: datos.direccion || "0",
-      numero: datos.numero || "0",
-      complemento: datos.complemento || "0",
-      usuario: datos.usuario || "0",
-      contraseña: datos.contraseña || "0",
-      terminos_y_condiciones: parseInt(datos.terminos_y_condiciones) ? 1 : 0,
-      fecha_registro: fechaRegistro,
-    };
-
-    // Encriptar la contraseña
-    bcrypt.hash(valores.contraseña, saltRounds, (err, hashedPassword) => {
-      if (err) {
-        console.error("Error al encriptar la contraseña:", err);
-        return res.status(500).send("Error al encriptar la contraseña");
-      }
-
-      // Actualizar el valor de la contraseña con el hash
-      valores.contraseña = hashedPassword;
-
-      const sql = `
-        INSERT INTO usuarios (
-            tipo_persona, email, confirmacion_email, celular, telefono,
-            nombre_apellidos, dni_ce, fecha_nacimiento, sexo, estado_civil,
-            ruc, nombre_comercial, actividad_comercial,
-            departamento, provincia, distrito, direccion, numero, complemento,
-            usuario, contraseña, terminos_y_condiciones, fecha_registro
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-      `;
-
-      conection.query(
-        sql,
-        [
-          valores.tipo_persona,
-          valores.email,
-          valores.confirmacion_email,
-          valores.celular,
-          valores.telefono,
-          valores.nombre_apellidos,
-          valores.dni_ce,
-          valores.fecha_nacimiento,
-          valores.sexo,
-          valores.estado_civil,
-          valores.ruc,
-          valores.nombre_comercial,
-          valores.actividad_comercial,
-          valores.departamento,
-          valores.provincia,
-          valores.distrito,
-          valores.direccion,
-          valores.numero,
-          valores.complemento,
-          valores.usuario,
-          valores.contraseña,
-          valores.terminos_y_condiciones,
-          valores.fecha_registro,
-        ],
-        (err, results) => {
-          if (err) {
-            console.error("Error al realizar la inserción:", err);
-            return res.status(500).send("Error al realizar la inserción");
-          }
-          res.redirect("/login");
+    checkDNIExists(datos.dni_ce)
+      .then(dniExists => {
+        if (dniExists) {
+          // Responde solo con un mensaje en formato JSON
+          return res.status(400).json({ error: "El DNI ya está registrado en el sistema." });
         }
-      );
-    });
-  } else if (datos.tipo_persona === "juridica") {
+
+        // Continúa con el registro si el DNI no existe
+        const valores = {
+          tipo_persona: datos.tipo_persona,
+          email: datos.email || "0",
+          confirmacion_email: datos.confirmacion_email || "0",
+          celular: datos.celular || "0",
+          telefono: datos.telefono || "0",
+          nombre_apellidos: datos.nombre_apellidos || "0",
+          dni_ce: datos.dni_ce || "0",
+          fecha_nacimiento: datos.fecha_nacimiento || "0000-00-00",
+          sexo: datos.sexo || "0",
+          estado_civil: datos.estado_civil || "0",
+          ruc: null,
+          nombre_comercial: null,
+          actividad_comercial: null,
+          departamento: datos.departamento || "0",
+          provincia: datos.provincia || "0",
+          distrito: datos.distrito || "0",
+          direccion: datos.direccion || "0",
+          numero: datos.numero || "0",
+          complemento: datos.complemento || "0",
+          usuario: datos.usuario || "0",
+          contraseña: datos.contraseña || "0",
+          terminos_y_condiciones: parseInt(datos.terminos_y_condiciones) ? 1 : 0,
+          fecha_registro: fechaRegistro,
+        };
+
+        bcrypt.hash(valores.contraseña, saltRounds, (err, hashedPassword) => {
+          if (err) {
+            console.error("Error al encriptar la contraseña:", err);
+            return res.status(500).json({ error: "Error al encriptar la contraseña" });
+          }
+
+          valores.contraseña = hashedPassword;
+
+          const sql = `
+            INSERT INTO usuarios (
+                tipo_persona, email, confirmacion_email, celular, telefono,
+                nombre_apellidos, dni_ce, fecha_nacimiento, sexo, estado_civil,
+                ruc, nombre_comercial, actividad_comercial,
+                departamento, provincia, distrito, direccion, numero, complemento,
+                usuario, contraseña, terminos_y_condiciones, fecha_registro
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          `;
+
+          conection.query(sql, [
+              valores.tipo_persona,
+              valores.email,
+              valores.confirmacion_email,
+              valores.celular,
+              valores.telefono,
+              valores.nombre_apellidos,
+              valores.dni_ce,
+              valores.fecha_nacimiento,
+              valores.sexo,
+              valores.estado_civil,
+              valores.ruc,
+              valores.nombre_comercial,
+              valores.actividad_comercial,
+              valores.departamento,
+              valores.provincia,
+              valores.distrito,
+              valores.direccion,
+              valores.numero,
+              valores.complemento,
+              valores.usuario,
+              valores.contraseña,
+              valores.terminos_y_condiciones,
+              valores.fecha_registro
+            ],
+            (err, results) => {
+              if (err) {
+                console.error("Error al realizar la inserción:", err);
+                return res.status(500).json({ error: "Error al realizar la inserción" });
+              }
+              res.redirect("/login");
+            }
+          );
+        });
+      })
+      .catch(err => {
+        console.error("Error al verificar DNI:", err);
+        res.status(500).json({ error: "Error al verificar DNI" });
+      });
+} else if (datos.tipo_persona === "juridica") {
     // Persona Jurídica
     const valores = {
       tipo_persona: datos.tipo_persona,
@@ -796,11 +820,11 @@ router.get('/subasta/:id', (req, res) => {
                     }
 
                     console.log("Subastas recomendadas:", recomendados); // Asegúrate de ver el log
-                  
+
                     const subastasRecomendadas = recomendados.map(sub => {
                       // Formatear la hora de cada subasta recomendada individualmente
                       let horaFormateada = sub.hora_subasta ? moment(sub.hora_subasta, 'HH:mm').format('hh:mm A') : null;
-                      
+
                       return {
                         ...sub,
                         imagen: sub.imagen ? sub.imagen.toString('base64') : null,

@@ -95,16 +95,15 @@
                 <!-- Gráfico de visitantes y tarjeta de nuevas subastas -->
                 <div class="col-md-9">
                     <div class="d-flex" style="gap:2rem; overflow: hidden;">
-                        <div class="graph-card new-subastas-card mb-4"
-                            style="width: 50%; height: 450px; padding-bottom: 2rem; overflow-y: auto;">
+                        <div class="graph-card new-subastas-card mb-4" style="width: 50%; height: 450px; padding-bottom: 2rem; overflow-y: auto;">
                             <h6>
-                                Usuarios
+                                Usuarios con nombre
                                 <span style="font-size: 1.1rem; font-weight: 600; margin-left: .5rem;">
-                                    <%= numUsuarios %>
+                                    <%= numUsuariosConNombre %>
                                 </span>
                             </h6>
                             <div style="overflow-y: auto; max-height: 350px;">
-                                <!-- Establece la altura máxima y habilita el desplazamiento vertical -->
+                                <!-- Tabla de usuarios con nombre -->
                                 <table class="table-bordered" style="width: 100%; text-align: center;">
                                     <thead style="font-weight: 600;">
                                         <tr>
@@ -112,12 +111,12 @@
                                             <td>Nombre</td>
                                             <td>DNI</td>
                                             <td>Correo</td>
-                                            <td>Oportunidades</td> <!-- Nueva columna -->
+                                            <td>Oportunidades</td>
                                             <td>Acciones</td>
                                         </tr>
                                     </thead>
                                     <tbody style="font-size: .9rem;">
-                                        <% usuarios.forEach(usuario => { %>
+                                        <% usuariosConNombre.forEach(usuario => { %>
                                             <tr>
                                                 <td>
                                                     <i class="bi bi-person-circle text-warning" style="font-size: 1.5rem;"></i>
@@ -132,7 +131,7 @@
                                                     <%= usuario.email %>
                                                 </td>
                                                 <td>
-                                                    <%= usuario.oportunidades %> <!-- Muestra las oportunidades -->
+                                                    <%= usuario.oportunidades %>
                                                 </td>
                                                 <td class="acciones">
                                                     <a href="/admin/editarUsuario/<%= usuario.id %>" class="text-primary">
@@ -141,13 +140,10 @@
                                                     <a href="#" class="text-danger eliminar-usuario" data-id="<%= usuario.id %>">
                                                         <i class="bi bi-trash3"></i>
                                                     </a>
-                                                    <!-- Enlace para activar oportunidades -->
                                                     <a href="#" class="text-success activar-oportunidades" data-id="<%= usuario.id %>">
                                                         <i class="bi bi-check-square"></i>
                                                         <span class="tooltip-text">Activar oportunidades</span>
                                                     </a>
-                                                    
-                                                    
                                                 </td>
                                             </tr>
                                         <% }); %>
@@ -155,51 +151,67 @@
                                 </table>
                             </div>
                         </div>
-
-                        <div class="graph-card new-subastas-card mb-4"
-                            style="width: 50%; height: 450px; padding-bottom: 2rem; overflow-y: auto;">
+                        
+                        <!-- Similar tabla para usuarios sin nombre -->
+                        <div class="graph-card new-subastas-card mb-4" style="width: 50%; height: 450px; padding-bottom: 2rem; overflow-y: auto;">
                             <h6>
-                                Admin vendedor
+                                Usuarios sin nombre
                                 <span style="font-size: 1.1rem; font-weight: 600; margin-left: .5rem;">
-                                    <%= numAdminVendedores %>
+                                    <%= numUsuariosSinNombre %>
                                 </span>
                             </h6>
                             <div style="overflow-y: auto; max-height: 350px;">
-                                <!-- Establece la altura máxima y habilita el desplazamiento vertical -->
+                                <!-- Tabla de usuarios sin nombre -->
                                 <table class="table-bordered" style="width: 100%; text-align: center;">
                                     <thead style="font-weight: 600;">
                                         <tr>
                                             <td>Foto</td>
-                                            <td>Usuario</td>
-                                            <td>Estado</td>
+                                            <td>Nombre</td>
+                                            <td>DNI</td>
+                                            <td>Correo</td>
+                                            <td>Oportunidades</td>
                                             <td>Acciones</td>
                                         </tr>
                                     </thead>
                                     <tbody style="font-size: .9rem;">
-                                        <% adminVendedores.forEach(adminVendedor=> { %>
+                                        <% usuariosSinNombre.forEach(usuario => { %>
                                             <tr>
                                                 <td>
-                                                    <i class="bi bi-person-badge-fill text-success"
-                                                        style="font-size: 1.5rem;"></i>
+                                                    <i class="bi bi-person-circle text-warning" style="font-size: 1.5rem;"></i>
                                                 </td>
                                                 <td>
-                                                    <%= adminVendedor.nombre_usuario %>
+                                                    <%= usuario.nombre_apellidos || 'Sin nombre' %>
                                                 </td>
                                                 <td>
-                                                    <%= adminVendedor.activo ? "Activo" : "Inactivo" %>
+                                                    <%= usuario.dni_ce %>
+                                                </td>
+                                                <td>
+                                                    <%= usuario.email %>
+                                                </td>
+                                                <td>
+                                                    <%= usuario.oportunidades %>
                                                 </td>
                                                 <td class="acciones">
-                                                    <a href="#" class="eliminar-adminVendedor"
-                                                        data-id="<%= adminVendedor.id %>">
-                                                        <i class="bi bi-trash3 text-danger"></i>
+                                                    <a href="/admin/editarUsuario/<%= usuario.id %>" class="text-primary">
+                                                        <i class="bi bi-pencil-square"></i>
+                                                    </a>
+                                                    <a href="#" class="text-danger eliminar-usuario" data-id="<%= usuario.id %>">
+                                                        <i class="bi bi-trash3"></i>
+                                                    </a>
+                                                    <a href="#" class="text-success activar-oportunidades" data-id="<%= usuario.id %>">
+                                                        <i class="bi bi-check-square"></i>
+                                                        <span class="tooltip-text">Activar oportunidades</span>
                                                     </a>
                                                 </td>
                                             </tr>
-                                            <% }); %>
+                                        <% }); %>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
+                        
+
+                        
                     </div>
 
                     <div class="graph-card">
@@ -306,6 +318,51 @@
                             </div>
                         </div>
                     </form>
+
+                    <div class="graph-card new-subastas-card mb-4"
+                            style="width: 100%; height: 450px; padding-bottom: 2rem; overflow-y: auto; margin-top: 2rem;">
+                            <h6>
+                                Admin vendedor
+                                <span style="font-size: 1.1rem; font-weight: 600; margin-left: .5rem;">
+                                    <%= numAdminVendedores %>
+                                </span>
+                            </h6>
+                            <div style="overflow-y: auto; max-height: 350px;">
+                                <!-- Establece la altura máxima y habilita el desplazamiento vertical -->
+                                <table class="table-bordered" style="width: 100%; text-align: center;">
+                                    <thead style="font-weight: 600;">
+                                        <tr>
+                                            <td>Foto</td>
+                                            <td>Usuario</td>
+                                            <td>Estado</td>
+                                            <td>Acciones</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="font-size: .9rem;">
+                                        <% adminVendedores.forEach(adminVendedor=> { %>
+                                            <tr>
+                                                <td>
+                                                    <i class="bi bi-person-badge-fill text-success"
+                                                        style="font-size: 1.5rem;"></i>
+                                                </td>
+                                                <td>
+                                                    <%= adminVendedor.nombre_usuario %>
+                                                </td>
+                                                <td>
+                                                    <%= adminVendedor.activo ? "Activo" : "Inactivo" %>
+                                                </td>
+                                                <td class="acciones">
+                                                    <a href="#" class="eliminar-adminVendedor"
+                                                        data-id="<%= adminVendedor.id %>">
+                                                        <i class="bi bi-trash3 text-danger"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>

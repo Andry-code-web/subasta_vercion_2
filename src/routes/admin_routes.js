@@ -70,18 +70,29 @@ router.get("/adminG", (req, res) => {
 
   const nombreUsuario = req.session.admingeneralNombreUsuario;
 
-  const queryUsuarios = 'SELECT * FROM usuarios';
+  const queryUsuariosConNombre = 'SELECT * FROM usuarios WHERE nombre_apellidos IS NOT NULL AND nombre_apellidos != ""';
+  const queryUsuariosSinNombre = 'SELECT * FROM usuarios WHERE nombre_apellidos IS NULL OR nombre_apellidos = ""';
   const queryAdminVendedores = 'SELECT * FROM adminvendedor';
   const querySubastas = 'SELECT * FROM subastas';
 
   Promise.all([
     new Promise((resolve, reject) => {
-      conection.query(queryUsuarios, (error, resultadosUsuarios) => {
+      conection.query(queryUsuariosConNombre, (error, resultadosUsuariosConNombre) => {
         if (error) {
-          console.error("Error al obtener los usuarios: ", error);
+          console.error("Error al obtener los usuarios con nombre: ", error);
           reject(error);
         } else {
-          resolve(resultadosUsuarios);
+          resolve(resultadosUsuariosConNombre);
+        }
+      });
+    }),
+    new Promise((resolve, reject) => {
+      conection.query(queryUsuariosSinNombre, (error, resultadosUsuariosSinNombre) => {
+        if (error) {
+          console.error("Error al obtener los usuarios sin nombre: ", error);
+          reject(error);
+        } else {
+          resolve(resultadosUsuariosSinNombre);
         }
       });
     }),
@@ -113,15 +124,18 @@ router.get("/adminG", (req, res) => {
       });
     })
   ])
-    .then(([usuarios, adminVendedores, subastas]) => {
-      const numUsuarios = usuarios.length;
+    .then(([usuariosConNombre, usuariosSinNombre, adminVendedores, subastas]) => {
+      const numUsuariosConNombre = usuariosConNombre.length;
+      const numUsuariosSinNombre = usuariosSinNombre.length;
       const numAdminVendedores = adminVendedores.length;
       const numSubastas = subastas.length;
 
       res.render("adminGeneral", {
         nombreUsuario,
-        usuarios,
-        numUsuarios,
+        usuariosConNombre,
+        numUsuariosConNombre,
+        usuariosSinNombre,
+        numUsuariosSinNombre,
         adminVendedores,
         numAdminVendedores,
         subastas,
@@ -133,6 +147,7 @@ router.get("/adminG", (req, res) => {
       res.status(500).send("Error al obtener datos para la vista admingeneral");
     });
 });
+
 
 // Método POST para crear un nuevo admin vendedor
 router.post("/crear-admin-vendedor", async (req, res) => {
