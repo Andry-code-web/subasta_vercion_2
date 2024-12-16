@@ -415,62 +415,62 @@ router.post("/registro", (req, res) => {
 
 //hasta aiqui funciona
 // Catálogo con funcionalidad de búsqueda
+// Catálogo con funcionalidad de búsqueda
 router.get("/", (req, res) => {
-  const { categoria, page = 1, estado, search } = req.query; // Parámetros de la consulta
+  const { categoria, page = 1, estado, search } = req.query;
   const usuario_id = req.session.usuario ? req.session.usuario.id : null;
-  const limit = 12; // Número de subastas por página
+  const limit = 16; // Número de subastas por página
   const offset = (page - 1) * limit; // Calcular el desplazamiento
 
-  let querySubastas = "SELECT * FROM subastas";
-  const queryParams = []; // arrays
+  // Consulta base para las subastas
+  let querySubastas = `
+    SELECT *, 
+           CONCAT(fecha_subasta, ' ', hora_subasta) AS fecha_hora 
+    FROM subastas
+  `;
+  const queryParams = [];
 
-  // Filtro por categoría si se proporciona
+  // Filtro por categoría
   if (categoria) {
     querySubastas += " WHERE categoria = ?";
     queryParams.push(categoria);
   }
 
-  // Filtro por estado de subasta basado en la columna act_fina
+  // Filtro por estado
   if (estado === "finalizadas") {
-    querySubastas +=
-      (categoria ? " AND" : " WHERE") + " act_fina = 'finalizada'";
+    querySubastas += (categoria ? " AND" : " WHERE") + " act_fina = 'finalizada'";
   } else if (estado === "activas") {
     querySubastas += (categoria ? " AND" : " WHERE") + " act_fina = 'activa'";
   }
 
-  // Filtro por búsqueda si se proporciona
+  // Filtro por búsqueda
   if (search) {
     querySubastas +=
       (categoria || estado ? " AND" : " WHERE") +
       `(
-      categoria LIKE ? OR marca LIKE ? OR modelo LIKE ? OR ubicacion LIKE ? OR importante LIKE ?
-    )`;
-    const searchQuery = `%${search}%`; // Definición de searchQuery
-    queryParams.push(
-      searchQuery,
-      searchQuery,
-      searchQuery,
-      searchQuery,
-      searchQuery
-    );
+        categoria LIKE ? OR marca LIKE ? OR modelo LIKE ? 
+        OR ubicacion LIKE ? OR importante LIKE ?
+      )`;
+    const searchQuery = `%${search}%`;
+    queryParams.push(searchQuery, searchQuery, searchQuery, searchQuery, searchQuery);
   }
 
-  console.log(querySubastas); // Imprimir la consulta SQL para verificar
+  querySubastas += " ORDER BY id ASC LIMIT ? OFFSET ?";
+  queryParams.push(limit, offset);
 
-  querySubastas += " ORDER BY id ASC LIMIT ? OFFSET ?"; // Agregar paginación
-  queryParams.push(limit, offset); // Agregar limit y offset a los parámetros de consulta
-
+  // Consulta para obtener imágenes
   const queryImagenes = "SELECT id_subasta, imagen FROM imagenes_propiedad";
 
+  // Ejecutar consulta de subastas
   conection.query(querySubastas, queryParams, (error, subastas) => {
     if (error) {
       console.error("Error al obtener datos de subasta", error);
       return res.status(500).send("Error al obtener datos de subasta");
     }
 
-    // Formatear la fecha de subasta antes de continuar
+    // Formatear fecha de las subastas
     const subastasFormateadas = subastas.map((subasta) => {
-      const fecha = new Date(subasta.fecha_subasta); // Convertir a objeto Date
+      const fecha = new Date(subasta.fecha_subasta);
       subasta.fecha_formateada = fecha.toLocaleDateString("es-PE", {
         day: "2-digit",
         month: "2-digit",
@@ -479,12 +479,12 @@ router.get("/", (req, res) => {
       return subasta;
     });
 
-    // Si no se encontraron subastas, buscar sugerencia
+    // Buscar sugerencias si no hay resultados
     if (subastas.length === 0 && search) {
       buscarSugerencia(search, conection, (sugerencia) => {
         const mensaje = sugerencia
-          ? `El vehículo que busca la marca o modelo "${search}" no encontramos".`
-          : `El vehículo que busca la marca o modelo "${search}" no encontramos y no hay sugerencias disponibles.`;
+          ? `El vehículo que busca con la marca o modelo "${search}" no fue encontrado.`
+          : `El vehículo que busca con la marca o modelo "${search}" no fue encontrado y no hay sugerencias disponibles.`;
 
         return res.render("catalogo", {
           usuario: req.session.usuario,
@@ -494,10 +494,11 @@ router.get("/", (req, res) => {
           search,
           page: Number(page),
           totalPages: 0,
-          mensaje, // Pasar el mensaje a la vista
+          mensaje,
         });
       });
     } else {
+      // Obtener imágenes de las subastas
       conection.query(queryImagenes, (error, imagenes) => {
         if (error) {
           console.error("Error al obtener imágenes de subasta", error);
@@ -516,11 +517,13 @@ router.get("/", (req, res) => {
           };
         });
 
-        // Consulta adicional para contar el total de subastas
-        let totalSubastasQuery = "SELECT COUNT(*) AS total FROM subastas";
+        // Contar total de subastas para calcular paginación
+        let totalSubastasQuery = `
+          SELECT COUNT(*) AS total 
+          FROM subastas
+        `;
         const totalParams = [];
 
-        // Contar también basado en el estado seleccionado
         if (categoria) {
           totalSubastasQuery += " WHERE categoria = ?";
           totalParams.push(categoria);
@@ -534,65 +537,40 @@ router.get("/", (req, res) => {
             (categoria ? " AND" : " WHERE") + " act_fina = 'activa'";
         }
 
-        // Filtro de búsqueda para contar total de subastas
         if (search) {
-          const searchQuery = `%${search}%`; // Definición de searchQuery
           totalSubastasQuery +=
             (categoria || estado ? " AND" : " WHERE") +
             `(
-            categoria LIKE ? OR marca LIKE ? OR modelo LIKE ? OR ubicacion LIKE ? OR importante LIKE ?
-          )`;
-          totalParams.push(
-            searchQuery,
-            searchQuery,
-            searchQuery,
-            searchQuery,
-            searchQuery
-          );
+              categoria LIKE ? OR marca LIKE ? OR modelo LIKE ? 
+              OR ubicacion LIKE ? OR importante LIKE ?
+            )`;
+          totalParams.push(searchQuery, searchQuery, searchQuery, searchQuery, searchQuery);
         }
 
-        conection.query(
-          totalSubastasQuery,
-          totalParams,
-          (error, totalResult) => {
-            if (error) {
-              console.error("Error al contar subastas", error);
-              return res.status(500).send("Error al contar subastas");
-            }
+        conection.query(totalSubastasQuery, totalParams, (error, totalResult) => {
+          if (error) {
+            console.error("Error al contar subastas", error);
+            return res.status(500).send("Error al contar subastas");
+          }
 
-            const totalSubastas = totalResult[0].total;
-            const totalPages = Math.ceil(totalSubastas / limit); // Calcular el total de páginas
+          const totalSubastas = totalResult[0].total;
+          const totalPages = Math.ceil(totalSubastas / limit);
 
-            if (usuario_id) {
-              // Consulta adicional para verificar los likes del usuario
-              const queryLikes =
-                "SELECT subasta_id FROM likes WHERE user_id = ?";
-              conection.query(queryLikes, [usuario_id], (error, likes) => {
-                if (error) {
-                  console.error("Error al obtener likes del usuario", error);
-                  return res
-                    .status(500)
-                    .send("Error al obtener likes del usuario");
-                }
+          if (usuario_id) {
+            // Verificar likes del usuario
+            const queryLikes = "SELECT subasta_id FROM likes WHERE user_id = ?";
+            conection.query(queryLikes, [usuario_id], (error, likes) => {
+              if (error) {
+                console.error("Error al obtener likes del usuario", error);
+                return res.status(500).send("Error al obtener likes del usuario");
+              }
 
-                const likedSubastas = likes.map((like) => like.subasta_id);
+              const likedSubastas = likes.map((like) => like.subasta_id);
 
-                subastasConImagenes.forEach((subasta) => {
-                  subasta.liked_by_user = likedSubastas.includes(subasta.id);
-                });
-
-                res.render("catalogo", {
-                  usuario: req.session.usuario,
-                  subastas: subastasConImagenes,
-                  categoria,
-                  estado,
-                  search,
-                  page: Number(page),
-                  totalPages,
-                  mensaje: null, // Sin mensaje si hay subastas
-                });
+              subastasConImagenes.forEach((subasta) => {
+                subasta.liked_by_user = likedSubastas.includes(subasta.id);
               });
-            } else {
+
               res.render("catalogo", {
                 usuario: req.session.usuario,
                 subastas: subastasConImagenes,
@@ -601,15 +579,27 @@ router.get("/", (req, res) => {
                 search,
                 page: Number(page),
                 totalPages,
-                mensaje: null, // Sin mensaje si hay subastas
+                mensaje: null,
               });
-            }
+            });
+          } else {
+            res.render("catalogo", {
+              usuario: req.session.usuario,
+              subastas: subastasConImagenes,
+              categoria,
+              estado,
+              search,
+              page: Number(page),
+              totalPages,
+              mensaje: null,
+            });
           }
-        );
+        });
       });
     }
   });
 });
+
 
 // Función para buscar sugerencias de marcas
 function buscarSugerencia(busqueda, conexion, callback) {
@@ -676,6 +666,24 @@ router.get('/subasta/:id', (req, res) => {
   SELECT IFNULL(MAX(monto_oferta), ?) AS oferta_maxima
   FROM ofertas 
   WHERE id_subasta = ?`;
+
+  // Consulta para subastas recomendadas (misma categoría, excluyendo la actual)
+  const queryRecomendados = `
+  SELECT s.id, s.marca, s.modelo, s.precio_base, s.categoria,
+         DATE_FORMAT(s.fecha_subasta, '%Y-%m-%d') AS fecha_subasta,
+         TIME_FORMAT(s.hora_subasta, '%H:%i:%s') AS hora_subasta,
+         CONCAT(s.fecha_subasta, ' ', s.hora_subasta) AS fecha_hora_subasta,
+         (SELECT i.imagen 
+          FROM imagenes_propiedad i 
+          WHERE i.id_subasta = s.id 
+          LIMIT 1) AS imagen
+  FROM subastas s
+  WHERE s.id != ?  -- Excluir la subasta actual
+    AND s.auctionEnded = 0 
+    AND s.currentWinner IS NULL
+    AND s.currentBid IS NULL
+  ORDER BY s.fecha_subasta ASC, s.hora_subasta ASC
+  LIMIT 5;`;
 
 
   function formatNumber(num) {
@@ -780,25 +788,47 @@ router.get('/subasta/:id', (req, res) => {
                     oferta.fecha_subasta_formateada = moment(oferta.fecha_oferta).tz("America/Lima").format('DD/MM/YYYY [GMT -05:00]');
                   });
 
-                  res.render("subasta", {
-                    usuario: req.session.usuario,
-                    subasta,
-                    imagenes: resultadoImagenes.map(img => img.imagen.toString('base64')),
-                    anexos: resultadoAnexos.map(anexo => ({ id: anexo.id, url: anexo.anexo })),
-                    estaEnCurso,
-                    estaTerminada,
-                    fechaFormateadaEsp,
-                    formatNumber,
-                    totalVisitas,
-                    totalPujas,
-                    ofertaActual,
-                    ofertaMaxima: ofertaMaximaFormateada, // Aquí pasas la oferta máxima o precio base al frontend
-                    initialPrice,
-                    fechaHoraSubasta: fechaHoraSubasta.format(),
-                    fechaHoraFinSubasta: fechaHoraFinSubasta.format(),
-                    fechaHoraAperturaSubasta: fechaHoraAperturaSubasta.format(),
-                    fechaActual,
-                    oferta: resultadoOfertas
+                  // Obtener subastas recomendadas
+                  conection.query(queryRecomendados, [subastaId], (error, recomendados) => {
+                    if (error) {
+                      console.error("Error al obtener subastas recomendadas", error);
+                      return res.status(500).send("Error al obtener subastas recomendadas");
+                    }
+
+                    console.log("Subastas recomendadas:", recomendados); // Asegúrate de ver el log
+                  
+                    const subastasRecomendadas = recomendados.map(sub => {
+                      // Formatear la hora de cada subasta recomendada individualmente
+                      let horaFormateada = sub.hora_subasta ? moment(sub.hora_subasta, 'HH:mm').format('hh:mm A') : null;
+                      
+                      return {
+                        ...sub,
+                        imagen: sub.imagen ? sub.imagen.toString('base64') : null,
+                        hora_subasta: horaFormateada // Añadir la hora formateada a cada subasta recomendada
+                      };
+                    });
+
+                    res.render("subasta", {
+                      usuario: req.session.usuario,
+                      subasta,
+                      imagenes: resultadoImagenes.map(img => img.imagen.toString('base64')),
+                      anexos: resultadoAnexos.map(anexo => ({ id: anexo.id, url: anexo.anexo })),
+                      estaEnCurso,
+                      estaTerminada,
+                      fechaFormateadaEsp,
+                      formatNumber,
+                      totalVisitas,
+                      totalPujas,
+                      ofertaActual,
+                      ofertaMaxima: ofertaMaximaFormateada, // Aquí pasas la oferta máxima o precio base al frontend
+                      initialPrice,
+                      fechaHoraSubasta: fechaHoraSubasta.format(),
+                      fechaHoraFinSubasta: fechaHoraFinSubasta.format(),
+                      fechaHoraAperturaSubasta: fechaHoraAperturaSubasta.format(),
+                      fechaActual,
+                      oferta: resultadoOfertas,
+                      recomendados: subastasRecomendadas,
+                    });
                   });
                 });
               });
@@ -809,7 +839,6 @@ router.get('/subasta/:id', (req, res) => {
     });
   });
 });
-
 
 
 // Ruta para obtener la puja más alta de una subasta
@@ -962,7 +991,6 @@ router.get("/oportunidades/:id", (req, res) => {
   );
 });
 
-//
 // Like
 router.post("/like", (req, res) => {
   if (!req.session.usuario) {
@@ -1149,7 +1177,6 @@ router.get("/chat", (req, res) => {
   res.render("chat");
 });
 
-
 router.get("/editar_user/:id", (req, res) => {
   const userId = req.params.id;
 
@@ -1283,7 +1310,6 @@ router.post("/enviar/formulario", (req, res) => {
 
 
 /* SUBASTAS EN VIVO*/
-
 router.get("/subastas_en_vivo", (req, res) => {
   const now = moment().tz("America/Lima").format('YYYY-MM-DD HH:mm:ss');
 

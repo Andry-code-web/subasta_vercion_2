@@ -29,6 +29,7 @@
       cursor: pointer;
     }
   </style>
+  <script src="/js/contador_catalogo.js"></script>
 </head>
 
 <body>
@@ -374,7 +375,7 @@
         </div>
         <% } %>
 
-        <% subastas.forEach(subasta => { %>
+        <% subastas.forEach((subasta, index) => { %>
         <div class="card">
           <div id="carouselExample<%= subasta.id %>" class="carousel slide slider">
             <div class="carousel-inner baner_img_subasta">
@@ -504,10 +505,13 @@
               <i class="bi bi-heart-fill like-icon <%= subasta.liked_by_user ? 'like-filled' : 'd-none' %>"></i>
               <i class="bi bi-heart like-icon <%= subasta.liked_by_user ? 'd-none' : 'like-empty' %>"></i>
             </button>
-
-
-
-
+            <p id="countdown-<%= index %>" class="contador_catalogo">Cargando tiempo restante...</p>
+            <script>
+              (function() {
+                const fechaSubasta = new Date("<%= subasta.fecha_hora %>").getTime();
+                iniciarConteoRegresivo(fechaSubasta, "countdown-<%= index %>");
+              })();
+            </script>
           </div>
 
         </div>
@@ -580,8 +584,6 @@
     });
   </script>
 
-
-  <!-- SCRIPT -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const botonActivar = document.getElementById("btn_menu");

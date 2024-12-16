@@ -390,10 +390,16 @@
                   <li><span class="highlight">Titular:</span> SUBASTA SUR SAC</li>
                   <li><span class="highlight">RUC:</span> 2060935301</li>
                 </ul>
+                <p><strong>INCUMPLIMIENTO</strong></p>
+                <p>Si el adjudicatario o ganador del lote desiste de su oferta terminada la subasta, será retenido el 100% de la garantía, no será devuelta y quedará en poder de SUBASTASUR como penalidad por los perjuicios que se ocasionan en virtud de la retractación.</p>
+                <p>Es de exclusiva responsabilidad de los usuarios o postores verificar el estado, condición, calidad, cantidad, serie de chasis, serie de motor, registro en el SAT, cargas, gravámenes, impuestos, multas y dominio en que se encuentren los bienes o lotes que se ofrece en subasta, por lo que la información publicada es referencial e ilustrativa, de esta manera SUBASTASUR  y EL VENDEDOR no se responsabilizarán en ningún caso ni por motivo alguno, quedando liberados de toda responsabilidad.</p>
                 <p><strong>ENTREGA DEL AUTO</strong></p>
                 <p>La entrega del lote es “donde está y como está”, por tanto, será responsabilidad del adjudicado retirar todos los suministros de almacén de dicho lugar dentro de los 3 días hábiles siguientes a la adjudicación y trasladarlos a su lugar de destino final. De no retirar los bienes dentro del plazo antes indicado se aplicarán costos de almacenaje.</p>
+                <p><strong>RETIRO DEL VEHICULO </strong></p>
+                <p>El retiro de todos los lotes de la subasta debe hacerse en estricta coordinación con el personal de seguridad y las áreas respectivas de EL VENDEDOR. Solo se podrá retirar los bienes con la aceptación de EL VENDEDOR. El comprador deberá retirar el activo subastado a su propio costo, desde la ubicación donde se encuentre, o en plena firma del acta de transferencia en NOTARIA.</p>
                 <p><strong>Devolución de la Garantía</strong></p>
                 <p>SUBASTASUR devolverá la Garantía de los 500 Dólares en un aproximado de 5 a 7 días hábiles. Esta será notificada por correo o podrá solicitarse a <a href="mailto:devoluciones@subastasur.com">devoluciones@subastasur.com</a>.</p>
+    
               </div>
             </div>
           </div>
@@ -409,12 +415,12 @@
 
   <!--Componente de tabla ofertas -->
   <div class="contenedor_ofertas">
-    <div class="d-flex justify-content-around align-items-center">
+    <!-- <div class="d-flex justify-content-around align-items-center">
       <h2>OFERTAS CONSOLIDADAS</h2>
       <p class="offer-summary"><strong>Total de ofertantes: <%= totalPujas %> </strong></p>
-    </div>
+    </div> -->
 
-    <table class="tabla_principal">
+    <!-- <table class="tabla_principal">
       <thead class="tabla_letras">
         <tr>
           <th>Usuario</th>
@@ -434,7 +440,28 @@
         </tr>
         <% }) %>
       </tbody>
-    </table>
+    </table> -->
+
+    <div class="content_recomendado">
+      <h2>Subastas Recomendadas</h2>
+      <div class="recomendados_lista d-flex">
+        <% recomendados.forEach(subasta => { %>
+        <div class="recomendado">
+          <img src="data:image/jpeg;base64,<%= subasta.imagen %>" alt="<%= subasta.marca %> <%= subasta.modelo %>">
+          <a href="/subasta/<%= subasta.id %>" class="info_re">
+            <p class="hora_subasta_re">Comienza a las: &#160;
+              <strong>
+                <%= subasta.hora_subasta %>
+              </strong>
+            </p>
+            <h3><%= subasta.marca %> <%= subasta.modelo %></h3>
+            <p class="categoria_re"><%= subasta.categoria %></p>
+            <p class="precio_base_re">Precio Base: $<%= subasta.precio_base %></p>
+          </a>
+        </div>
+        <% }) %>
+      </div>
+    </div>
   </div>
 
 
