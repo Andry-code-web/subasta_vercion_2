@@ -6,6 +6,7 @@ const moment = require("moment");
 const momenT = require("moment-timezone"); // Asegúrate de tener moment-timezone instalado
 
 const { conection } = require("../database/db"); // Asegúrate de que el nombre del archivo y la ruta sean correctos
+const { enviarCorreoBienvenida } = require("../utils/emailService");
 
 router.use(bodyParser.urlencoded({ extended: true }));
 
@@ -236,7 +237,6 @@ const saltRounds = 10; // Puedes ajustar el número de rondas de sal
 router.post("/registro", (req, res) => {
   const datos = req.body;
 
-
   // Función para verificar si el DNI ya existe
   const checkDNIExists = (dni) => {
     return new Promise((resolve, reject) => {
@@ -254,7 +254,6 @@ router.post("/registro", (req, res) => {
   // Determinar el tipo de persona y asignar valores predeterminados
   // Obtener la fecha actual para la fecha de registro
   const fechaRegistro = new Date().toISOString().split('T')[0];
-
 
   if (datos.tipo_persona === "natural") {
     checkDNIExists(datos.dni_ce)
@@ -291,7 +290,7 @@ router.post("/registro", (req, res) => {
           fecha_registro: fechaRegistro,
         };
 
-        bcrypt.hash(valores.contraseña, saltRounds, (err, hashedPassword) => {
+        bcrypt.hash(valores.contraseña, saltRounds, async (err, hashedPassword) => {
           if (err) {
             console.error("Error al encriptar la contraseña:", err);
             return res.status(500).json({ error: "Error al encriptar la contraseña" });
@@ -310,36 +309,45 @@ router.post("/registro", (req, res) => {
           `;
 
           conection.query(sql, [
-              valores.tipo_persona,
-              valores.email,
-              valores.confirmacion_email,
-              valores.celular,
-              valores.telefono,
-              valores.nombre_apellidos,
-              valores.dni_ce,
-              valores.fecha_nacimiento,
-              valores.sexo,
-              valores.estado_civil,
-              valores.ruc,
-              valores.nombre_comercial,
-              valores.actividad_comercial,
-              valores.departamento,
-              valores.provincia,
-              valores.distrito,
-              valores.direccion,
-              valores.numero,
-              valores.complemento,
-              valores.usuario,
-              valores.contraseña,
-              valores.terminos_y_condiciones,
-              valores.fecha_registro
-            ],
-            (err, results) => {
+            valores.tipo_persona,
+            valores.email,
+            valores.confirmacion_email,
+            valores.celular,
+            valores.telefono,
+            valores.nombre_apellidos,
+            valores.dni_ce,
+            valores.fecha_nacimiento,
+            valores.sexo,
+            valores.estado_civil,
+            valores.ruc,
+            valores.nombre_comercial,
+            valores.actividad_comercial,
+            valores.departamento,
+            valores.provincia,
+            valores.distrito,
+            valores.direccion,
+            valores.numero,
+            valores.complemento,
+            valores.usuario,
+            valores.contraseña,
+            valores.terminos_y_condiciones,
+            valores.fecha_registro
+          ],
+            async (err, results) => {
               if (err) {
                 console.error("Error al realizar la inserción:", err);
                 return res.status(500).json({ error: "Error al realizar la inserción" });
               }
-              res.redirect("/login");
+
+              // Enviar correo de bienvenida
+              try {
+                await enviarCorreoBienvenida(datos.email, datos.nombre_apellidos);
+                console.log("Correo de bienvenida enviado");
+                res.redirect("/login");
+              } catch (error) {
+                console.error("Error al enviar correo de bienvenida:", error);
+                res.status(500).send("Usuario registrado, pero hubo un problema al enviar el correo.");
+              }
             }
           );
         });
@@ -348,7 +356,7 @@ router.post("/registro", (req, res) => {
         console.error("Error al verificar DNI:", err);
         res.status(500).json({ error: "Error al verificar DNI" });
       });
-} else if (datos.tipo_persona === "juridica") {
+  } else if (datos.tipo_persona === "juridica") {
     // Persona Jurídica
     const valores = {
       tipo_persona: datos.tipo_persona,
@@ -377,7 +385,7 @@ router.post("/registro", (req, res) => {
     };
 
     // Encriptar la contraseña
-    bcrypt.hash(valores.contraseña, saltRounds, (err, hashedPassword) => {
+    bcrypt.hash(valores.contraseña, saltRounds, async (err, hashedPassword) => {
       if (err) {
         console.error("Error al encriptar la contraseña:", err);
         return res.status(500).send("Error al encriptar la contraseña");
@@ -423,12 +431,21 @@ router.post("/registro", (req, res) => {
           valores.terminos_y_condiciones,
           valores.fecha_registro,
         ],
-        (err, results) => {
+        async (err, results) => {
           if (err) {
             console.error("Error al realizar la inserción:", err);
             return res.status(500).send("Error al realizar la inserción");
           }
-          res.redirect("/login");
+
+          // Enviar correo de bienvenida a persona jurídica
+          try {
+            await enviarCorreoBienvenida(datos.email, datos.nombre_comercial || "empresa");
+            console.log("Correo de bienvenida enviado");
+            res.redirect("/login");
+          } catch (error) {
+            console.error("Error al enviar correo de bienvenida:", error);
+            res.status(500).send("Usuario registrado, pero hubo un problema al enviar el correo.");
+          }
         }
       );
     });
@@ -436,6 +453,7 @@ router.post("/registro", (req, res) => {
     res.status(400).send("Tipo de persona no válido");
   }
 });
+
 
 //hasta aiqui funciona
 // Catálogo con funcionalidad de búsqueda
@@ -852,6 +870,7 @@ router.get('/subasta/:id', (req, res) => {
                       fechaActual,
                       oferta: resultadoOfertas,
                       recomendados: subastasRecomendadas,
+                      subastaId
                     });
                   });
                 });
@@ -1415,6 +1434,10 @@ router.get("/subastas_en_vivo", (req, res) => {
 //ingreso a la propuesta
 router.get('/propuesta/comprar', (req, res) => {
   res.render('propuesta', { usuario: req.session.usuario })
+})
+
+router.get('/correo', (req, res) => {
+  res.render('correo_bienvenida')
 })
 
 module.exports = router;

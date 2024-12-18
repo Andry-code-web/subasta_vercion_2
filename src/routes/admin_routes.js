@@ -247,7 +247,7 @@ router.post('/activarOportunidades/:id', (req, res) => {
 
   // Consulta para activar oportunidades
   conection.query(
-      'UPDATE usuarios SET oportunidades = oportunidades + 3 WHERE id = ?',
+      'UPDATE usuarios SET oportunidades = oportunidades + 10 WHERE id = ?',
       [usuarioId],
       (error, results) => {
           if (error) {
@@ -390,7 +390,7 @@ function calcularFechaProrroga(minutos) {
 }
 
 router.post("/subir-vehiculo", upload.fields([{ name: 'images', maxCount: 10 }]), (req, res) => {
-  const { marca, modelo, descripcion, categoria, anio, precio_base, placa, tarjeta_propiedad, llave, ubicacion, estado, importante, fecha_subasta, hora_subasta, anexos } = req.body;
+  const { marca, modelo, descripcion, categoria, anio, precio_base, placa, kilometraje, cilindrada, tarjeta_propiedad, llave, ubicacion, estado, importante, fecha_subasta, hora_subasta, anexos } = req.body;
   const imagenes = req.files['images'];
 
   const id_admin_vendedor = req.session.adminVendedorId;
@@ -399,9 +399,9 @@ router.post("/subir-vehiculo", upload.fields([{ name: 'images', maxCount: 10 }])
     return res.status(401).json({ success: false, message: "Debe iniciar sesión como administrador vendedor para subir un vehículo." });
   }
 
-  const insertQuery = `INSERT INTO subastas (marca, modelo, descripcion, categoria, anio, precio_base, placa, tarjeta_propiedad, llave, ubicacion, estado, importante, fecha_subasta, hora_subasta, id_admin_vendedor) 
-                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-  const values = [marca, modelo, descripcion, categoria, anio, precio_base, placa, tarjeta_propiedad, llave, ubicacion, estado, importante, fecha_subasta, hora_subasta, id_admin_vendedor];
+  const insertQuery = `INSERT INTO subastas (marca, modelo, descripcion, categoria, anio, precio_base, placa, kilometraje, cilindrada, tarjeta_propiedad, llave, ubicacion, estado, importante, fecha_subasta, hora_subasta, id_admin_vendedor) 
+                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+  const values = [marca, modelo, descripcion, categoria, anio, precio_base, placa, kilometraje, cilindrada, tarjeta_propiedad, llave, ubicacion, estado,  importante, fecha_subasta, hora_subasta, id_admin_vendedor];
 
   conection.query(insertQuery, values, (err, result) => {
     if (err) {
