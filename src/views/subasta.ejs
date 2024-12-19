@@ -388,12 +388,12 @@
                   <li>Los ofertantes no podrán solicitar eliminar ofertas una vez ejecutadas en nuestro sistema.</li>
                 </ul>
                 <p>DESARROLLO DE LA OFERTA "EN VIVO"</p>
-                  <p>Todo usuario interesado en participar en una oferta “En vivo”, reconoce y acepta que:</p>
-                  <ol type="a">
-                    <li>Una oferta "En Vivo" se activa en la fecha en la que esta es publicada en el Portal, solo pudiéndose recibir ofertas durante el proceso "En Vivo" en la sala.</li>
-                    <li>El acceso a sala se habilita 5 minutos antes de la hora de inicio programada, la misma que se indica en el detalle de la oferta. Es responsabilidad de cada participante acceder oportunamente.</li>
-                    <li>Llegada la hora de inicio, se validará que la cuota mínima de participación se cumpla para iniciar el proceso "En Vivo". De obtener un resultado negativo en la validación, se extenderá 30 segundos la hora de inicio. De incumplirse la cuota de participación mínima dentro de ese periodo, la oferta se declara desierta.</li>
-                  </ol>
+                <p>Todo usuario interesado en participar en una oferta “En vivo”, reconoce y acepta que:</p>
+                <ol type="a">
+                  <li>Una oferta "En Vivo" se activa en la fecha en la que esta es publicada en el Portal, solo pudiéndose recibir ofertas durante el proceso "En Vivo" en la sala.</li>
+                  <li>El acceso a sala se habilita 5 minutos antes de la hora de inicio programada, la misma que se indica en el detalle de la oferta. Es responsabilidad de cada participante acceder oportunamente.</li>
+                  <li>Llegada la hora de inicio, se validará que la cuota mínima de participación se cumpla para iniciar el proceso "En Vivo". De obtener un resultado negativo en la validación, se extenderá 30 segundos la hora de inicio. De incumplirse la cuota de participación mínima dentro de ese periodo, la oferta se declara desierta.</li>
+                </ol>
               </div>
 
               <div class="section_pagos">
@@ -413,7 +413,7 @@
                 </ul>
                 <p><strong>INCUMPLIMIENTO</strong></p>
                 <p>Si el adjudicatario o ganador del lote desiste de su oferta terminada la subasta, será retenido el 100% de la garantía, no será devuelta y quedará en poder de SUBASTASUR como penalidad por los perjuicios que se ocasionan en virtud de la retractación.</p>
-                <p>Es de exclusiva responsabilidad de los usuarios o postores verificar el estado, condición, calidad, cantidad, serie de chasis, serie de motor, registro en el SAT, cargas, gravámenes, impuestos, multas y dominio en que se encuentren los bienes o lotes que se ofrece en subasta, por lo que la información publicada es referencial e ilustrativa, de esta manera SUBASTASUR  y EL VENDEDOR no se responsabilizarán en ningún caso ni por motivo alguno, quedando liberados de toda responsabilidad.</p>
+                <p>Es de exclusiva responsabilidad de los usuarios o postores verificar el estado, condición, calidad, cantidad, serie de chasis, serie de motor, registro en el SAT, cargas, gravámenes, impuestos, multas y dominio en que se encuentren los bienes o lotes que se ofrece en subasta, por lo que la información publicada es referencial e ilustrativa, de esta manera SUBASTASUR y EL VENDEDOR no se responsabilizarán en ningún caso ni por motivo alguno, quedando liberados de toda responsabilidad.</p>
                 <p><strong>ENTREGA DEL AUTO</strong></p>
                 <p>La entrega del lote es “donde está y como está”, por tanto, será responsabilidad del adjudicado retirar todos los suministros de almacén de dicho lugar dentro de los 3 días hábiles siguientes a la adjudicación y trasladarlos a su lugar de destino final. De no retirar los bienes dentro del plazo antes indicado se aplicarán costos de almacenaje.</p>
                 <p><strong>RETIRO DEL VEHICULO </strong></p>
@@ -423,10 +423,10 @@
 
                   Si solicita la devolución de su saldo en US$ dólares americanos a una cuenta bancaria BCP, el plazo máximo para hacerse efectivo es de hasta 07 días hábiles. En el supuesto que haya solicitado el reembolso a una cuenta de otra entidad financiera, podría tomar hasta 21 días hábiles para hacerse efectivo.
                   Cuando solicite la devolución de la garantía en US$ dólares americanos:
-                  •	Esta será realizada a una cuenta bancaria de titularidad del solicitante.
-                  •	Se le descontarán US$50.00 del saldo disponible por concepto de gastos operativos y administrativos inherentes a la operación.
-                  •	Para realizar la devolución de la garantía en US$ a una cuenta bancaria de titularidad de un tercero, se deberá enviar una solicitud escrita y debidamente legalizada vía correo electrónico a devoluciones@subastasur.sbs   SUBASTA SUR S.A.C se reserva el derecho de solicitar que dicha legalización sea en una notaría de su preferencia.</p>
-    
+                  • Esta será realizada a una cuenta bancaria de titularidad del solicitante.
+                  • Se le descontarán US$50.00 del saldo disponible por concepto de gastos operativos y administrativos inherentes a la operación.
+                  • Para realizar la devolución de la garantía en US$ a una cuenta bancaria de titularidad de un tercero, se deberá enviar una solicitud escrita y debidamente legalizada vía correo electrónico a devoluciones@subastasur.sbs SUBASTA SUR S.A.C se reserva el derecho de solicitar que dicha legalización sea en una notaría de su preferencia.</p>
+
               </div>
             </div>
           </div>
@@ -511,6 +511,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
   <script>
+    const bidSound = new Audio('/sonido/bellding-254774.mp3')
+
     document.addEventListener('DOMContentLoaded', function() {
       const socket = io();
       const messages = document.getElementById('messages');
@@ -527,12 +529,19 @@
       let auctionInProgress = false;
       let auctionEnded = false;
       let countdownRunning = false;
+      let lastMessageId = null;
 
       const auctionRoom = '<%= subasta.id %>';
 
       function init() {
         socket.emit('joinRoom', auctionRoom, username);
       }
+
+      socket.on('bid', (data) => {
+        displayMessage(data);
+        // Reproducir sonido solo cuando se recibe una nueva puja
+        bidSound.play();
+      });
 
       socket.on('auctionState', (state) => {
         console.log('Estado recibido:', state);
@@ -599,6 +608,11 @@
         disableButtons();
         progressBar.style.width = '0%';
       });
+
+      socket.on('newMessage', (data) => {
+        displayMessage(data);
+      });
+
 
       /* socket.on('resetProgressBar', () => {
     // Aquí reinicias la barra de progreso al 100% o al valor deseado
@@ -694,13 +708,32 @@
       });
 
       function displayMessage(data) {
-        const li = document.createElement('li');
-        li.innerHTML = `<i class="fa-solid fa-share" style="color: #ffffff; margin-right: .5rem; font-size: .9rem;"></i> <b>${data.user}:</b> $${formatNumber(data.bid)}`;
-        li.classList.add('shake-animation');
+        const li = document.createElement('li'); // Crear un nuevo elemento para cada mensaje
+
+        // Si el usuario es 'Sistema', mostrar solo el mensaje sin el monto
+        if (data.user === 'Sistema') {
+          li.classList.add('system-message'); // Clase para mensajes del sistema
+          li.innerHTML = `<i class="fa-solid fa-gavel" style="color: #ffffff; margin-right: .7rem; font-size: 1.5rem;"></i> ${data.mensaje}`;
+        } else {
+          li.innerHTML = `<i class="fa-solid fa-share" style="color: #ffffff; margin-right: .5rem; font-size: .9rem;"></i> <b>${data.user}:</b> $${formatNumber(data.bid)}`;
+        }
+
+
+        // Aplicar la animación solo al nuevo mensaje
+        if (data.id !== lastMessageId) {
+          li.classList.add('shake-animation');
+          setTimeout(() => li.classList.remove('shake-animation'), 2000);
+          lastMessageId = data.id;
+        }
+
+        // Asegurarse de que el mensaje se mantenga en el chat
         messages.appendChild(li);
-        setTimeout(() => li.classList.remove('shake-animation'), 2000);
+
+        // Desplazar hacia el último mensaje
         messages.scrollTop = messages.scrollHeight;
       }
+
+
 
       function disableButtons() {
         sendButton.disabled = true;
@@ -943,7 +976,7 @@
           } else {
             Swal.fire({
               title: "Información de depósito",
-              html: `<p>Por favor, realiza el depósito en el siguiente número de cuenta y envía el comprobante a subastasurperu@gmail.com.</p>
+              html: `<p>Por favor, realiza el depósito en el siguiente número de cuenta y envía el comprobante a soporte@subastasur.sbs.</p>
             <img src="/img/Commons_QR_code.png" alt="QR Code" style="width: 200px; height: auto;">`,
               showCancelButton: true,
               confirmButtonText: 'Ya envié',

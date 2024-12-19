@@ -471,6 +471,7 @@ router.get("/", (req, res) => {
     FROM subastas
   `;
   const queryParams = [];
+  let searchQuery = null;
 
   // Filtro por categoría
   if (categoria) {
@@ -487,13 +488,13 @@ router.get("/", (req, res) => {
 
   // Filtro por búsqueda
   if (search) {
+    searchQuery = `%${search}%`;
     querySubastas +=
       (categoria || estado ? " AND" : " WHERE") +
       `(
         categoria LIKE ? OR marca LIKE ? OR modelo LIKE ? 
         OR ubicacion LIKE ? OR importante LIKE ?
       )`;
-    const searchQuery = `%${search}%`;
     queryParams.push(searchQuery, searchQuery, searchQuery, searchQuery, searchQuery);
   }
 
@@ -579,7 +580,7 @@ router.get("/", (req, res) => {
             (categoria ? " AND" : " WHERE") + " act_fina = 'activa'";
         }
 
-        if (search) {
+        if (searchQuery) {
           totalSubastasQuery +=
             (categoria || estado ? " AND" : " WHERE") +
             `(
@@ -641,6 +642,7 @@ router.get("/", (req, res) => {
     }
   });
 });
+
 
 
 // Función para buscar sugerencias de marcas
