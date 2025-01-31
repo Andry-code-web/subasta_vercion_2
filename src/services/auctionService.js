@@ -111,8 +111,9 @@ class AuctionService {
 
     static async endAuction(room) {
         try {
+            // Obtener la última oferta de la subasta
             const [lastBid] = await conection.promise().query(
-                `SELECT o.*, u.usuario 
+                `SELECT o.*, u.usuario, u.id, u.oportunidades
                  FROM ofertas o
                  JOIN usuarios u ON o.id_usuario = u.id
                  WHERE o.id_subasta = ?
@@ -120,30 +121,43 @@ class AuctionService {
                  LIMIT 1`,
                 [room]
             );
-
+    
+            // Si hay una oferta, extraer los datos del ganador
+            const winnerId = lastBid.length > 0 ? lastBid[0].id : null;
+            const winnerUsername = lastBid.length > 0 ? lastBid[0].usuario : 'DESIERTA';
+            const finalBid = lastBid.length > 0 ? lastBid[0].monto_oferta : null;
+    
+            // Actualizar la subasta con los datos del ganador
             await conection.promise().query(
                 `UPDATE subastas 
                  SET auctionEnded = 1,
                      currentWinner = ?,
                      currentBid = ?
                  WHERE id = ?`,
-                [
-                    lastBid.length > 0 ? lastBid[0].usuario : 'DESIERTA',
-                    lastBid.length > 0 ? lastBid[0].monto_oferta : null,
-                    room
-                ]
+                [winnerUsername, finalBid, room]
             );
-
+    
+            // Si hay un ganador válido, restar una oportunidad (sin permitir negativas)
+            if (winnerId !== null) {
+                await conection.promise().query(
+                    `UPDATE usuarios 
+                     SET oportunidades = oportunidades - 1 
+                     WHERE id = ? AND oportunidades > 0`,
+                    [winnerId]
+                );
+            }
+    
             return {
                 success: true,
-                winner: lastBid.length > 0 ? lastBid[0].usuario : 'DESIERTA',
-                finalBid: lastBid.length > 0 ? lastBid[0].monto_oferta : null
+                winner: winnerUsername,
+                finalBid
             };
         } catch (error) {
             console.error("[AuctionService] Error al finalizar subasta:", error);
             throw error;
         }
     }
+    
 }
 
 module.exports = AuctionService;
