@@ -495,8 +495,7 @@ hr {
 }
 
 .messages {
-  height: calc(90% - 80px);
-  /* Ajustar según la altura de .content_acciones y .progress */
+  height: 75%;
   overflow-y: scroll;
   padding: 10px;
   border: 1px solid #ddd;
