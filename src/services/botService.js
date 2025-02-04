@@ -56,7 +56,7 @@ class BotService {
             } finally {
                 this.bidManager.cleanupBid(room, bot.bot_name, nextBid);
             }
-        }, 2000);
+        }, 4000);
 
         this.stateManager.setBidTimeout(room, timeout);
     }
