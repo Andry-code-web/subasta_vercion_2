@@ -36,8 +36,28 @@ class BotService {
                 return;
             }
 
+            const basePrice = auctionState.precio_base;
+            const currentBid = auctionState.currentBid;
+            const maxAllowedBid = basePrice * 1.2;
+
+            console.log(`[BotService] Base price: ${basePrice}, Current bid: ${currentBid}, Max allowed bid: ${maxAllowedBid}`);
+
+            // Check if the current bid exceeds the base price by 20%
+            if (currentBid >= maxAllowedBid) {
+                console.log(`[BotService] Bot bidding stopped for room ${room} as current bid exceeds 20% of base price.`);
+                this.stopBotBidding(room);
+                return;
+            }
+
             const bidDetails = await this.bidManager.prepareBotBid(room, bots, auctionState);
             if (!bidDetails) return;
+
+            // Ensure the bot's bid does not exceed the 20% limit before scheduling the bid
+            if (bidDetails.nextBid > maxAllowedBid) {
+                console.log(`[BotService] Bot bid of ${bidDetails.nextBid} exceeds 20% of base price. Stopping bot bidding.`);
+                this.stopBotBidding(room);
+                return;
+            }
 
             await this.scheduleBotBid(room, bots, bidDetails);
         } catch (error) {
@@ -64,6 +84,18 @@ class BotService {
     async processBotBid(room, botName, bidAmount) {
         try {
             const auctionState = await AuctionService.getAuctionState(room);
+            const basePrice = auctionState.precio_base;
+            const maxAllowedBid = basePrice * 1.2;
+
+            console.log(`[BotService] Processing bot bid: ${bidAmount}, Base price: ${basePrice}, Max allowed bid: ${maxAllowedBid}`);
+
+            // Check if the current bid exceeds the base price by 20%
+            if (bidAmount > maxAllowedBid) {
+                console.log(`[BotService] Bot bid of ${bidAmount} exceeds 20% of base price. Stopping bot bidding.`);
+                this.stopBotBidding(room);
+                return { success: false };
+            }
+
             if (this.stateManager.shouldStopBidding(room, auctionState)) {
                 return { success: false };
             }
@@ -71,9 +103,17 @@ class BotService {
             const userId = await AuctionService.getUserId(botName);
             if (!userId) return { success: false };
 
-            const result = await AuctionService.saveBid(room, userId, bidAmount, botName);
+            // Ensure the bot's bid is higher than the current highest bid
+            const nextBid = auctionState.currentBid + 100;
+            if (nextBid > maxAllowedBid) {
+                console.log(`[BotService] Bot bid of ${nextBid} exceeds 20% of base price. Stopping bot bidding.`);
+                this.stopBotBidding(room);
+                return { success: false };
+            }
+
+            const result = await AuctionService.saveBid(room, userId, nextBid, botName);
             if (result.success) {
-                await this.emitBidUpdates(room, result, botName, bidAmount);
+                await this.emitBidUpdates(room, result, botName, nextBid);
             }
 
             return result;
@@ -112,6 +152,19 @@ class BotService {
             // Actualizar el estado de la subasta (si aplica)
             const updatedState = await AuctionService.getAuctionState(room);
             this.io.to(room).emit('auctionState', updatedState);
+
+            const basePrice = updatedState.precio_base;
+            const currentBid = updatedState.currentBid;
+            const maxAllowedBid = basePrice * 1.2;
+
+            console.log(`[BotService] Base price: ${basePrice}, Current bid: ${currentBid}, Max allowed bid: ${maxAllowedBid}`);
+
+            // Stop further bidding if the current bid has reached or exceeded the 20% limit
+            if (currentBid >= maxAllowedBid) {
+                console.log(`[BotService] Bot bidding stopped for room ${room} as current bid has reached or exceeded 20% of base price.`);
+                this.stopBotBidding(room);
+                return;
+            }
 
             // Reiniciar el proceso de pujas para los bots
             if (this.stateManager.isRoomActive(room)) {

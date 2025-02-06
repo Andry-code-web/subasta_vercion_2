@@ -1,7 +1,14 @@
 const { conection } = require("../database/db");
 const MessageService = require("./messageService");
+const CountdownService = require("./countdownService"); // Import CountdownService
 
 class AuctionService {
+    static countdownService;
+
+    static setCountdownService(service) {
+        this.countdownService = service;
+    }
+
     static async getAuctionState(room) {
         try {
             const [results] = await conection.promise().query(
@@ -19,7 +26,8 @@ class AuctionService {
                      JOIN ofertas o ON u.id = o.id_usuario  
                      WHERE o.id_subasta = s.id 
                      ORDER BY o.fecha_subasta DESC, o.hora_subasta DESC 
-                     LIMIT 1) as current_winner
+                     LIMIT 1) as current_winner,
+                    s.precio_base
                 FROM subastas s 
                 WHERE s.id = ?`,
                 [room]
@@ -35,6 +43,7 @@ class AuctionService {
                 currentBid: parseFloat(results[0].current_bid) || results[0].precio_base,
                 startTime: results[0].fecha_hora_inicio,
                 endTime: results[0].fecha_hora_fin,
+                precio_base: results[0].precio_base,
                 messages,
             };
         } catch (error) {
@@ -95,6 +104,9 @@ class AuctionService {
             // Guardar el mensaje de la puja
             const messageText = `${username} ha pujado con ${bidValue}`;
             const messageId = await MessageService.saveMessage(room, userId, messageText, bidValue);
+
+            // Reset the countdown timer
+            this.countdownService.resetCountdown(room);
 
             return { 
                 success: true,

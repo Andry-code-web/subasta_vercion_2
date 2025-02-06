@@ -104,32 +104,6 @@
     .next_button {
       right: 10px;
     }
-
-
-    /* Efecto de temblor */
-    .shake-animation {
-      animation: shake 0.1s ease-in-out 10;
-    }
-
-    @keyframes shake {
-
-      0%,
-      100% {
-        transform: translateX(0);
-      }
-
-      25% {
-        transform: translateX(-5px);
-      }
-
-      50% {
-        transform: translateX(5px);
-      }
-
-      75% {
-        transform: translateX(-5px);
-      }
-    }
   </style>
 </head>
 
@@ -607,63 +581,17 @@
         displayMessage(data);
       });
 
+      socket.on('resetProgressBar', () => {
+        progressBar.style.width = '100%';
+        showProrrogaMessage();
+      });
 
-      /* socket.on('resetProgressBar', () => {
-    // Aquí reinicias la barra de progreso al 100% o al valor deseado
-    progressBar.style.width = '100%'; // Si deseas reiniciar a 100%
-    // También puedes mostrar el mensaje si es necesario
-    showProrrogaMessage();
-}); */
-
-
-      /*  socket.on('bid', async (data) => {
-         try {
-           if (!data.user || !data.bid || !data.room || data.bid <= 0) {
-             console.error("Datos de puja inválidos:", data);
-             return;
-           }
-
-           const userId = await AuctionService.getUserId(data.user);
-           if (!userId) {
-             console.error('Usuario no encontrado:', data.user);
-             return;
-           }
-
-           const auctionState = await AuctionService.getAuctionState(data.room);
-           if (auctionState) {
-             if (auctionState.current_bid >= data.bid) {
-               console.log("La puja es menor o igual a la actual. Ignorando...");
-               return; // Ignorar la puja si el monto no es mayor
-             }
-
-             const result = await AuctionService.saveBid(data.room, userId, data.bid, data.user);
-             if (result.success) {
-               if (!countdownService.isRunning(data.room)) {
-                 countdownService.startCountdown(data.room);
-               } else {
-                 countdownService.resetCountdown(data.room);
-               }
-
-               const updatedState = await AuctionService.getAuctionState(data.room);
-               io.to(data.room).emit('auctionState', {
-                 ...updatedState,
-                 timeLeft: countdownService.getTimeLeft(data.room),
-                 countdownRunning: true,
-               });
-             }
-           }
-         } catch (error) {
-           console.error('Error al procesar puja:', error);
-           socket.emit('errorMessage', 'Hubo un problema al procesar tu puja.');
-         }
-       });*/
-
-      function showProrrogaMessage() {
+      /* function showProrrogaMessage() {
         prorroga.textContent = "¡Prórroga! Se reinició el tiempo";
         setTimeout(() => {
           prorroga.textContent = "";
         }, 3000);
-      }
+      } */
 
       function handleBid(bidValue) {
         if (auctionEnded) return;
@@ -712,22 +640,12 @@
           li.innerHTML = `<i class="fa-solid fa-share" style="color: #ffffff; margin-right: .5rem; font-size: .9rem;"></i> <b>${data.user}:</b> $${formatNumber(data.bid)}`;
         }
 
-
-        // Aplicar la animación solo al nuevo mensaje
-        if (data.id !== lastMessageId) {
-          li.classList.add('shake-animation');
-          setTimeout(() => li.classList.remove('shake-animation'), 2000);
-          lastMessageId = data.id;
-        }
-
         // Asegurarse de que el mensaje se mantenga en el chat
         messages.appendChild(li);
 
         // Desplazar hacia el último mensaje
         messages.scrollTop = messages.scrollHeight;
       }
-
-
 
       function disableButtons() {
         sendButton.disabled = true;
@@ -743,9 +661,6 @@
       init();
     });
   </script>
-
-
-
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {

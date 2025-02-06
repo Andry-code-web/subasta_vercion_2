@@ -24,6 +24,9 @@ const port = process.env.PORT || 3000;
 const countdownService = new CountdownService(io);
 const botService = new BotService(io);
 
+// Pass the countdownService instance to AuctionService
+AuctionService.setCountdownService(countdownService);
+
 // Conjunto para rastrear salas con bots activos
 const activeBotRooms = new Set();
 

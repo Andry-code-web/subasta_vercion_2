@@ -5,7 +5,9 @@ class BidManager {
     }
 
     async prepareBotBid(room, bots, auctionState) {
+        const basePrice = auctionState.precio_base;
         const currentBid = parseFloat(auctionState.currentBid);
+        const maxAllowedBid = basePrice * 1.2;
         const availableBots = this.getAvailableBots(room, bots);
         
         if (availableBots.length === 0) {
@@ -14,8 +16,18 @@ class BidManager {
         }
 
         const bot = this.selectRandomBot(availableBots, bots);
-        const nextBid = this.calculateNextBid(currentBid);
+        let nextBid = this.calculateNextBid(currentBid);
         
+        // Ensure the bot's bid does not exceed the 20% limit
+        if (nextBid > maxAllowedBid) {
+            nextBid = maxAllowedBid;
+        }
+
+        // Ensure the bot's bid is always higher than the current highest bid
+        if (nextBid <= currentBid) {
+            nextBid = currentBid + 1;
+        }
+
         if (this.isBidProcessing(room, bot.bot_name, nextBid)) {
             return null;
         }
